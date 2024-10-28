@@ -149,7 +149,7 @@ $element->add_render_attribute( 'acc_wrapper', array(
 					<?php
                     elseif ( $accorion_content['accordion_tab_content_type'] == 'template' ):
 						if ( ! empty( $accorion_content['acc_content_template'] ) ) {
-							echo Plugin::$instance->frontend->get_builder_content_for_display( $accorion_content['acc_content_template'] );
+                            echo ube_get_builder_content_for_display($accorion_content['acc_content_template']);
 						}
 					endif;
 					?>

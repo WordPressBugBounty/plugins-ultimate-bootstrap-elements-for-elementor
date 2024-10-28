@@ -29,7 +29,7 @@ class UBE_Assets {
 		 * Vendors assets
 		 */
 		$goolge_map_options = get_option( 'ube_integrated_api', false );
-		$api                = 'AIzaSyDiMIj9qJw-InawUWnu7kUK4GjDQ7dktMQ';
+		$api                = '';
 		if ( $goolge_map_options !== false ) {
 			$api = $goolge_map_options['google_map_api_key'];
 		}

@@ -48,7 +48,7 @@ $element->add_render_attribute( 'offcanvas', array(
 		if ( $settings['content_source'] == 'sidebar' && ! empty( $settings['sidebars_id'] ) ) {
 			dynamic_sidebar( $settings['sidebars_id'] );
 		} elseif ( $settings['content_source'] == 'elementor' && ! empty( $settings['template_id'] ) ) {
-			echo Plugin::instance()->frontend->get_builder_content_for_display( $settings['template_id'] );
+			echo ube_get_builder_content_for_display( $settings['template_id'] );
 		}
 		?>
     </div>

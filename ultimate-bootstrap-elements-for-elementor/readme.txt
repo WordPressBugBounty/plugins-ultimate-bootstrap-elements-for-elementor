@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: elementor, elementor addons, elementor widget, element
 Requires at least: 4.7
 Tested up to: 6.5.4
-Stable tag: 1.4.6
+Stable tag: 1.4.7
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -102,6 +102,9 @@ Do follow to install plugins:
 3. Go to menu UBE Elements screen to configure the plugin
 
 == Changelog ==
+= 1.4.7 =
+Fix display private template
+
 = 1.4.6 =
 Replace waypoints.js with the native Intersection Observer API
 

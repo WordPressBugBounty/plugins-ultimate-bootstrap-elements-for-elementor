@@ -56,7 +56,7 @@ $element->add_render_attribute( $slider_setting_key, 'class', $box_classes );
 			<?php
 			if ( ! empty( $slider_content_template ) ) {
 
-				echo Plugin::$instance->frontend->get_builder_content_for_display( $slider_content_template );
+				echo ube_get_builder_content_for_display( $slider_content_template );
 			}
 			?>
         </div>

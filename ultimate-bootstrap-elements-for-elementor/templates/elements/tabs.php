@@ -329,7 +329,7 @@ $id_int = $element->get_id();
 								<?php
                                 elseif ( $item['tab_content_type'] == 'template' ):
 									if ( ! empty( $item['tab_content_template'] ) ) {
-										echo Plugin::$instance->frontend->get_builder_content_for_display( $item['tab_content_template'] );
+										echo ube_get_builder_content_for_display( $item['tab_content_template'] );
 									}
 								endif;
 								?>

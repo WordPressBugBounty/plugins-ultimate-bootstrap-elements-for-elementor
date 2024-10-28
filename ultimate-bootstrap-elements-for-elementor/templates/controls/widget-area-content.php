@@ -43,7 +43,7 @@ $dynamic_content_id = isset($widget_content['ube_dynamic_content_id']) ? $widget
 	        }
         }
         if ( $current_id && ($current_id !== get_the_ID()) ) {
-	        echo UBE()->elementor()->frontend->get_builder_content_for_display( $current_id );
+	        echo ube_get_builder_content_for_display( $current_id );
         } else {
 	        esc_html_e( 'no content added yet', 'ube' );
         }

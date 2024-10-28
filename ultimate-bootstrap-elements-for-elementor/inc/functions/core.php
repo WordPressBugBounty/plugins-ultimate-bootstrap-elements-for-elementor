@@ -384,3 +384,17 @@ function ube_icon_svg_markup( $html ) {
 	return $html;
 }
 
+function ube_get_builder_content_for_display($post_id, $with_css = false)
+{
+    $template = get_post($post_id);
+
+    if ($template instanceof WP_Post &&
+        ($template->post_status === 'publish' ||
+            get_current_user_id() === (int) $template->post_author ||
+            current_user_can('administrator'))) {
+        return UBE()->elementor()->frontend->get_builder_content_for_display($post_id, $with_css);
+    }
+
+    return '';
+}
+

@@ -75,7 +75,7 @@ class UBE_Element_Slider_Container extends UBE_Abstracts_Elements_Slider {
 			foreach ( $settings['slider_content_template'] as $template ) {
 				?>
 				<div class="ube-slider-item">
-					<?php echo Plugin::$instance->frontend->get_builder_content_for_display( $template ); ?>
+					<?php echo ube_get_builder_content_for_display( $template ); ?>
 				</div>
 				<?php
 			}

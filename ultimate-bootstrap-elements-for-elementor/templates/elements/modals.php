@@ -82,7 +82,7 @@ $element->add_render_attribute('modal_footer_attr', 'class', $footer_class);
 					if ($settings['modal_content_source'] === 'custom' && !empty($settings['modal_custom_content'])) {
 						echo wp_kses_post($settings['modal_custom_content']);
 					} elseif ($settings['modal_content_source'] === 'template' && !empty($settings['modal_template_id'])) {
-						echo Plugin::$instance->frontend->get_builder_content_for_display($settings['modal_template_id']);
+						echo ube_get_builder_content_for_display($settings['modal_template_id']);
 					}
 					?>
                 </div>
