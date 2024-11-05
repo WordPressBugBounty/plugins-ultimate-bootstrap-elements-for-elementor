@@ -1,3 +1,7 @@
+:root {
+  --ube-font-icon: "Font Awesome 6 Pro";
+}
+
 .widgetarea_warper_editable {
   position: relative;
   min-height: 50px;
@@ -2514,7 +2518,7 @@ a.text-dark:hover, a.text-dark:focus {
 
 .ube-list-icon-circle li:before {
   content: "\f111";
-  font-family: "Font Awesome 5 Pro";
+  font-family: var(--ube-font-icon);
   font-weight: 600;
   font-size: 0.5em;
   text-align: left;
@@ -2819,7 +2823,7 @@ a.text-dark:hover, a.text-dark:focus {
 }
 
 .breadcrumbs .breadcrumb-item + .breadcrumb-item:before {
-  font-family: "Font Awesome 5 Pro";
+  font-family: var(--ube-font-icon);
   font-size: 0.8em;
 }
 
@@ -3376,7 +3380,7 @@ li.ube-social-whatsapp.ube-social-outline {
 }
 .slick-dots span::before {
   width: 30px;
-  font-family: "Font Awesome 5 Pro";
+  font-family: var(--ube-font-icon);
   content: "\f111";
   font-weight: 700;
   font-size: 80%;
@@ -5185,7 +5189,7 @@ div.ube-testimonial-avatar img {
   padding: 30px;
 }
 .ube-testimonial-is-quote .ube-testimonial-client-say:before, .ube-testimonial-is-quote .ube-testimonial-client-say:after {
-  font-family: "Font Awesome 5 Pro";
+  font-family: var(--ube-font-icon);
   font-size: 1.2em;
   position: absolute;
   top: 0;

@@ -1,3 +1,7 @@
+:root {
+  --ube-font-icon: "Font Awesome 6 Pro";
+}
+
 i.ube-badge:after {
   content: "UBE";
   position: absolute;

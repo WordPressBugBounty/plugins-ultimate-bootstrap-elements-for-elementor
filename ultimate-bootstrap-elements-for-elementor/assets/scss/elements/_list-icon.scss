@@ -81,7 +81,7 @@
 }
 .ube-list-icon-circle li:before{
 	content: "\f111";
-	font-family: "Font Awesome 5 Pro";
+	font-family: var(--ube-font-icon);
 	font-weight: 600;
 	font-size: 0.5em;
 	text-align: left;

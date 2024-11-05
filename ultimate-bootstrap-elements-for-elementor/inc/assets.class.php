@@ -41,7 +41,7 @@ class UBE_Assets {
 		wp_register_script( 'vivus', ube_get_asset_url( 'assets/vendors/vivus/vivus.min.js' ), array(), '1.8.0', true );
 		wp_register_script( 'google-map', 'https://maps.googleapis.com/maps/api/js?libraries=places&key=' . $api, array(), '', true );
 		wp_register_script( 'share', ube_get_asset_url( 'assets/vendors/share/goodshare.min.js' ), array(), '1.8.0', true );
-		wp_register_style( 'font-awesome', ube_get_asset_url( 'assets/vendors/font-awesome/css/fontawesome.min.css' ), array(), '5.8.2' );
+		wp_register_style( 'font-awesome', ube_get_asset_url( 'assets/vendors/font-awesome/css/all.min.css' ), array(), '6.6.0' );
 		wp_register_script( 'typed', ube_get_asset_url( 'assets/vendors/typed/typed.min.js' ), array( 'jquery' ), '1.0.0' );
 
 
@@ -219,7 +219,7 @@ class UBE_Assets {
 		wp_enqueue_style( 'ube-editor', ube_get_asset_url( 'assets/css/editor.min.css' ), array(), ube_get_plugin_version() );
 		wp_enqueue_script( 'ube-color', ube_get_asset_url( 'assets/js/color.min.js' ), array( 'jquery' ), ube_get_plugin_version(), true );
 		wp_enqueue_script( 'ube-editor', ube_get_asset_url( 'assets/js/editor.min.js' ), array( 'jquery' ), ube_get_plugin_version(), true );
-		wp_enqueue_style( 'font-awesome', ube_get_asset_url( 'assets/vendors/font-awesome/css/fontawesome.min.css' ), array(), '5.8.2' );
+		wp_enqueue_style( 'font-awesome', ube_get_asset_url( 'assets/vendors/font-awesome/css/all.min.css' ), array(), '6.6.0' );
 
 
 		$ajax_url       = admin_url( 'admin-ajax.php' );

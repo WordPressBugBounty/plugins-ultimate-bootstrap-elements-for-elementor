@@ -52,7 +52,7 @@ div.ube-testimonial-avatar img {
 	padding: 30px;
 
 	&:before, &:after {
-		font-family: "Font Awesome 5 Pro";
+		font-family: var(--ube-font-icon);
 		font-size: 1.2em;
 		position: absolute;
 		top: 0;

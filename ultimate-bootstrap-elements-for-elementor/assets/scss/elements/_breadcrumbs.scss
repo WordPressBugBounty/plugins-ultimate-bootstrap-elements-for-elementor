@@ -16,7 +16,7 @@
 .breadcrumbs {
 	.breadcrumb-item + .breadcrumb-item {
 		&:before{
-			font-family: "Font Awesome 5 Pro";
+			font-family: var(--ube-font-icon);
 			font-size: 0.8em;
 		}
 	}
