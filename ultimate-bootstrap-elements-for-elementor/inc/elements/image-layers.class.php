@@ -64,6 +64,12 @@ class UBE_Element_Image_Layers extends UBE_Abstracts_Elements {
 			],
 		] );
 
+		$repeater->add_control('image_link', [
+			'label' => esc_html__('Link', 'ube'),
+			'type' => Controls_Manager::URL,
+			'separator' => 'before',
+		]);
+
 		$repeater->add_group_control( Group_Control_Image_Size::get_type(), [
 			'name'      => 'image_size',
 			'default'   => 'full',

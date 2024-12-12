@@ -76,13 +76,20 @@ if ( $settings['section_style_animation'] == 'yes' ) {
 						'class' => 'ube-layer-loop ube-loop-' . $layer['loop'],
 					] );
 				}
+				$element->add_link_attributes( 'link_' . $layer_content_key, $layer['image_link'] );
 				?>
                 <div <?php $element->print_render_attribute_string( $layer_key ); ?>>
-                    <div <?php $element->print_render_attribute_string( $layer_content_key ); ?>>
-						<?php echo ube_get_elementor_attachment( [
-							'settings' => $layer,
-						] ); ?>
-                    </div>
+	                <?php if ( $layer['image_link']['url'] !== '' ): ?>
+                        <a <?php echo $element->get_render_attribute_string( 'link_' . $layer_content_key ) ?>>
+                    <?php endif; ?>
+                        <div <?php $element->print_render_attribute_string( $layer_content_key ); ?>>
+                                <?php echo ube_get_elementor_attachment( [
+                                    'settings' => $layer,
+                                ] ); ?>
+                        </div>
+                    <?php if ( $layer['image_link']['url'] !== '' ): ?>
+                         </a>
+                     <?php endif; ?>
                 </div>
 				<?php
 			}
