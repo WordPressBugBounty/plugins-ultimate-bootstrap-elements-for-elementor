@@ -141,6 +141,7 @@ $settings_array = [
 	'image_size_width'                   => $settings['image_size_width'],
 	'image_size_height'                  => $settings['image_size_height'],
 	'read_more_class'                    => implode( " ", $btn_class ),
+    'post_style'                         => 'grid'
 ];
 
 $wrapper_classes[] = 'ube-posts ube-post-grid ube-post-appender row';

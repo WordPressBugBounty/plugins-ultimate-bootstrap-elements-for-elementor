@@ -1,3 +1,7 @@
+.elementor-widget-ube-banner {
+	width: 100%;
+}
+
 .ube-banner {
 	overflow: hidden;
 	position: relative;
@@ -86,6 +90,34 @@
 	}
 }
 
+.ube-banner-btn {
+	svg {
+		display: inline-block;
+		width: 1em;
+		height: 1em;
+		stroke: currentColor;
+		fill: currentColor;
+
+		*[stroke^="#"],
+		*[stroke^="url(#"] {
+			stroke: currentColor;
+		}
+
+		*[fill^="#"],
+		*[fill^="url(#"] {
+			fill: currentColor;
+		}
+	}
+
+	&.icon-before i, &.icon-before svg {
+		margin-right: 5px;
+	}
+
+	&.icon-after i, &.icon-after svg {
+		margin-left: 5px;
+	}
+}
+
 .elementor-align-center .ube-banner-btn-fixed .ube-banner-content {
 	@include justify-content-center();
 
@@ -110,61 +142,6 @@
 		padding-right: inherit;
 	}
 }
-
-@media (max-width: 1024px) {
-	.elementor-tablet-align-center .ube-banner-btn-fixed .ube-banner-content {
-		@include justify-content-center();
-
-		.ube-banner-top-box {
-			padding-left: inherit;
-			padding-right: inherit;
-		}
-	}
-	.elementor-tablet-align-right .ube-banner-btn-fixed .ube-banner-content {
-		@include justify-content-end();
-
-		.ube-banner-top-box {
-			padding-left: inherit;
-			padding-right: 0;
-		}
-	}
-	.elementor-tablet-align-left .ube-banner-btn-fixed .ube-banner-content {
-		@include justify-content-start();
-
-		.ube-banner-top-box {
-			padding-right: inherit;
-			padding-left: 0;
-		}
-	}
-}
-
-@media (max-width: 767px) {
-	.elementor-mobile-align-center .ube-banner-btn-fixed .ube-banner-content {
-		@include justify-content-center();
-
-		.ube-banner-top-box {
-			padding-left: inherit;
-			padding-right: inherit;
-		}
-	}
-	.elementor-mobile-align-right .ube-banner-btn-fixed .ube-banner-content {
-		@include justify-content-end();
-
-		.ube-banner-top-box {
-			padding-left: inherit;
-			padding-right: 0;
-		}
-	}
-	.elementor-mobile-align-left .ube-banner-btn-fixed .ube-banner-content {
-		@include justify-content-start();
-
-		.ube-banner-top-box {
-			padding-right: inherit;
-			padding-left: 0;
-		}
-	}
-}
-
 
 .ube-banner-layout-01 .ube-banner-content,
 .ube-banner-layout-04:hover .ube-banner-content,
@@ -606,7 +583,7 @@
 	}
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 767px) {
 	.ube-banner .ube-banner-content {
 		padding: 1rem;
 	}

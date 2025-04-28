@@ -30,10 +30,7 @@ if (!isset($item_key)) {
 	$item_key = '';
 }
 
-$style_allow = array_keys(ube_get_team_member_style());
-if (!in_array($style, $style_allow)) {
-	$style = 'style-01';
-}
+
 
 $team_member_classes = array(
 	'ube-team-member',
@@ -88,6 +85,11 @@ if (isset($desc_class) && !empty($desc_class)) {
 }
 
 $element->add_render_attribute("desc{$item_key}",'class',$desc_classes );
+
+$style_allow = array_keys(ube_get_team_member_style());
+if (!in_array($style, $style_allow)) {
+    $style = 'style-01';
+}
 
 ube_get_template("elements/team-member/{$style}.php", array(
 	'element' => $element,

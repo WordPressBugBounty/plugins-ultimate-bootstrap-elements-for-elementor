@@ -103,6 +103,7 @@ $settings_array = [
 	'prev_text'                          => $settings['prev_text'],
 	'prev_icon'                          => $settings['prev_icon'],
 	'read_more_class'                    => implode( " ", $btn_class ),
+    'post_style'                         => 'list'
 ];
 
 $wrapper_classes[] = 'ube-posts ube-post-list ube-post-appender';

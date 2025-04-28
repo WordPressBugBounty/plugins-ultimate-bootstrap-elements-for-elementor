@@ -25,10 +25,7 @@ use Elementor\Widget_Base;
 if (!isset($item_key)) {
 	$item_key = '';
 }
-$layout_allow = array_keys(ube_get_testimonials_style());
-if (!in_array($layout, $layout_allow)) {
-	$layout = 'layout-01';
-}
+
 $wrapper_classes = array(
 	'ube-testimonial',
 	"ube-testimonial-{$layout}",
@@ -79,6 +76,11 @@ if (isset($author_job_class) && !empty($author_job_class)) {
 	$author_job_classes[] = $author_job_class;
 }
 $element->add_render_attribute("author_job_attr{$item_key}", 'class', $author_job_classes);
+
+$layout_allow = array_keys(ube_get_testimonials_style());
+if (!in_array($layout, $layout_allow)) {
+    $layout = 'layout-01';
+}
 ?>
 <div <?php echo $element->get_render_attribute_string("wrapper{$item_key}") ?>>
 	<?php ube_get_template("elements/testimonial/{$layout}.php", array(

@@ -83,33 +83,3 @@
 .elementor-align-left .ube-heading-divider {
 	margin-right: auto;
 }
-
-@media (max-width: 1024px) {
-	.elementor-tablet-align-center .ube-heading-divider {
-		margin-left: auto;
-		margin-right: auto;
-	}
-	.elementor-tablet-align-right .ube-heading-divider {
-		margin-left: auto;
-		margin-right: 0;
-	}
-	.elementor-tablet-align-left .ube-heading-divider {
-		margin-right: auto;
-		margin-left: 0;
-	}
-}
-
-@media (max-width: 767px) {
-	.elementor-mobile-align-center .ube-heading-divider {
-		margin-left: auto;
-		margin-right: auto;
-	}
-	.elementor-mobile-align-right .ube-heading-divider {
-		margin-left: auto;
-		margin-right: 0;
-	}
-	.elementor-mobile-align-left .ube-heading-divider {
-		margin-right: auto;
-		margin-left: 0;
-	}
-}

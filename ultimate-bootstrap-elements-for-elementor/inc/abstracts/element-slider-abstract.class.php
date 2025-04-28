@@ -850,43 +850,21 @@ abstract class UBE_Abstracts_Elements_Slider extends UBE_Abstracts_Elements {
 			$wrapper_classes[] = 'manual';
 		}
 
-
-		$slider_type = $slides_to_show = $slides_to_show_tablet = $slides_to_show_mobile =
-		$navigation_arrow = $navigation_arrow_tablet = $navigation_arrow_mobile =
-		$navigation_dots = $navigation_dots_tablet = $navigation_dots_mobile = $slider_arrows_position = $slider_arrows_shape =
-		$dots_position = $slider_arrows_type = $slider_arrows_size = $slider_dots_size =
-		$center_mode =
-		$center_padding = $center_padding_tablet = $center_padding_mobile =
-		$autoplay_enable = $autoplay_speed = $infinite_loop = $transition_speed =
-		$adaptive_height = $pause_on_hover = $single_slide_scroll = $fade_enabled =
-		$slider_syncing = $slider_syncing_element = $focus_on_select =
-		$grid_mode = $slide_rows = $slide_rows_tablet = $slide_rows_mobile =
-		$slides_per_row = $slides_per_row_tablet = $slides_per_row_mobile = $rtl_mode = $slider_item_same_height_enable = $slider_content_position = $slider_content_alignment =  '';
+        $slider_type = $slides_to_show = $navigation_arrow =
+        $navigation_dots = $slider_arrows_position = $slider_arrows_shape =
+        $dots_position = $slider_arrows_type = $slider_arrows_size = $slider_dots_size =
+        $center_mode = $center_padding = $autoplay_enable = $autoplay_speed = $infinite_loop = $transition_speed =
+        $adaptive_height = $pause_on_hover = $single_slide_scroll = $fade_enabled =
+        $slider_syncing = $slider_syncing_element = $focus_on_select = $grid_mode = $slide_rows =
+        $slides_per_row = $rtl_mode = $slider_item_same_height_enable = $slider_content_position = $slider_content_alignment = '';
 		extract( $settings );
 
 		if (empty($slides_to_show)) {
 			$slides_to_show = 1;
 		}
 
-		$slides_to_show_tablet = $slides_to_show_tablet == '' ? $slides_to_show : $slides_to_show_tablet;
-		$slides_to_show_mobile = $slides_to_show_mobile == '' ? $slides_to_show_tablet : $slides_to_show_mobile;
 
-		$navigation_arrow_tablet = $navigation_arrow_tablet == '' ? $navigation_arrow : $navigation_arrow_tablet;
-		$navigation_arrow_mobile = $navigation_arrow_mobile == '' ? $navigation_arrow_tablet : $navigation_arrow_mobile;
-
-		$navigation_dots_tablet = $navigation_dots_tablet == '' ? $navigation_dots : $navigation_dots_tablet;
-		$navigation_dots_mobile = $navigation_dots_mobile == '' ? $navigation_dots_tablet : $navigation_dots_mobile;
-
-		$center_padding_tablet = $center_padding_tablet == '' ? $center_padding : $center_padding_tablet;
-		$center_padding_mobile = $center_padding_mobile == '' ? $center_padding_tablet : $center_padding_mobile;
-
-		$slide_rows_tablet = $slide_rows_tablet == '' ? $slide_rows : $slide_rows_tablet;
-		$slide_rows_mobile = $slide_rows_mobile == '' ? $slide_rows_tablet : $slide_rows_mobile;
-
-		$slides_per_row_tablet = $slides_per_row_tablet == '' ? $slides_per_row : $slides_per_row_tablet;
-		$slides_per_row_mobile = $slides_per_row_mobile == '' ? $slides_per_row_tablet : $slides_per_row_mobile;
-
-		if ( ! empty( $slider_arrows_position ) ) {
+        if ( ! empty( $slider_arrows_position ) ) {
 			$wrapper_classes[] = 'ube-slider-arrow-position-' . $slider_arrows_position;
 		}
 		if ( ! empty( $dots_position ) ) {
@@ -941,47 +919,100 @@ abstract class UBE_Abstracts_Elements_Slider extends UBE_Abstracts_Elements {
 			$slick_options['nextArrow'] = '<div class="slick-next" aria-label="Next"><i class="fas fa-chevron-down"></i></div>';
 		}
 
+        if ( $grid_mode === 'on' ) {
+            $slick_options['rows']         = intval( $slide_rows );
+            $slick_options['slidesPerRow'] = intval( $slides_per_row );
+        }
 
-		$mobile_breakpoint_value = \Elementor\Plugin::$instance->breakpoints->get_breakpoints( 'mobile' )->get_value();
-		$tablet_breakpoint_value = \Elementor\Plugin::$instance->breakpoints->get_breakpoints( 'tablet' )->get_value();
+        $breakpoints = \Elementor\Plugin::$instance->breakpoints->get_active_breakpoints();
+        // Đảo ngược breakpoints để có thứ tự từ lớn đến nhỏ
+        uasort($breakpoints, function ($a, $b) {
+            return $b->get_value() - $a->get_value();
+        });
 
-		$tablet_settings = array(
-			'slidesToShow'   => intval( $slides_to_show_tablet ),
-			'slidesToScroll' => $single_slide_scroll === 'on' ? 1 : intval( $slides_to_show_tablet ),
-			'centerPadding'  => $center_padding_tablet,
-			'arrows'         => $navigation_arrow_tablet === 'on',
-			'dots'           => $navigation_dots_tablet === 'on',
-		);
+        $responsive_values = [];
 
-		$mobile_settings = array(
-			'slidesToShow'   => intval( $slides_to_show_mobile ),
-			'slidesToScroll' => $single_slide_scroll === 'on' ? 1 : intval( $slides_to_show_mobile ),
-			'centerPadding'  => $center_padding_mobile,
-			'arrows'         => $navigation_arrow_mobile === 'on',
-			'dots'           => $navigation_dots_mobile === 'on',
-		);
 
-		if ( $grid_mode === 'on' ) {
-			$slick_options['rows']         = intval( $slide_rows );
-			$slick_options['slidesPerRow'] = intval( $slides_per_row );
+        // Danh sách các biến responsive cần xử lý
+        $responsive_controls = [
+            'slides_to_show' => [
+                'default' => 4,
+                'type' => 'number',
+            ],
+            'navigation_arrow' => [
+                'default' => 'off',
+                'type' => 'boolean',
+            ],
+            'navigation_dots' => [
+                'default' => 'off',
+                'type' => 'boolean',
+            ],
+            'center_padding' => [
+                'default' => '0px',
+                'type' => 'string',
+            ],
+            'slide_rows' => [
+                'default' => 1,
+                'type' => 'number',
+            ],
+            'slides_per_row' => [
+                'default' => 1,
+                'type' => 'number',
+            ],
+        ];
 
-			$tablet_settings['rows']         = intval( $slide_rows_tablet );
-			$tablet_settings['slidesPerRow'] = intval( $slides_per_row_tablet );
+        // Khởi tạo giá trị cho desktop và các breakpoint
+        foreach ($responsive_controls as $control => $config) {
+            // Giá trị cho desktop
+            $responsive_values[$control]['desktop'] = isset($settings[$control]) && $config['type'] === 'number' && is_numeric($settings[$control])
+                ? (int) $settings[$control]
+                : ($config['type'] === 'boolean' ? ($settings[$control] === 'on') : ($settings[$control] ?? $config['default']));
 
-			$mobile_settings['rows']         = intval( $slide_rows_mobile );
-			$mobile_settings['slidesPerRow'] = intval( $slides_per_row_mobile );
-		}
+            // Giá trị trước đó (dùng cho fallback)
+            $previous_value = $responsive_values[$control]['desktop'];
+            // Xử lý các breakpoint khác
+            foreach ($breakpoints as $breakpoint_name => $breakpoint) {
+                $key = "{$control}_$breakpoint_name";
+                $value = isset($settings[$key])
+                    ? ($config['type'] === 'number' && is_numeric($settings[$key]) ? (int) $settings[$key]
+                        : ($config['type'] === 'boolean' ? ($settings[$key] === 'on') : $settings[$key]))
+                    : null;
 
-		$responsive = array(
-			array(
-				'breakpoint' => ( $tablet_breakpoint_value + 1 ),
-				'settings'   => $tablet_settings
-			),
-			array(
-				'breakpoint' => ( $mobile_breakpoint_value + 1 ),
-				'settings'   => $mobile_settings
-			)
-		);
+                // Logic fallback: Dùng giá trị của breakpoint trước đó hoặc desktop
+                $responsive_values[$control][$breakpoint_name] = ($value !== null && $value !== '') ? $value : $previous_value;
+                $previous_value = $responsive_values[$control][$breakpoint_name];
+            }
+        }
+
+
+        // Tạo mảng responsive cho slider
+        $responsive = [];
+
+        foreach ($breakpoints as $breakpoint_name => $breakpoint) {
+            $breakpoint_value = $breakpoint->get_value();
+
+            // Tạo settings cho breakpoint hiện tại
+            $breakpoint_settings = [
+                'slidesToShow'   => $responsive_values['slides_to_show'][$breakpoint_name],
+                'slidesToScroll' => $single_slide_scroll === 'on' ? 1 : $responsive_values['slides_to_show'][$breakpoint_name],
+                'centerPadding'  => $responsive_values['center_padding'][$breakpoint_name],
+                'arrows'         => $responsive_values['navigation_arrow'][$breakpoint_name],
+                'dots'           => $responsive_values['navigation_dots'][$breakpoint_name],
+            ];
+
+            // Thêm rows và slidesPerRow nếu grid_mode bật
+            if ($grid_mode === 'on') {
+                $breakpoint_settings['rows'] = $responsive_values['slide_rows'][$breakpoint_name];
+                $breakpoint_settings['slidesPerRow'] = $responsive_values['slides_per_row'][$breakpoint_name];
+            }
+
+
+            // Thêm vào mảng responsive
+            $responsive[] = [
+                'breakpoint' => $breakpoint_value + 1, // +1 để phù hợp với logic của bạn
+                'settings'   => $breakpoint_settings,
+            ];
+        }
 
 		$slick_options['responsive'] = $responsive;
 

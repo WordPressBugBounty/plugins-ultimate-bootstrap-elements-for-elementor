@@ -20,7 +20,7 @@ class UBE_Element_Breadcrumbs extends UBE_Abstracts_Elements {
 	}
 
 	public function get_ube_keywords() {
-		return array( 'breadcrumbs' , 'ube' , 'ube breadcrumbs');
+		return array( 'breadcrumbs', 'ube', 'ube breadcrumbs' );
 	}
 
 	protected function register_controls() {
@@ -407,6 +407,8 @@ class UBE_Element_Breadcrumbs extends UBE_Abstracts_Elements {
 			// If the post doesn't have parents.
 			if ( isset( $post->post_parent ) && ( $post->post_parent === 0 ) && $settings['breadcrumb_switcher_categories'] === 'yes' ) {
 				$html_markup .= $this->ube_get_post_terms( $settings );
+			} else {
+				$html_markup .= $this->get_post_ancestors();
 			}
 
 			$html_markup .= $this->ube_get_breadcrumb_leaf_markup();
@@ -651,7 +653,8 @@ class UBE_Element_Breadcrumbs extends UBE_Abstracts_Elements {
 		if ( $post->post_type === 'post' ) {
 			$taxonomy = 'category';
 		} else {
-			$taxonomy = $post->post_type . '_cat';
+			//$taxonomy = $post->post_type . '_cat';
+            $taxonomy = apply_filters("ube_breadcrumb_{$post->post_type}_cat", $post->post_type . '_cat');
 		}
 		if ( empty( $taxonomy ) ) {
 			return $terms_markup;
@@ -709,7 +712,7 @@ class UBE_Element_Breadcrumbs extends UBE_Abstracts_Elements {
 				$breadcrumb_item_link = "text-{$settings['breadcrumb_scheme_link']}";
 			}
 			$terms_markup .= '<li class="breadcrumb-item ' . esc_attr( $breadcrumb_item_link ) . '">';
-			$i      = 1;
+			$i            = 1;
 
 			foreach ( $terms as $term ) {
 				$breadcrumb_content = $term->name;
@@ -745,5 +748,25 @@ class UBE_Element_Breadcrumbs extends UBE_Abstracts_Elements {
 		}
 
 		return $terms_markup;
+	}
+
+	private function get_post_ancestors() {
+		$ancestors_markup = '';
+
+		// Get the ancestor id, order needs to be reversed.
+		$post_ancestor_ids = array_reverse( get_post_ancestors( get_post( get_queried_object_id() ) ) );
+
+		// Loop through the ids to get the full tree.
+		foreach ( $post_ancestor_ids as $post_ancestor_id ) {
+			$post_ancestor = get_post( $post_ancestor_id );
+			$title         = $post_ancestor->post_title;
+			$title_custom  = get_post_meta( $post_ancestor->ID, G5CORE()->meta_prefix . 'page_title_custom', true );
+			if ( $title_custom !== '' ) {
+				$title = $title_custom;
+			}
+			$ancestors_markup .= $this->ube_get_single_breadcrumb_markup( $title, get_permalink( $post_ancestor->ID ) );
+		}
+
+		return $ancestors_markup;
 	}
 }

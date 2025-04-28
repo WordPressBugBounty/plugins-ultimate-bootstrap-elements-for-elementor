@@ -12,7 +12,7 @@ use \Elementor\Group_Control_Background;
 class UBE_Element_Subscribe_News_Letter extends UBE_Abstracts_Elements
 {
 	public static function is_enabled() {
-		return function_exists('_mc4wp_load_plugin');
+		return class_exists('MC4WP_Form_Manager');
 	}
 
 	public function get_name()

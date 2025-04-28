@@ -9,17 +9,6 @@
 			display: block;
 			padding-top: var(--ube-post-ratio);
 		}
-
-		@media screen and (max-width: 768px) {
-			&::before {
-				padding-top: var(--ube-post-ratio-md);
-			}
-		}
-		@media screen and (max-width: 576px) {
-			&::before {
-				padding-top: var(--ube-post-ratio-sm);
-			}
-		}
 	}
 
 	.card {

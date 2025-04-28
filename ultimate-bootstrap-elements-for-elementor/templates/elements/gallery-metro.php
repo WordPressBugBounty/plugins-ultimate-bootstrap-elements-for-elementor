@@ -44,88 +44,74 @@ if ( array_key_exists( $settings['gallery_ratio'], $ratios ) ) {
 	$ratio = $ratios[ $settings['gallery_ratio'] ];
 }
 
-$item_bg_classes = apply_filters('ube_gallery_metro_item_bg_classes', array(
+$item_bg_classes = apply_filters( 'ube_gallery_metro_item_bg_classes', array(
 	'card-img',
 	'ube-gallery-ration-custom'
-));
+) );
+$breakpoints     = \Elementor\Plugin::$instance->breakpoints->get_active_breakpoints();
+$breakpoints     = is_array( $breakpoints ) ? array_keys( $breakpoints ) : array( 'mobile', 'tablet' );
 
 ?>
 <div <?php echo $element->get_render_attribute_string( 'wrapper_attr' ) ?>>
 	<?php
-	$grid_items        = $settings['gallery_grid_items'];
-	$all_image         = count( $galleries );
-	$number_image_show = intval( $settings['gallery_number_images'] ) > 0 ? $settings['gallery_number_images'] : $all_image;
+	$grid_items           = $settings['gallery_grid_items'];
+	$all_image            = count( $galleries );
+	$number_image_show    = intval( $settings['gallery_number_images'] ) > 0 ? $settings['gallery_number_images'] : $all_image;
 	foreach ( $galleries as $i => $gallery ) :
 		$grid_class = array( 'ube-grid-item' );
+		$item_bg_styles   = array();
+		$item_bg_styles[] = sprintf( 'background-image: url(%s)', esc_url( $gallery['url'] ) );
+
 		if ( $number_image_show < $all_image && $i + 1 == $number_image_show ) {
 			$grid_class[] = 'ube-gallery-view-more';
 		}
 
-		$item_col    = 1;
-		$item_row    = 1;
-		$item_row_md = $item_row;
-		$item_row_sm = $item_row_md;
-		$item_col_md = $item_col;
-		$item_col_sm = $item_col_md;
+		$item_col = 1;
+		$item_row = 1;
 		if ( $grid_items ) {
 			$grid_count = count( $grid_items );
 			$grid_index = $settings['gallery_loop_layout'] !== 'yes' ? $i : $i % $grid_count;
 
 			if ( $grid_index < $grid_count ) {
-				if ( isset( $grid_items[ $grid_index ]['number_column_mobile'] ) && $grid_items[ $grid_index ]['number_column_mobile'] !== '' ) {
-					$item_col_sm  = $grid_items[ $grid_index ]['number_column_mobile'];
-					$grid_class[] = 'gc-sm-' . $item_col_sm;
-				}
-				if ( isset( $grid_items[ $grid_index ]['number_column_tablet'] ) && $grid_items[ $grid_index ]['number_column_tablet'] !== '' ) {
-					$item_col_md  = $grid_items[ $grid_index ]['number_column_tablet'];
-					$grid_class[] = 'gc-md-' . $item_col_md;
-				}
 				if ( isset( $grid_items[ $grid_index ]['number_column'] ) && $grid_items[ $grid_index ]['number_column'] !== '' ) {
 					$item_col     = $grid_items[ $grid_index ]['number_column'];
 					$grid_class[] = 'gc-' . $item_col;
-				}
-				if ( isset( $grid_items[ $grid_index ]['number_row_mobile'] ) && $grid_items[ $grid_index ]['number_row_mobile'] !== '' ) {
-					$item_row_sm  = $grid_items[ $grid_index ]['number_row_mobile'];
-					$grid_class[] = 'gr-sm-' . $item_row_sm;
-				}
-				if ( isset( $grid_items[ $grid_index ]['number_row_tablet'] ) && $grid_items[ $grid_index ]['number_row_tablet'] !== '' ) {
-					$item_row_md  = $grid_items[ $grid_index ]['number_row_tablet'];
-					$grid_class[] = 'gr-md-' . $item_row_md;
 				}
 				if ( isset( $grid_items[ $grid_index ]['number_row'] ) && $grid_items[ $grid_index ]['number_row'] !== '' ) {
 					$item_row     = $grid_items[ $grid_index ]['number_row'];
 					$grid_class[] = 'gr-' . $item_row;
 				}
 
+				foreach ( $breakpoints as $points ) {
+					$key_number_column   = "number_column_{$points}";
+					$key_number_row      = "number_row_{$points}";
+					$item_col_responsive = 1;
+					$item_row_responsive = 1;
+
+					if ( isset( $grid_items[ $grid_index ][ $key_number_column ] ) && $grid_items[ $grid_index ][ $key_number_column ] !== '' ) {
+						$item_col_responsive = $grid_items[ $grid_index ][ $key_number_column ];
+						$grid_class[]        = "gc-{$points}-" . $item_col_responsive;
+					}
+					if ( isset( $grid_items[ $grid_index ][ $key_number_row ] ) && $grid_items[ $grid_index ][ $key_number_row ] !== '' ) {
+						$item_row_responsive = $grid_items[ $grid_index ][ $key_number_row ];
+						$grid_class[]        = "gr-{$points}-" . $item_row_responsive;
+					}
+
+					$item_ratio_responsive = $ratio * intval( $item_row_responsive ) / intval( $item_col_responsive );
+					$item_bg_styles[]      = sprintf( "--ube-gallery-ratio-{$points}: %s", $item_ratio_responsive . '%' );
+				}
 			}
 
 		}
 
-
+		$item_ratio          = $ratio * $item_row / $item_col;
+		$item_bg_styles[]    = sprintf( '--ube-gallery-ratio: %s', $item_ratio . '%' );
 		$gallery_setting_key = $element->get_repeater_setting_key( 'gallery_grid', 'gallery_grid_items', $i );
 		$element->add_render_attribute( $gallery_setting_key, 'class', $grid_class );
-
-
-
-		$item_ratio    = $ratio * $item_row / $item_col;
-		$item_ratio_md = $ratio * $item_row_md / $item_col_md;
-		$item_ratio_sm = $ratio * $item_row_sm / $item_col_sm;
-
-
 		$gallery_bg_setting_key = $element->get_repeater_setting_key( 'gallery_grid', 'gallery_grid_items_bg', $i );
-
-		do_action('ube_gallery_metro/frontend/before_render_item',$element,$gallery_bg_setting_key, $gallery);
-
-
-		$item_bg_styles = array();
-		$item_bg_styles[] = sprintf('background-image: url(%s)',esc_url( $gallery['url'] ));
-		$item_bg_styles[] = sprintf('--ube-gallery-ratio: %s',$item_ratio.'%');
-		$item_bg_styles[] = sprintf('--ube-gallery-ratio-md: %s',$item_ratio_md.'%');
-		$item_bg_styles[] = sprintf('--ube-gallery-ratio-sm: %s',$item_ratio_sm.'%');
-
-		$element->add_render_attribute( $gallery_bg_setting_key, 'class', implode(' ', $item_bg_classes) );
-		$element->add_render_attribute( $gallery_bg_setting_key, 'style', implode(';', $item_bg_styles) );
-
+		do_action( 'ube_gallery_metro/frontend/before_render_item', $element, $gallery_bg_setting_key, $gallery );
+		$element->add_render_attribute( $gallery_bg_setting_key, 'class', implode( ' ', $item_bg_classes ) );
+		$element->add_render_attribute( $gallery_bg_setting_key, 'style', implode( ';', $item_bg_styles ) );
 
 		if ( $i < $number_image_show ):
 			?>
@@ -133,7 +119,7 @@ $item_bg_classes = apply_filters('ube_gallery_metro_item_bg_classes', array(
             <div <?php echo $element->get_render_attribute_string( $gallery_setting_key ) ?>>
                 <a class="card" href="<?php echo esc_url( $gallery['url'] ) ?>"
                    data-elementor-lightbox-slideshow="<?php echo esc_attr( $id ) ?>">
-	                <div <?php $element->print_render_attribute_string($gallery_bg_setting_key) ?>></div>
+                    <div <?php $element->print_render_attribute_string( $gallery_bg_setting_key ) ?>></div>
                     <div class="card-img-overlay">
 						<?php
 						if ( $number_image_show < $all_image && $i + 1 == $number_image_show ):

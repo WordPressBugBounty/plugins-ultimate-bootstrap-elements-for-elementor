@@ -64,6 +64,7 @@ if ( $settings['enable_pricing_table_featured'] == 'yes' ) {
 }
 
 $element->add_render_attribute( 'inner_attr', 'class', $inner_class );
+
 $style_allow = array_keys(ube_get_pricing_table_style());
 $style = isset( $settings['pricing_table_style'] ) ? $settings['pricing_table_style'] : 'style-1';
 if (!in_array($style, $style_allow)) {

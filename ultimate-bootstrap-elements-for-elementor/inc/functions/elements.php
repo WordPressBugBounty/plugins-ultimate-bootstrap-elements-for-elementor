@@ -67,7 +67,7 @@ function ube_get_all_types_post() {
 
 function ube_get_authors() {
 	$users = get_users( [
-		'who'                 => 'authors',
+        'capability'           => 'edit_posts',
 		'has_published_posts' => true,
 		'fields'              => [
 			'ID',
@@ -205,7 +205,7 @@ function ube_render_template_post( $args, $settings ) {
 				if ( isset( $settings['image_size_mode'] ) ) {
 					$pd_top      = 66.6666666;
 					$media_image = wp_get_attachment_image_src( get_post_thumbnail_id(), 'full' );
-					if ( $media_image && ($media_image[1] != 0) ) {
+					if ( $media_image && ( $media_image[1] != 0 ) ) {
 						$pd_top = ( $media_image[2] / $media_image[1] ) * 100;
 					}
 
@@ -225,69 +225,81 @@ function ube_render_template_post( $args, $settings ) {
 
 			}
 			if ( isset( $settings['post_style'] ) && $settings['post_style'] == 'metro' ) {
+				$breakpoints = \Elementor\Plugin::$instance->breakpoints->get_active_breakpoints();
+				$breakpoints = is_array( $breakpoints ) ? array_keys( $breakpoints ) : array( 'mobile', 'tablet' );
+
+
 				$ratio      = $settings['ratio'];
-				$ratio_show = array(
-					' --ube-post-ratio: ' . $ratio . '%;',
-					'--ube-post-ratio-md:' . $ratio . '%;',
-					'--ube-post-ratio-sm:' . $ratio . '%'
-				);
+				$ratio_show = array();
 				$grid_class = array( 'ube-grid-item' );
 				if ( ! empty( $grid_items ) ) {
-					$item_col    = 1;
-					$item_row    = 1;
-					$item_col    = 1;
-					$item_row    = 1;
-					$item_row_md = $item_row;
-					$item_row_sm = $item_row_md;
-					$item_col_md = $item_col;
-					$item_col_sm = $item_col_md;
+
+					$item_col = 1;
+					$item_row = 1;
 					if ( $grid_items ) {
 						$grid_count = count( $grid_items );
 						$grid_index = $settings['post_loop_layout'] !== 'yes' ? $i : $i % $grid_count;
 
 						if ( $grid_index < $grid_count ) {
-							if ( isset( $grid_items[ $grid_index ]['number_column_mobile'] ) && $grid_items[ $grid_index ]['number_column_mobile'] !== '' ) {
-								$item_col_sm  = $grid_items[ $grid_index ]['number_column_mobile'];
-								$grid_class[] = 'gc-sm-' . $item_col_sm;
-							}
-							if ( isset( $grid_items[ $grid_index ]['number_column_tablet'] ) && $grid_items[ $grid_index ]['number_column_tablet'] !== '' ) {
-								$item_col_md  = $grid_items[ $grid_index ]['number_column_tablet'];
-								$grid_class[] = 'gc-md-' . $item_col_md;
-							}
 							if ( isset( $grid_items[ $grid_index ]['number_column'] ) && $grid_items[ $grid_index ]['number_column'] !== '' ) {
 								$item_col     = $grid_items[ $grid_index ]['number_column'];
 								$grid_class[] = 'gc-' . $item_col;
-							}
-							if ( isset( $grid_items[ $grid_index ]['number_row_mobile'] ) && $grid_items[ $grid_index ]['number_row_mobile'] !== '' ) {
-								$item_row_sm  = $grid_items[ $grid_index ]['number_row_mobile'];
-								$grid_class[] = 'gr-sm-' . $item_row_sm;
-							}
-							if ( isset( $grid_items[ $grid_index ]['number_row_tablet'] ) && $grid_items[ $grid_index ]['number_row_tablet'] !== '' ) {
-								$item_row_md  = $grid_items[ $grid_index ]['number_row_tablet'];
-								$grid_class[] = 'gr-md-' . $item_row_md;
 							}
 							if ( isset( $grid_items[ $grid_index ]['number_row'] ) && $grid_items[ $grid_index ]['number_row'] !== '' ) {
 								$item_row     = $grid_items[ $grid_index ]['number_row'];
 								$grid_class[] = 'gr-' . $item_row;
 							}
+
+							foreach ( $breakpoints as $points ) {
+								$item_col_responsive = 1;
+								$item_row_responsive = 1;
+								$key_number_column   = "number_column_{$points}";
+								$key_number_row      = "number_row_{$points}";
+
+								if ( isset( $grid_items[ $grid_index ][ $key_number_column ] ) && $grid_items[ $grid_index ][ $key_number_column ] !== '' ) {
+									$item_col_responsive = $grid_items[ $grid_index ][ $key_number_column ];
+									$grid_class[]        = "gc-{$points}-" . $item_col_responsive;
+								}
+								if ( isset( $grid_items[ $grid_index ][ $key_number_row ] ) && $grid_items[ $grid_index ][ $key_number_row ] !== '' ) {
+									$item_row_responsive = $grid_items[ $grid_index ][ $key_number_row ];
+									$grid_class[]        = "gr-{$points}-" . $item_row_responsive;
+								}
+
+								$item_ratio_responsive = $ratio * intval( $item_row_responsive ) / intval( $item_col_responsive );
+								$ratio_show[]          = sprintf( "--ube-post-ratio-{$points}: %s", $item_ratio_responsive . '%' );
+							}
 						}
 					}
-					$item_ratio    = $ratio * $item_row / $item_col;
-					$item_ratio_md = $ratio * $item_row_md / $item_col_md;
-					$item_ratio_sm = $ratio * $item_row_sm / $item_col_sm;
-					$ratio_show    = array(
-						' --ube-post-ratio: ' . $item_ratio . '%;',
-						'--ube-post-ratio-md:' . $item_ratio_md . '%;',
-						'--ube-post-ratio-sm:' . $item_ratio_sm . '%'
-					);
 
+					$item_ratio   = $ratio * $item_row / $item_col;
+					$ratio_show[] = ' --ube-post-ratio: ' . $item_ratio . '%;';
 				}
 				$settings['style']        = implode( ";", $ratio_show );
 				$settings['column_class'] = implode( " ", $grid_class );
 			}
 
+            $post_style = isset($settings['post_style'])  ? sanitize_text_field(wp_unslash($settings['post_style'])) : 'grid';
+            $post_layout = isset($settings['post_layout'])  ? sanitize_text_field(wp_unslash($settings['post_layout'])) : '';
+            $layout_allow = array();
+            if ($post_style == 'grid') {
+                $layout_allow = array_keys(ube_get_post_grid_layout());
+            } elseif ($post_style == 'list') {
+                $layout_allow = array_keys(ube_get_post_list_layout());
+            } elseif ($post_style == 'masonry') {
+                $layout_allow = array_keys(ube_get_post_masonry_layout());
+            } elseif ($post_style == 'metro') {
+                $layout_allow = array_keys(ube_get_post_metro_layout());
+            } elseif ($post_style == 'slider') {
+                $layout_allow = array_keys(ube_get_post_grid_layout());
+            }
 
-			ube_get_template( 'post/post-list/' . $settings['post_layout'] . '.php', array(
+
+           if (!in_array($post_layout, $layout_allow)) {
+               $post_layout = 'post-grid-layout-01';
+           }
+
+
+			ube_get_template( 'post/post-list/' . $post_layout . '.php', array(
 				'settings'        => $settings,
 				'category_length' => $settings['category_length'] != '' ? intval( $settings['category_length'] ) : 10
 			) );

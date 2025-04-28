@@ -194,6 +194,7 @@ $settings_array = [
 	'image_size_width'                   => $settings['image_size_width'],
 	'image_size_height'                  => $settings['image_size_height'],
 	'read_more_class'                    => implode( " ", $btn_class ),
+    'post_style'                         => 'slider'
 ];
 
 $wrapper_classes[] = 'ube-posts ube-post-grid ube-posts-slider ube-post-appender';

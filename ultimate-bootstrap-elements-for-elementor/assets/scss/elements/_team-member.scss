@@ -1,9 +1,11 @@
 .ube-team-member {
 	@include border-radius(0);
 	border: none;
-	&.card{
+
+	&.card {
 		background-color: transparent;
 	}
+
 	.card {
 		@include border-radius(0);
 		border: none;
@@ -16,11 +18,13 @@
 
 	.ube-tm-image {
 		width: 100%;
+
 		.g5core__lazy-image,
 		.card-img {
 			width: 100%;
 			display: block;
 		}
+
 		img {
 			width: 100%;
 		}
@@ -30,6 +34,7 @@
 		margin-top: 0;
 		margin-bottom: 5px;
 		font-size: 20px;
+
 		a {
 			color: inherit;
 		}
@@ -47,8 +52,27 @@
 
 .ube-tm-social {
 	margin-top: 1rem;
+
 	.elementor-icon {
 		font-size: 16px;
+
+		svg {
+			display: inline-block;
+			width: 1em;
+			height: 1em;
+			stroke: currentColor;
+			fill: currentColor;
+
+			*[stroke^="#"],
+			*[stroke^="url(#"] {
+				stroke: currentColor;
+			}
+
+			*[fill^="#"],
+			*[fill^="url(#"] {
+				fill: currentColor;
+			}
+		}
 	}
 
 	.elementor-icon + .elementor-icon {
@@ -64,6 +88,7 @@
 
 .ube-tm-style-02 {
 	overflow: hidden;
+
 	.card-body {
 		position: absolute;
 		bottom: 25px;
@@ -77,6 +102,7 @@
 		//color: #fafafa;
 		background-color: var(--e-global-color-accent);
 		color: var(--e-global-color-accent-foreground);
+
 		* {
 			color: inherit;
 			/*&:hover {
@@ -85,6 +111,7 @@
 		}
 
 	}
+
 	&:hover {
 		.card-body {
 			opacity: 1;
@@ -98,12 +125,14 @@
 	.ube-tm-inner {
 		@include flex-grow-1();
 	}
+
 	.ube-tm-image {
 		@include border-radius(100%);
 		background-size: cover;
 		background-repeat: no-repeat;
 		position: relative;
 		z-index: 1;
+
 		&:before {
 			content: '';
 			display: block;
@@ -130,6 +159,7 @@
 		background-color: var(--e-global-color-accent);
 		//color: #fafafa;
 		color: var(--e-global-color-accent-foreground);
+
 		* {
 			color: inherit;
 			/*&:hover {
@@ -144,14 +174,17 @@
 			@include transition(all 0.4s ease-in-out 0s);
 			opacity: 0;
 			z-index: 2;
+
 			* {
 				@include transform(translateX(-100%));
 				@include transition(all 0.35s ease-in-out);
 			}
 		}
+
 		&:hover {
 			.card-body {
 				opacity: 1;
+
 				* {
 					@include transform(translateX(0));
 				}
@@ -165,6 +198,7 @@
 			@include transition(transform 0.5s ease-in-out);
 			@include transform-origin(50%, 0);
 		}
+
 		&:hover {
 			.ube-tm-image {
 				@include transform(rotate3d(1, 0, 0, 180deg));
@@ -177,6 +211,7 @@
 			@include transition(transform 0.5s ease-in-out);
 			@include transform-origin(0, 100%);
 		}
+
 		&:hover {
 			.ube-tm-image {
 				@include transform(rotate3d(1, 0, 0, 180deg));
@@ -189,6 +224,7 @@
 			@include transition(transform 0.5s ease-in-out);
 			@include transform-origin(0, 50%);
 		}
+
 		&:hover {
 			.ube-tm-image {
 				@include transform(rotate3d(0, 1, 0, -180deg));
@@ -201,6 +237,7 @@
 			@include transition(transform 0.5s ease-in-out);
 			@include transform-origin(100%, 50%);
 		}
+
 		&:hover {
 			.ube-tm-image {
 				@include transform(rotate3d(0, 1, 0, 180deg));

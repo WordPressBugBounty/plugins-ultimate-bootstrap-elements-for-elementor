@@ -138,6 +138,7 @@ $settings_array = [
 	'show_day'                           => $settings['show_day'],
 	'column_class'                       => implode( " ", $column_classes ),
 	'read_more_class'                    => implode( " ", $btn_class ),
+    'post_style'                         => 'masonry'
 ];
 
 $wrapper_classes[] = 'ube-posts ube-post-grid ube-posts-masonry ube-post-appender row';
