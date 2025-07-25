@@ -29,14 +29,6 @@
 				@include align-items-center();
 				@include justify-content-center();
 			}
-
-			svg {
-				display: inline-block;
-				width: 1em;
-				height: 1em;
-				stroke: currentColor;
-				fill: currentColor;
-			}
 		}
 	}
 

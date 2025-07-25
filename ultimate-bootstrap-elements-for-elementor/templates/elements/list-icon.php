@@ -59,7 +59,7 @@ if ( $settings['list_icon_number'] > 0 ) {
 		}
 		$element->add_render_attribute( $link_list_icon, 'class', 'ube-list-icon-title');
 
-		$list_icon_content_classes = array( 'ube-list-icon-icon' );
+		$list_icon_content_classes = array( 'ube-list-icon-icon','ube-icon' );
 
 		$element->add_render_attribute( $list_items_classes, 'class', $list_icon_content_classes );
 
@@ -67,12 +67,12 @@ if ( $settings['list_icon_number'] > 0 ) {
         <li <?php echo $element->get_render_attribute_string( 'list_icon_item' ); ?>>
 			<?php if ( ! empty( $settings['list_icon_type_icon']['value'] ) && $item['list_icon_selected_icon']['value'] === "" && $settings['list_icon_view'] === 'list-icon-icon' ) : ?>
                 <span <?php echo $element->get_render_attribute_string($list_items_classes ); ?>>
-					<?php Icons_Manager::render_icon( $settings['list_icon_type_icon'] ); ?>
+					<?php ube_render_icon( $settings['list_icon_type_icon'] ); ?>
 				</span>
 			<?php endif; ?>
 			<?php if ( ! empty( $item['list_icon_selected_icon']['value'] ) && $settings['list_icon_view'] === 'list-icon-icon' ) : ?>
                 <span <?php echo $element->get_render_attribute_string( $list_items_classes ); ?>>
-					<?php Icons_Manager::render_icon( $item['list_icon_selected_icon'] ); ?>
+					<?php ube_render_icon( $item['list_icon_selected_icon'] ); ?>
 				</span>
 			<?php endif; ?>
 			<?php if ( ! empty( $item['list_icon_title'] )) : ?>

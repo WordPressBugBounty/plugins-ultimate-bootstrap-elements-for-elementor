@@ -60,18 +60,10 @@
 	.ube-list-icon-icon{
 		font-style: normal;
 		padding-right: 0.5em;
+		font-size: inherit;
 	}
 	a,a:hover,a:active{
 		color: inherit;
-	}
-}
-.ube-list-icon-icon{
-	svg{
-		display: inline-block;
-		width: 1em;
-		height: 1em;
-		stroke: currentColor;
-		fill: currentColor;
 	}
 }
 

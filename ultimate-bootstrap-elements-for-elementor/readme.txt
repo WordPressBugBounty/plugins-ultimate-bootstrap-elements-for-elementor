@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: elementor, elementor addons, elementor widget, element
 Requires at least: 4.7
 Tested up to: 6.8
-Stable tag: 1.5.0
+Stable tag: 1.5.1
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -102,6 +102,12 @@ Do follow to install plugins:
 3. Go to menu UBE Elements screen to configure the plugin
 
 == Changelog ==
+= 1.5.1 =
+* Update css icon box
+* Fix insert template
+* Fix icon svg
+* Update option Variable Width for slider
+
 = 1.5.0 =
 * Fix responsive control slider
 * Fix: Security issue NOT filtered load php template

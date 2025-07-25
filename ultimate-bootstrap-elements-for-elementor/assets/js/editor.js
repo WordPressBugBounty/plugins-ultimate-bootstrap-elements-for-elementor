@@ -486,7 +486,7 @@
                 }).done(function (res) {
                     if (res.success) {
 
-                        var sectionCount = elementor.getPreviewView().$el.find('.elementor-section-wrap > section ').length;
+                        var sectionCount = elementor.getPreviewView().$el.find('.elementor-section-wrap > .elementor-element ').length;
                         var title = { rendered: 'New Templates ' + sectionCount };
 
                         var templateModel = new Backbone.Model({

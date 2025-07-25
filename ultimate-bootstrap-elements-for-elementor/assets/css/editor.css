@@ -1,5 +1,12 @@
 :root {
   --ube-font-icon: "Font Awesome 6 Pro";
+  --ube-ib-color: var(--e-global-color-primary);
+  --ube-ib-color-foreground: var(--e-global-color-primary-foreground);
+  --ube-ib-border-width: 3px;
+  --ube-ib-spacing: 30px;
+  --ube-ib-desc-spacing: 15px;
+  --ube-ib-view-stacked-icon-padding: .5em;
+  --ube-ib-shape-rounded: 10%;
 }
 
 i.ube-badge:after {

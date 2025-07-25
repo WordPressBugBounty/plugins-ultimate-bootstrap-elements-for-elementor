@@ -59,7 +59,7 @@ var iconsHTML = {};
 		}
 		view.addRenderAttribute( link_list_icon, 'class','ube-list-icon-title');
 
-		var list_icon_content_classes = ['ube-list-icon-icon'];
+		var list_icon_content_classes = ['ube-list-icon-icon ube-icon'];
 
 		view.addRenderAttribute( list_items_classes, 'class',list_icon_content_classes );
 

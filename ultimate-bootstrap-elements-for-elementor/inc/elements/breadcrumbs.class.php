@@ -417,7 +417,7 @@ class UBE_Element_Breadcrumbs extends UBE_Abstracts_Elements {
 			if ( is_home() && ! is_front_page() ) {
 				$posts_page       = get_option( 'page_for_posts' );
 				$posts_page_title = get_the_title( $posts_page );
-				$html_markup      .= $this->ube_get_single_breadcrumb_markup( $posts_page_title );
+				$html_markup      .= $this->ube_get_breadcrumb_leaf_markup( $posts_page_title );
 			}
 
 			// Custom post types archives.
@@ -490,7 +490,7 @@ class UBE_Element_Breadcrumbs extends UBE_Abstracts_Elements {
 
 		$breadcrumb_content = $title;
 		if ( $link ) {
-			$breadcrumb_content = '<a ' . $micro_data_url . ' href="' . esc_url( $link ) . '">' . esc_html( $breadcrumb_content ) . '</a>';
+			$breadcrumb_content = '<a ' . $micro_data_url . ' href="' . esc_url( $link ) . '">' . wp_strip_all_tags( $breadcrumb_content ) . '</a>';
 		}
 		$output = '<li class="breadcrumb-item ' . esc_attr( $breadcrumb_item_link ) . '">' . $breadcrumb_content . '</li>';
 
@@ -760,10 +760,10 @@ class UBE_Element_Breadcrumbs extends UBE_Abstracts_Elements {
 		foreach ( $post_ancestor_ids as $post_ancestor_id ) {
 			$post_ancestor = get_post( $post_ancestor_id );
 			$title         = $post_ancestor->post_title;
-			$title_custom  = get_post_meta( $post_ancestor->ID, G5CORE()->meta_prefix . 'page_title_custom', true );
+			/*$title_custom  = get_post_meta( $post_ancestor->ID, G5CORE()->meta_prefix . 'page_title_custom', true );
 			if ( $title_custom !== '' ) {
 				$title = $title_custom;
-			}
+			}*/
 			$ancestors_markup .= $this->ube_get_single_breadcrumb_markup( $title, get_permalink( $post_ancestor->ID ) );
 		}
 

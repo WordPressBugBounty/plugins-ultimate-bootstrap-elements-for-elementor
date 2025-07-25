@@ -62,6 +62,7 @@ abstract class UBE_Abstracts_Elements_Slider extends UBE_Abstracts_Elements {
 				],
 			]
 		);
+
 		$this->add_responsive_control( 'slides_to_show', [
 			'label'   => esc_html__( 'Slides To Show', 'ube' ),
 			'type'    => Controls_Manager::NUMBER,
@@ -74,28 +75,34 @@ abstract class UBE_Abstracts_Elements_Slider extends UBE_Abstracts_Elements {
 		$this->add_responsive_control(
 			'navigation_arrow',
 			[
-				'label'   => esc_html__( 'Navigation Arrow', 'ube' ),
-				'type'    => Controls_Manager::SELECT,
-				'options' => [
+				'label'     => esc_html__( 'Navigation Arrow', 'ube' ),
+				'type'      => Controls_Manager::SELECT,
+				'options'   => [
 					'off' => esc_html__( 'Hide', 'ube' ),
 					'on'  => esc_html__( 'Show', 'ube' ),
 
 				],
-				'default' => 'off',
+				'default'   => 'off',
+				'condition' => [
+					'slider_marquee!' => 'on'
+				]
 			]
 		);
 
 		$this->add_responsive_control(
 			'navigation_dots',
 			[
-				'label'   => esc_html__( 'Navigation Dots', 'ube' ),
-				'type'    => Controls_Manager::SELECT,
-				'options' => [
+				'label'     => esc_html__( 'Navigation Dots', 'ube' ),
+				'type'      => Controls_Manager::SELECT,
+				'options'   => [
 					'off' => esc_html__( 'Hide', 'ube' ),
 					'on'  => esc_html__( 'Show', 'ube' ),
 
 				],
-				'default' => 'on',
+				'default'   => 'on',
+				'condition' => [
+					'slider_marquee!' => 'on'
+				]
 			]
 		);
 
@@ -108,6 +115,9 @@ abstract class UBE_Abstracts_Elements_Slider extends UBE_Abstracts_Elements {
 				'label_off'    => esc_html__( 'Disable', 'ube' ),
 				'return_value' => 'on',
 				'default'      => '',
+				'condition'    => [
+					'slider_marquee!' => 'on'
+				]
 			]
 		);
 
@@ -119,7 +129,8 @@ abstract class UBE_Abstracts_Elements_Slider extends UBE_Abstracts_Elements {
 				'type'        => Controls_Manager::TEXT,
 				'default'     => '50px',
 				'condition'   => [
-					'center_mode' => 'on'
+					'center_mode'     => 'on',
+					'slider_marquee!' => 'on'
 				]
 			]
 		);
@@ -133,6 +144,9 @@ abstract class UBE_Abstracts_Elements_Slider extends UBE_Abstracts_Elements {
 				'label_off'    => esc_html__( 'Disable', 'ube' ),
 				'return_value' => 'on',
 				'default'      => '',
+				'condition'    => [
+					'slider_marquee!' => 'on'
+				]
 			]
 		);
 
@@ -144,7 +158,8 @@ abstract class UBE_Abstracts_Elements_Slider extends UBE_Abstracts_Elements {
 				'step'      => 500,
 				'default'   => 5000,
 				'condition' => [
-					'autoplay_enable' => 'on'
+					'autoplay_enable' => 'on',
+					'slider_marquee!' => 'on'
 				]
 			]
 		);
@@ -158,17 +173,48 @@ abstract class UBE_Abstracts_Elements_Slider extends UBE_Abstracts_Elements {
 				'label_off'    => esc_html__( 'Disable', 'ube' ),
 				'return_value' => 'on',
 				'default'      => '',
+				'condition'    => [
+					'slider_marquee!' => 'on'
+				]
 			]
 		);
 
 		$this->add_control(
 			'transition_speed',
 			[
-				'label'   => esc_html__( 'Transition Speed', 'ube' ),
-				'type'    => Controls_Manager::NUMBER,
-				'default' => 300,
+				'label'     => esc_html__( 'Transition Speed', 'ube' ),
+				'type'      => Controls_Manager::NUMBER,
+				'default'   => 300,
+				'condition' => [
+					'slider_marquee!' => 'on'
+				]
 			]
 		);
+
+		$this->add_control(
+			'variableWidth',
+			[
+				'label'        => esc_html__( 'Variable Width', 'ube' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'Enable', 'ube' ),
+				'label_off'    => esc_html__( 'Disable', 'ube' ),
+				'return_value' => 'on',
+				'default'      => '',
+			]
+		);
+
+		$this->add_responsive_control( 'customWidthItem', [
+			'label'      => esc_html__( 'Custom Width Item (px)', 'ube' ),
+			'type'      => Controls_Manager::NUMBER,
+			'selectors' => [
+				'{{WRAPPER}} .ube-slider-item' => 'width: {{VALUE}}px;',
+			],
+			'condition' => [
+				'variableWidth' => 'on'
+			]
+		] );
+
+
 
 		$this->add_responsive_control( 'slider_space_between_items', [
 			'label'     => esc_html__( 'Space Between Items', 'ube' ),
@@ -198,7 +244,7 @@ abstract class UBE_Abstracts_Elements_Slider extends UBE_Abstracts_Elements {
 				'middle' => 'center',
 				'bottom' => 'end',
 			],
-			'selectors' => [
+			'selectors'            => [
 				'{{WRAPPER}} .ube-slider-item' => 'display: grid;align-items: {{VALUE}};',
 
 			],
@@ -221,13 +267,67 @@ abstract class UBE_Abstracts_Elements_Slider extends UBE_Abstracts_Elements {
 				'left'  => 'start',
 				'right' => 'end',
 			],
-			'selectors' => [
+			'selectors'            => [
 				'{{WRAPPER}} .ube-slider-item' => 'display: grid;justify-content: {{VALUE}};',
 			],
 			'condition'            => [
 				'grid_mode!' => 'on'
 			]
 		] );
+
+		$this->add_control(
+			'slider_marquee',
+			[
+				'label'        => esc_html__( 'Marquee Track', 'ube' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'Enable', 'ube' ),
+				'label_off'    => esc_html__( 'Disable', 'ube' ),
+				'return_value' => 'on',
+				'default'      => '',
+				'separator'    => 'before',
+			]
+		);
+
+		$this->add_control(
+			'slider_marquee_alert',
+			[
+				'type'       => \Elementor\Controls_Manager::ALERT,
+				'alert_type' => 'info',
+				'heading'    => esc_html__( 'Tips:', 'ube' ),
+				'content'    => wp_kses_post( __( 'You can set the <strong>Slides To Show</strong> value lower than the total number of items to smooth infinite scroll', 'ube' ) ),
+				'condition'  => [
+					'slider_marquee' => 'on'
+				]
+			]
+		);
+
+		$this->add_control( 'slider_marquee_type', [
+			'label'     => esc_html__( 'Marquee Type', 'ube' ),
+			'type'      => Controls_Manager::SELECT,
+			'default'   => 'rtl',
+			'options'   => [
+				'rtl' => esc_html__( 'Right To Left', 'ube' ),
+				'ltr' => esc_html__( 'Left To Right', 'ube' ),
+			],
+			'condition' => [
+				'slider_marquee' => 'on'
+			]
+		] );
+
+		$this->add_control(
+			'slider_marquee_speed',
+			[
+				'label'     => esc_html__( 'Marquee Speed', 'ube' ),
+				'type'      => Controls_Manager::NUMBER,
+				'default'   => 100,
+				'selectors' => [
+					'{{WRAPPER}} .ube-slider-marquee .slick-track ' => '--ube-slider-marquee-speed: {{VALUE}}s',
+				],
+				'condition' => [
+					'slider_marquee' => 'on'
+				]
+			]
+		);
 
 		$this->end_controls_section();
 	}
@@ -655,7 +755,7 @@ abstract class UBE_Abstracts_Elements_Slider extends UBE_Abstracts_Elements {
 		$this->end_controls_section();
 	}
 
-	protected function register_slider_item_style_section_controls($condition = []) {
+	protected function register_slider_item_style_section_controls( $condition = [] ) {
 		$conditions = [
 			'terms' => [
 				/*[
@@ -673,8 +773,8 @@ abstract class UBE_Abstracts_Elements_Slider extends UBE_Abstracts_Elements {
 		$this->start_controls_section(
 			'section_slider_item_style',
 			[
-				'label'     => esc_html__( 'Slider Item', 'ube' ),
-				'tab'       => Controls_Manager::TAB_STYLE,
+				'label'      => esc_html__( 'Slider Item', 'ube' ),
+				'tab'        => Controls_Manager::TAB_STYLE,
 				'conditions' => $conditions
 			]
 		);
@@ -701,12 +801,10 @@ abstract class UBE_Abstracts_Elements_Slider extends UBE_Abstracts_Elements {
 			],
 		] );
 
-		$this->start_controls_tabs('slider_item_tabs');
-		$this->start_controls_tab('slider_item_tab_normal',[
-			'label' => esc_html__('Normal','ube')
-		]);
-
-
+		$this->start_controls_tabs( 'slider_item_tabs' );
+		$this->start_controls_tab( 'slider_item_tab_normal', [
+			'label' => esc_html__( 'Normal', 'ube' )
+		] );
 
 
 		$this->add_group_control(
@@ -735,7 +833,7 @@ abstract class UBE_Abstracts_Elements_Slider extends UBE_Abstracts_Elements {
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
 			[
-				'name' => 'slider_item_box_shadow',
+				'name'     => 'slider_item_box_shadow',
 				'selector' => '{{WRAPPER}}  .ube-slider-item',
 			]
 		);
@@ -743,8 +841,8 @@ abstract class UBE_Abstracts_Elements_Slider extends UBE_Abstracts_Elements {
 		$this->add_control(
 			'slider_item_background',
 			[
-				'label' => esc_html__('Background Color', 'ube'),
-				'type' => Controls_Manager::COLOR,
+				'label'     => esc_html__( 'Background Color', 'ube' ),
+				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .ube-slider-item' => 'background-color: {{VALUE}};',
 				]
@@ -754,11 +852,9 @@ abstract class UBE_Abstracts_Elements_Slider extends UBE_Abstracts_Elements {
 
 		$this->end_controls_tab();
 
-		$this->start_controls_tab('slider_item_tab_hover',[
-			'label' => esc_html__('Hover','ube')
-		]);
-
-
+		$this->start_controls_tab( 'slider_item_tab_hover', [
+			'label' => esc_html__( 'Hover', 'ube' )
+		] );
 
 
 		$this->add_group_control(
@@ -787,7 +883,7 @@ abstract class UBE_Abstracts_Elements_Slider extends UBE_Abstracts_Elements {
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
 			[
-				'name' => 'slider_item_box_shadow_hover',
+				'name'     => 'slider_item_box_shadow_hover',
 				'selector' => '{{WRAPPER}}  .ube-slider-item:hover',
 			]
 		);
@@ -795,8 +891,8 @@ abstract class UBE_Abstracts_Elements_Slider extends UBE_Abstracts_Elements {
 		$this->add_control(
 			'slider_item_background_hover',
 			[
-				'label' => esc_html__('Background Color', 'ube'),
-				'type' => Controls_Manager::COLOR,
+				'label'     => esc_html__( 'Background Color', 'ube' ),
+				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .ube-slider-item:hover' => 'background-color: {{VALUE}};',
 				]
@@ -807,15 +903,15 @@ abstract class UBE_Abstracts_Elements_Slider extends UBE_Abstracts_Elements {
 		$this->add_control(
 			'slider_item_hover_transition',
 			[
-				'label' => esc_html__( 'Transition Duration', 'ube' ),
-				'type' => Controls_Manager::SLIDER,
+				'label'     => esc_html__( 'Transition Duration', 'ube' ),
+				'type'      => Controls_Manager::SLIDER,
 				'separator' => 'before',
-				'default' => [
+				'default'   => [
 					'size' => 0.3,
 				],
-				'range' => [
+				'range'     => [
 					'px' => [
-						'max' => 3,
+						'max'  => 3,
 						'step' => 0.1,
 					],
 				],
@@ -824,7 +920,6 @@ abstract class UBE_Abstracts_Elements_Slider extends UBE_Abstracts_Elements {
 				],
 			]
 		);
-
 
 
 		$this->end_controls_tab();
@@ -850,21 +945,25 @@ abstract class UBE_Abstracts_Elements_Slider extends UBE_Abstracts_Elements {
 			$wrapper_classes[] = 'manual';
 		}
 
-        $slider_type = $slides_to_show = $navigation_arrow =
-        $navigation_dots = $slider_arrows_position = $slider_arrows_shape =
-        $dots_position = $slider_arrows_type = $slider_arrows_size = $slider_dots_size =
-        $center_mode = $center_padding = $autoplay_enable = $autoplay_speed = $infinite_loop = $transition_speed =
-        $adaptive_height = $pause_on_hover = $single_slide_scroll = $fade_enabled =
-        $slider_syncing = $slider_syncing_element = $focus_on_select = $grid_mode = $slide_rows =
-        $slides_per_row = $rtl_mode = $slider_item_same_height_enable = $slider_content_position = $slider_content_alignment = '';
+		$slider_type = $slides_to_show = $navigation_arrow =
+		$navigation_dots = $slider_arrows_position = $slider_arrows_shape =
+		$dots_position = $slider_arrows_type = $slider_arrows_size = $slider_dots_size =
+		$center_mode = $center_padding = $autoplay_enable = $autoplay_speed = $infinite_loop = $transition_speed =
+		$adaptive_height = $pause_on_hover = $single_slide_scroll = $fade_enabled = $slider_marquee = $slider_marquee_type =
+		$slider_syncing = $slider_syncing_element = $focus_on_select = $grid_mode = $slide_rows =
+		$slides_per_row = $rtl_mode = $slider_item_same_height_enable = $slider_content_position = $slider_content_alignment = $variableWidth = '';
 		extract( $settings );
 
-		if (empty($slides_to_show)) {
+		if ( empty( $slides_to_show ) ) {
 			$slides_to_show = 1;
 		}
 
+		if ( empty( $slider_marquee ) ) {
+			$slider_marquee = 'off';
+		}
 
-        if ( ! empty( $slider_arrows_position ) ) {
+
+		if ( ! empty( $slider_arrows_position ) ) {
 			$wrapper_classes[] = 'ube-slider-arrow-position-' . $slider_arrows_position;
 		}
 		if ( ! empty( $dots_position ) ) {
@@ -884,7 +983,7 @@ abstract class UBE_Abstracts_Elements_Slider extends UBE_Abstracts_Elements {
 			$wrapper_classes[] = 'ube-slider-dots-' . $slider_dots_size;
 		}
 
-		if (($slider_item_same_height_enable === 'on') || ($slider_content_position !== '') || ($slider_content_alignment !== '')) {
+		if ( ( $slider_item_same_height_enable === 'on' ) || ( $slider_content_position !== '' ) || ( $slider_content_alignment !== '' ) ) {
 			$wrapper_classes[] = 'ube-slider-same-height';
 		}
 
@@ -906,6 +1005,7 @@ abstract class UBE_Abstracts_Elements_Slider extends UBE_Abstracts_Elements {
 			'rtl'             => $rtl_mode === 'on',
 			'focusOnSelect'   => $focus_on_select === 'on',
 			'draggable'       => true,
+			'variableWidth'   => $variableWidth === 'on',
 		);
 		if ( ! empty( $autoplay_speed ) ) {
 			$slick_options['autoplaySpeed'] = intval( $autoplay_speed );
@@ -915,104 +1015,133 @@ abstract class UBE_Abstracts_Elements_Slider extends UBE_Abstracts_Elements {
 			$slick_options['asNavFor'] = $slider_syncing_element;
 		}
 		if ( $slider_arrows_position == 'vertical' ) {
-			$slick_options['prevArrow'] = '<div class="slick-prev" aria-label="Previous"><i class="fas fa-chevron-up"></i></div>';
-			$slick_options['nextArrow'] = '<div class="slick-next" aria-label="Next"><i class="fas fa-chevron-down"></i></div>';
+			$slick_options['prevArrow'] = '<div role="button" class="slick-prev" aria-label="Previous"><i class="fas fa-chevron-up"></i></div>';
+			$slick_options['nextArrow'] = '<div role="button" class="slick-next" aria-label="Next"><i class="fas fa-chevron-down"></i></div>';
 		}
 
-        if ( $grid_mode === 'on' ) {
-            $slick_options['rows']         = intval( $slide_rows );
-            $slick_options['slidesPerRow'] = intval( $slides_per_row );
-        }
+		if ( $grid_mode === 'on' ) {
+			$slick_options['rows']         = intval( $slide_rows );
+			$slick_options['slidesPerRow'] = intval( $slides_per_row );
+		}
 
-        $breakpoints = \Elementor\Plugin::$instance->breakpoints->get_active_breakpoints();
-        // Đảo ngược breakpoints để có thứ tự từ lớn đến nhỏ
-        uasort($breakpoints, function ($a, $b) {
-            return $b->get_value() - $a->get_value();
-        });
+		if ( $slider_marquee == 'on' ) {
+			$wrapper_classes[]           = 'ube-slider-marquee';
+			$slick_options['centerMode'] = false;
+			$slick_options['autoplay']   = false;
+			$slick_options['infinite']   = true;
+			$slick_options['speed']      = 0;
+		}
 
-        $responsive_values = [];
-
-
-        // Danh sách các biến responsive cần xử lý
-        $responsive_controls = [
-            'slides_to_show' => [
-                'default' => 4,
-                'type' => 'number',
-            ],
-            'navigation_arrow' => [
-                'default' => 'off',
-                'type' => 'boolean',
-            ],
-            'navigation_dots' => [
-                'default' => 'off',
-                'type' => 'boolean',
-            ],
-            'center_padding' => [
-                'default' => '0px',
-                'type' => 'string',
-            ],
-            'slide_rows' => [
-                'default' => 1,
-                'type' => 'number',
-            ],
-            'slides_per_row' => [
-                'default' => 1,
-                'type' => 'number',
-            ],
-        ];
-
-        // Khởi tạo giá trị cho desktop và các breakpoint
-        foreach ($responsive_controls as $control => $config) {
-            // Giá trị cho desktop
-            $responsive_values[$control]['desktop'] = isset($settings[$control]) && $config['type'] === 'number' && is_numeric($settings[$control])
-                ? (int) $settings[$control]
-                : ($config['type'] === 'boolean' ? ($settings[$control] === 'on') : ($settings[$control] ?? $config['default']));
-
-            // Giá trị trước đó (dùng cho fallback)
-            $previous_value = $responsive_values[$control]['desktop'];
-            // Xử lý các breakpoint khác
-            foreach ($breakpoints as $breakpoint_name => $breakpoint) {
-                $key = "{$control}_$breakpoint_name";
-                $value = isset($settings[$key])
-                    ? ($config['type'] === 'number' && is_numeric($settings[$key]) ? (int) $settings[$key]
-                        : ($config['type'] === 'boolean' ? ($settings[$key] === 'on') : $settings[$key]))
-                    : null;
-
-                // Logic fallback: Dùng giá trị của breakpoint trước đó hoặc desktop
-                $responsive_values[$control][$breakpoint_name] = ($value !== null && $value !== '') ? $value : $previous_value;
-                $previous_value = $responsive_values[$control][$breakpoint_name];
-            }
-        }
+		if ( $slider_marquee == 'on' && isset( $slider_marquee_type ) ) {
+			$wrapper_classes[] = "ube-slider-marquee-type-{$slider_marquee_type}";
+		}
 
 
-        // Tạo mảng responsive cho slider
-        $responsive = [];
+		$breakpoints = \Elementor\Plugin::$instance->breakpoints->get_active_breakpoints();
+		// Đảo ngược breakpoints để có thứ tự từ lớn đến nhỏ
+		uasort( $breakpoints, function ( $a, $b ) {
+			return $b->get_value() - $a->get_value();
+		} );
 
-        foreach ($breakpoints as $breakpoint_name => $breakpoint) {
-            $breakpoint_value = $breakpoint->get_value();
-
-            // Tạo settings cho breakpoint hiện tại
-            $breakpoint_settings = [
-                'slidesToShow'   => $responsive_values['slides_to_show'][$breakpoint_name],
-                'slidesToScroll' => $single_slide_scroll === 'on' ? 1 : $responsive_values['slides_to_show'][$breakpoint_name],
-                'centerPadding'  => $responsive_values['center_padding'][$breakpoint_name],
-                'arrows'         => $responsive_values['navigation_arrow'][$breakpoint_name],
-                'dots'           => $responsive_values['navigation_dots'][$breakpoint_name],
-            ];
-
-            // Thêm rows và slidesPerRow nếu grid_mode bật
-            if ($grid_mode === 'on') {
-                $breakpoint_settings['rows'] = $responsive_values['slide_rows'][$breakpoint_name];
-                $breakpoint_settings['slidesPerRow'] = $responsive_values['slides_per_row'][$breakpoint_name];
-            }
+		$responsive_values = [];
 
 
-            // Thêm vào mảng responsive
-            $responsive[] = [
-                'breakpoint' => $breakpoint_value + 1, // +1 để phù hợp với logic của bạn
-                'settings'   => $breakpoint_settings,
-            ];
-        }
+		// Danh sách các biến responsive cần xử lý
+		$responsive_controls = [
+			'slides_to_show'   => [
+				'default' => 4,
+				'type'    => 'number',
+			],
+			'navigation_arrow' => [
+				'default' => 'off',
+				'type'    => 'boolean',
+			],
+			'navigation_dots'  => [
+				'default' => 'off',
+				'type'    => 'boolean',
+			],
+			'center_padding'   => [
+				'default' => '0px',
+				'type'    => 'string',
+			],
+			'slide_rows'       => [
+				'default' => 1,
+				'type'    => 'number',
+			],
+			'slides_per_row'   => [
+				'default' => 1,
+				'type'    => 'number',
+			],
+		];
+
+
+		$slider_marquee_config = array(
+			'navigation_dots'  => 'off',
+			'navigation_arrow' => 'off',
+		);
+
+		// Khởi tạo giá trị cho desktop và các breakpoint
+		foreach ( $responsive_controls as $control => $config ) {
+			if ( $slider_marquee == 'on' && isset( $settings[ $control ] ) && array_key_exists( $control, $slider_marquee_config ) ) {
+				$responsive_values[ $control ]['desktop'] = $slider_marquee_config[ $control ];
+			} else {
+				// Giá trị cho desktop
+				$responsive_values[ $control ]['desktop'] = isset( $settings[ $control ] ) && $config['type'] === 'number' && is_numeric( $settings[ $control ] )
+					? (int) $settings[ $control ]
+					: ( $config['type'] === 'boolean' ? ( $settings[ $control ] === 'on' ) : ( $settings[ $control ] ?? $config['default'] ) );
+			}
+
+			// Giá trị trước đó (dùng cho fallback)
+			$previous_value = $responsive_values[ $control ]['desktop'];
+
+			// Xử lý các breakpoint khác
+			foreach ( $breakpoints as $breakpoint_name => $breakpoint ) {
+				if ( $slider_marquee == 'on' && isset( $settings[ $control ] ) && array_key_exists( $control, $slider_marquee_config ) ) {
+					$responsive_values[ $control ][ $breakpoint_name ] = $slider_marquee_config[ $control ];
+				} else {
+					$key   = "{$control}_$breakpoint_name";
+					$value = isset( $settings[ $key ] )
+						? ( $config['type'] === 'number' && is_numeric( $settings[ $key ] ) ? (int) $settings[ $key ]
+							: ( $config['type'] === 'boolean' ? ( $settings[ $key ] === 'on' ) : $settings[ $key ] ) )
+						: null;
+
+					// Logic fallback: Dùng giá trị của breakpoint trước đó hoặc desktop
+					$responsive_values[ $control ][ $breakpoint_name ] = ( $value !== null && $value !== '' ) ? $value : $previous_value;
+				}
+				$previous_value = $responsive_values[ $control ][ $breakpoint_name ];
+
+			}
+		}
+
+
+		// Tạo mảng responsive cho slider
+		$responsive = [];
+
+		foreach ( $breakpoints as $breakpoint_name => $breakpoint ) {
+			$breakpoint_value = $breakpoint->get_value();
+
+			// Tạo settings cho breakpoint hiện tại
+			$breakpoint_settings = [
+				'slidesToShow'   => $responsive_values['slides_to_show'][ $breakpoint_name ],
+				'slidesToScroll' => $single_slide_scroll === 'on' ? 1 : $responsive_values['slides_to_show'][ $breakpoint_name ],
+				'centerPadding'  => $responsive_values['center_padding'][ $breakpoint_name ],
+				'arrows'         => $responsive_values['navigation_arrow'][ $breakpoint_name ],
+				'dots'           => $responsive_values['navigation_dots'][ $breakpoint_name ],
+			];
+
+			// Thêm rows và slidesPerRow nếu grid_mode bật
+			if ( $grid_mode === 'on' ) {
+				$breakpoint_settings['rows']         = $responsive_values['slide_rows'][ $breakpoint_name ];
+				$breakpoint_settings['slidesPerRow'] = $responsive_values['slides_per_row'][ $breakpoint_name ];
+			}
+
+
+			// Thêm vào mảng responsive
+			$responsive[] = [
+				'breakpoint' => $breakpoint_value + 1, // +1 để phù hợp với logic của bạn
+				'settings'   => $breakpoint_settings,
+			];
+		}
 
 		$slick_options['responsive'] = $responsive;
 

@@ -480,7 +480,6 @@ class UBE_Element_Tabs extends UBE_Abstracts_Elements {
 				],
 				'selectors'  => [
 					'{{WRAPPER}} .ube-tabs .ube-tab-icon'     => 'font-size: {{SIZE}}{{UNIT}};',
-					'{{WRAPPER}} .ube-tabs .ube-tab-icon svg' => 'max-width: {{SIZE}}{{UNIT}}; height: auto',
 				],
 				'condition'  => [
 					'tab_title_type_icon' => 'yes',
@@ -733,8 +732,6 @@ class UBE_Element_Tabs extends UBE_Abstracts_Elements {
 				'selectors' => [
 					'{{WRAPPER}} .ube-tabs .nav-link:not(.active):not(:hover) .ube-tab-icon'                                 => 'color: {{VALUE}};',
 					'{{WRAPPER}} .ube-tabs .ube-tabs-card:not(.active) .ube-tabs-card-header:not(:hover) .ube-tab-icon'      => 'color: {{VALUE}};',
-					'{{WRAPPER}} .ube-tabs .nav-link:not(.active):not(:hover) .ube-tab-icon path'                            => 'stroke: {{VALUE}}; fill: {{value}}',
-					'{{WRAPPER}} .ube-tabs .ube-tabs-card:not(.active) .ube-tabs-card-header:not(:hover) .ube-tab-icon path' => 'stroke: {{VALUE}}; fill: {{value}}'
 				],
 				'condition' => [
 					'tab_title_type_icon' => 'yes',
@@ -794,8 +791,6 @@ class UBE_Element_Tabs extends UBE_Abstracts_Elements {
 				'selectors' => [
 					'{{WRAPPER}} .ube-tabs .nav-tabs .nav-link:not(.active):hover .ube-tab-icon'                                    => 'color: {{VALUE}} !important;',
 					'{{WRAPPER}} .ube-tabs .tab-content .ube-tabs-card:not(.active) .ube-tabs-card-header:hover .ube-tab-icon'      => 'color: {{VALUE}} !important;',
-					'{{WRAPPER}} .ube-tabs .nav-tabs .nav-link:not(.active):hover .ube-tab-icon path'                               => 'stroke: {{VALUE}}; fill: {{value}}',
-					'{{WRAPPER}} .ube-tabs .tab-content .ube-tabs-card:not(.active) .ube-tabs-card-header:hover .ube-tab-icon path' => 'stroke: {{VALUE}}; fill: {{value}}'
 				],
 				'condition' => [
 					'tab_title_type_icon' => 'yes',
@@ -854,8 +849,6 @@ class UBE_Element_Tabs extends UBE_Abstracts_Elements {
 				'selectors' => [
 					'{{WRAPPER}} .ube-tabs .nav-tabs .nav-link.active .ube-tab-icon'              => 'color: {{VALUE}} !important;',
 					'{{WRAPPER}} .ube-tabs .tab-content .ube-tabs-card.active .ube-tab-icon'      => 'color: {{VALUE}} !important;',
-					'{{WRAPPER}} .ube-tabs .nav-tabs .nav-link.active .ube-tab-icon path'         => 'stroke: {{VALUE}}; fill: {{value}}',
-					'{{WRAPPER}} .ube-tabs .tab-content .ube-tabs-card.active .ube-tab-icon path' => 'stroke: {{VALUE}}; fill: {{value}}'
 				],
 				'condition' => [
 					'tab_title_type_icon' => 'yes',

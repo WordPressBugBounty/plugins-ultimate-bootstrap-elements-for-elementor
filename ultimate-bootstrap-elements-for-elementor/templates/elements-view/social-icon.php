@@ -87,7 +87,7 @@ if ( settings.social_icon_outline === 'yes' && settings.social_icon_shape !== 't
 		if ( settings.social_switcher_tooltip === '' ) {
 			view.addRenderAttribute( social_items_classes, 'class', social_classes );
 			view.addRenderAttribute( social_items_links, {
-			'class'       : 'ube-social-icon-icon',
+			'class'       : 'ube-social-icon-icon ube-icon',
 			'title' : socials_title,
 			} );
 		} else {
@@ -97,7 +97,7 @@ if ( settings.social_icon_outline === 'yes' && settings.social_icon_shape !== 't
 			'data-placement' : settings.social_position,
 			'title' : socials_title,
 			} );
-			view.addRenderAttribute( social_items_links, 'class', 'ube-social-icon-icon' );
+			view.addRenderAttribute( social_items_links, 'class', 'ube-social-icon-icon ube-icon' );
 		}
 
 		icon_social = elementor.helpers.renderIcon( view, item.social_icon, { 'aria-hidden': true }, 'i' , 'object' ),

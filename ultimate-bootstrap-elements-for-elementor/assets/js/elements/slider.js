@@ -20,8 +20,8 @@
         speed: 300,
         asNavFor: '',
         vertical: false,
-        prevArrow: '<div class="slick-prev" aria-label="Previous"><i class="fas fa-chevron-left"></i></div>',
-        nextArrow: '<div class="slick-next" aria-label="Next"><i class="fas fa-chevron-right"></i></div>',
+        prevArrow: '<div role="button" class="slick-prev" aria-label="Previous"><i class="fas fa-chevron-left"></i></div>',
+        nextArrow: '<div role="button" class="slick-next" aria-label="Next"><i class="fas fa-chevron-right"></i></div>',
         customPaging: function (slider, i) {
             return $('<span></span>');
         }
@@ -45,7 +45,7 @@
                         $(slick.$slides[currentSlide]).find('.animated').each(function () {
                             var $settings = $(this).data('settings');
                             var $animation = $settings._animation;
-                            if ($(this).hasClass('elementor-column')) {
+                            if ($settings.animation !== undefined) {
                                 $animation = $settings.animation;
                             }
                             $(this).removeClass($animation).removeClass('animated').addClass('elementor-invisible');
@@ -53,7 +53,7 @@
                         $(slick.$slides[nextSlide]).find('.animated').each(function () {
                             var $settings = $(this).data('settings');
                             var $animation = $settings._animation;
-                            if ($(this).hasClass('elementor-column')) {
+                            if ($settings.animation !== undefined) {
                                 $animation = $settings.animation;
                             }
                             $(this).removeClass($animation).removeClass('animated').addClass('elementor-invisible');
@@ -70,8 +70,10 @@
                             var $settings = $(this).data('settings'),
                                 $animation = $settings._animation,
                                 $animationDelay = $settings._animation_delay;
-                            if ($(this).hasClass('elementor-column')) {
+                            if ($settings.animation !== undefined) {
                                 $animation = $settings.animation;
+                            }
+                            if ($settings.animation_delay !== undefined) {
                                 $animationDelay = $settings.animation_delay;
                             }
                             if ($.isNumeric($animationDelay)) {
@@ -329,7 +331,7 @@
         }
     }
 
-    window.addEventListener( 'elementor/frontend/init', () => {
+    window.addEventListener('elementor/frontend/init', () => {
         elementorFrontend.hooks.addAction('frontend/element_ready/ube-slider.default', UbeSliderHandler);
         elementorFrontend.hooks.addAction('frontend/element_ready/ube-advanced-slider.default', UbeAdvancedSliderHandler);
         elementorFrontend.hooks.addAction('frontend/element_ready/ube-slider-container.default', UbeSliderContainerHandler);

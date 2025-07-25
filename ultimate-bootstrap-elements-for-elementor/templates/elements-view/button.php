@@ -10,6 +10,10 @@ if (settings.type !== '') {
 	wrapper_classes.push('btn-' + settings.type);
 }
 
+if( ('yes' === settings.button_block) && ( settings.button_block !== '' ) ) {
+    wrapper_classes.push('d-block');
+}
+
 if (settings.type === '' || settings.type === '3d') {
 	wrapper_classes.push('btn-' + settings.scheme);
 }
@@ -46,10 +50,10 @@ if( ('yes' === settings.button_event_switcher) && ( settings.button_event_functi
 #>
 <a href="{{ settings.link.url }}" {{{ view.getRenderAttributeString( 'wrapper' ) }}}>
 	<# if ((iconHTML.rendered) && (settings.icon_align === 'left')) { #>
-		<span class="ube-btn-icon">{{{ iconHTML.value }}}</span>
+		<span class="ube-btn-icon ube-icon">{{{ iconHTML.value }}}</span>
 	<# } #>
 	<span {{{ view.getRenderAttributeString( 'text' ) }}}>{{{ settings.text }}}</span>
 	<# if ((iconHTML.rendered) && (settings.icon_align === 'right')) { #>
-		<span class="ube-btn-icon">{{{ iconHTML.value }}}</span>
+		<span class="ube-btn-icon ube-icon">{{{ iconHTML.value }}}</span>
 	<# } #>
 </a>

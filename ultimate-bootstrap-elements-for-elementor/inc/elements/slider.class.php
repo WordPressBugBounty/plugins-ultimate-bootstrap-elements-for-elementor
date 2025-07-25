@@ -152,6 +152,15 @@ class UBE_Element_Slider extends UBE_Abstracts_Elements_Grid {
 				],
 			]
 		);
+
+		$repeater->add_control(
+			'css_classes',
+			[
+				'label'       => esc_html__( 'Custom Css', 'ube' ),
+				'type'        => Controls_Manager::TEXT,
+				'default'     => '',
+			]
+		);
 	}
 
 	protected function get_repeater_defaults() {

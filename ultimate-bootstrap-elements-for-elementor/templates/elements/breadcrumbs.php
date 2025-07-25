@@ -13,7 +13,7 @@ $settings = $element->get_settings_for_display();
 ?>
 <nav aria-label="breadcrumb">
 	<?php if( !empty($settings['breadcrumb_icon']['value'])) :?>
-		<span class="breadcrumb-icon"><?php Icons_Manager::render_icon( $settings['breadcrumb_icon']);?></span>
+		<span class="breadcrumb-icon ube-icon"><?php ube_render_icon( $settings['breadcrumb_icon']);?></span>
 	<?php endif;?>
 	<?php $element->ube_the_breadcrumbs(); ?>
 </nav>

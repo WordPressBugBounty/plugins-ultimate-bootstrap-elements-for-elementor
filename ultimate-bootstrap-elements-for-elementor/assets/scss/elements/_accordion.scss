@@ -37,25 +37,6 @@
 	}
 }
 
-.ube-accordion-icon {
-	svg {
-		display: inline-block;
-		width: 1em;
-		height: 1em;
-		stroke: currentColor;
-		fill: currentColor;
-
-		*[stroke^="#"],
-		*[stroke^="url(#"] {
-			stroke: currentColor;
-		}
-
-		*[fill^="#"],
-		*[fill^="url(#"] {
-			fill: currentColor;
-		}
-	}
-}
 
 .ube-accordion-link {
 	cursor: pointer;

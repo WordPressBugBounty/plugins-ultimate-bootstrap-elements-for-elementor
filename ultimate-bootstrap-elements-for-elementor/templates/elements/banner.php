@@ -43,6 +43,7 @@ $element->add_link_attributes('btn_attr', $settings['banner_link']);
 $btn_class = array(
 	'btn',
 	'ube-banner-btn',
+    'ube-icon',
 	"btn-{$settings['banner_button_size']}",
 	"btn-{$settings['banner_button_shape']}",
 );
@@ -153,11 +154,11 @@ $element->add_render_attribute('banner_desc_attr','class', $banner_desc_classes)
 				<?php if (!empty($settings['banner_button_icon']['value']) || $settings['banner_text_button'] !== ''): ?>
                     <a <?php echo $element->get_render_attribute_string('btn_attr') ?>>
 						<?php if (!empty($settings['banner_button_icon']) && !empty($settings['banner_button_icon']['value']) && ($settings['banner_button_icon_align'] === 'before')): ?>
-							<?php Icons_Manager::render_icon($settings['banner_button_icon'], ['aria-hidden' => 'true']); ?>
+							<?php ube_render_icon($settings['banner_button_icon'], ['aria-hidden' => 'true']); ?>
 						<?php endif; ?>
 						<?php echo esc_html($settings['banner_text_button']) ?>
 						<?php if (!empty($settings['banner_button_icon']) && !empty($settings['banner_button_icon']['value']) && ($settings['banner_button_icon_align'] === 'after')): ?>
-							<?php Icons_Manager::render_icon($settings['banner_button_icon'], ['aria-hidden' => 'true']); ?>
+							<?php ube_render_icon($settings['banner_button_icon'], ['aria-hidden' => 'true']); ?>
 						<?php endif; ?>
                     </a>
 				<?php endif; ?>

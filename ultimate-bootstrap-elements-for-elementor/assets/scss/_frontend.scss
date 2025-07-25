@@ -44,3 +44,24 @@
 		color: #fff;
 	}
 }
+
+.ube-icon {
+	color: currentColor;
+	fill: currentColor;
+	display: inline-block;
+	line-height: 1;
+	text-align: center;
+	i,
+	svg {
+		display: block;
+		height: 1em;
+		position: relative;
+		width: 1em;
+	}
+}
+.ube-svg-stroke {
+	stroke: currentColor;
+}
+.ube-svg-fill {
+	fill: currentColor;
+}

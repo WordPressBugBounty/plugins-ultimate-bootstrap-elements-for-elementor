@@ -658,6 +658,21 @@ class UBE_Element_Testimonial extends UBE_Abstracts_Elements
 			]
 		);
 
+		$this->add_control('testimonial_rating_size', [
+			'label' => esc_html__('Size', 'ube'),
+			'type' => Controls_Manager::SLIDER,
+			'size_units' => ['px'],
+			'range' => [
+				'px' => [
+					'min' => 1,
+					'max' => 200,
+				],
+			],
+			'selectors' => [
+				'{{WRAPPER}} .ube-testimonial-rating .ube-icon' => 'font-size: {{SIZE}}{{UNIT}};',
+			],
+		]);
+
 		$this->add_responsive_control(
 			'testimonial_rating_margin',
 			[

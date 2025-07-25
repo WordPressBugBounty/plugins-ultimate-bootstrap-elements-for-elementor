@@ -128,8 +128,8 @@
 										speed: 300,
 										asNavFor: '',
 										vertical: false,
-										prevArrow: '<div class="slick-prev" aria-label="Previous"><i class="fas fa-chevron-left"></i></div>',
-										nextArrow: '<div class="slick-next" aria-label="Next"><i class="fas fa-chevron-right"></i></div>',
+										prevArrow: '<div role="button" class="slick-prev" aria-label="Previous"><i class="fas fa-chevron-left"></i></div>',
+										nextArrow: '<div role="button" class="slick-next" aria-label="Next"><i class="fas fa-chevron-right"></i></div>',
 										customPaging: function (slider, i) {
 											return $('<span></span>');
 										}

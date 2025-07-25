@@ -830,8 +830,8 @@ class UBE_Element_Video_Popup extends UBE_Abstracts_Elements
 				],
 			],
 			'selectors' => [
-				'{{WRAPPER}} .ube-video-btn.icon-before > i' => 'margin-right : {{SIZE}}{{UNIT}}',
-				'{{WRAPPER}} .ube-video-btn.icon-after > i' => 'margin-left : {{SIZE}}{{UNIT}}'
+				'{{WRAPPER}} .ube-video-btn.icon-before .ube-icon' => 'margin-right : {{SIZE}}{{UNIT}}',
+				'{{WRAPPER}} .ube-video-btn.icon-after .ube-icon' => 'margin-left : {{SIZE}}{{UNIT}}'
 			],
 			'condition' => [
 				'video_button_icon[value]!' => '',
@@ -855,7 +855,7 @@ class UBE_Element_Video_Popup extends UBE_Abstracts_Elements
 					],
 				],
 				'selectors' => [
-					'{{WRAPPER}} .ube-video-btn > i' => 'font-size: {{SIZE}}{{UNIT}}',
+					'{{WRAPPER}} .ube-video-btn .ube-icon i,{{WRAPPER}} .ube-video-btn .ube-icon svg' => 'font-size: {{SIZE}}{{UNIT}}',
 				],
 			]
 		);
@@ -876,7 +876,7 @@ class UBE_Element_Video_Popup extends UBE_Abstracts_Elements
 				'type' => Controls_Manager::COLOR,
 				'default' => '',
 				'selectors' => [
-					'{{WRAPPER}} .ube-video-btn > i' => 'fill: {{VALUE}}; color: {{VALUE}};',
+					'{{WRAPPER}} .ube-video-btn .ube-icon' => 'fill: {{VALUE}}; color: {{VALUE}};',
 				],
 			]
 		);
@@ -898,7 +898,7 @@ class UBE_Element_Video_Popup extends UBE_Abstracts_Elements
 				'type' => Controls_Manager::COLOR,
 				'default' => '',
 				'selectors' => [
-					'{{WRAPPER}} .ube-video-btn:hover > i' => 'fill: {{VALUE}}; color: {{VALUE}};',
+					'{{WRAPPER}} .ube-video-btn:hover .ube-icon' => 'fill: {{VALUE}}; color: {{VALUE}};',
 				],
 			]
 		);

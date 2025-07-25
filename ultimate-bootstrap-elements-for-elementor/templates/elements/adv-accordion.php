@@ -91,7 +91,7 @@ $element->add_render_attribute( 'acc_wrapper', 'id', 'accordion-' . $acc_id );
 					<?php
 					if ( $accordion_tab_icon_position == 'left' ):
 						?>
-                        <span class="ube-accordion-icon left-icon">
+                        <span class="ube-accordion-icon ube-icon left-icon">
                                      <?php
                                      if ( $is_new || $migrated ) { ?>
 	                                     <?php Icons_Manager::render_icon( $settings['accordion_tab_icon'] ); ?>
@@ -111,7 +111,7 @@ $element->add_render_attribute( 'acc_wrapper', 'id', 'accordion-' . $acc_id );
 					<?php
 					if ( $accordion_tab_icon_position == 'right' ):
 						?>
-                        <span class="ube-accordion-icon right-icon ml-auto">
+                        <span class="ube-accordion-icon ube-icon right-icon ml-auto">
                             <?php
                             if ( $is_new || $migrated ) { ?>
                                 <?php Icons_Manager::render_icon( $settings['accordion_tab_icon'] ); ?>

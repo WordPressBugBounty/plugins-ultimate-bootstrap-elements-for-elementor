@@ -91,7 +91,7 @@ if ( $settings['social_icon_outline'] === 'yes' && $settings['social_icon_shape'
 		if ( ( $settings['social_switcher_tooltip'] === '' ) ) {
 			$element->add_render_attribute( $social_items_classes, 'class' , $social_classes);
 			$element->add_render_attribute( $social_items_links, array(
-				'class' => 'ube-social-icon-icon',
+				'class' => 'ube-social-icon-icon ube-icon',
 				'title' => $socials_title,
 			));
 		} else {
@@ -101,13 +101,13 @@ if ( $settings['social_icon_outline'] === 'yes' && $settings['social_icon_shape'
 				'data-toggle' => 'tooltip',
 				'data-placement' => $settings['social_position'],
 			));
-			$element->add_render_attribute( $social_items_links, 'class' , 'ube-social-icon-icon');
+			$element->add_render_attribute( $social_items_links, 'class' , 'ube-social-icon-icon ube-icon');
 		}
 
 		?>
         <li <?php echo $element->get_render_attribute_string( $social_items_classes ); ?>>
 			<?php printf( '<%1$s %2$s>', $social_icon_tag, $element->get_render_attribute_string( $social_items_links ) );
-			Icons_Manager::render_icon( $item['social_icon'] ); ?>
+			ube_render_icon( $item['social_icon'] ); ?>
 			<?php if ( $settings['social_icon_shape'] === 'text' && $item['social_title'] == '') : ?>
                 <span class="ube-text-social"><?php echo esc_html( $social ); ?></span>
 			<?php endif; ?>

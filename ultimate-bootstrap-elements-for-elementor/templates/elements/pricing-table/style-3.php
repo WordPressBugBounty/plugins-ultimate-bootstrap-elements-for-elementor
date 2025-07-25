@@ -11,7 +11,7 @@ use Elementor\Group_Control_Image_Size;
 <?php if (!empty($settings['pricing_table_icon']) && !empty($settings['pricing_table_icon']['value']) && $settings['pricing_table_icon_type'] == 'icon'): ?>
 	<div class="ube-pricing-icon">
                      <span class="ube-icon">
-                         <?php Icons_Manager::render_icon($settings['pricing_table_icon'], ['aria-hidden' => 'true']); ?>
+                         <?php ube_render_icon($settings['pricing_table_icon'], ['aria-hidden' => 'true']); ?>
                      </span>
 	</div>
 <?php endif; ?>

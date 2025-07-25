@@ -1,4 +1,8 @@
 <?php
+
+use Elementor\Icons_Manager;
+use Elementor\Utils;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
@@ -367,21 +371,46 @@ function ube_icon_svg_markup( $html ) {
 	$id   = uniqid( 'ube_svg_gradient_' );
 	$html = preg_replace_callback( '/\<([^\>]*)\>/', function ( $matchs ) use ( $id ) {
 		$s           = $matchs[0];
-		$stroke_attr = sprintf( 'stroke="url(#%s)" class="ube-svg-stroke"', $id );
-		$fill_attr   = sprintf( 'fill="url(#%s)" class="ube-svg-fill"', $id );
+		if(strpos( $s, 'aria-label="skip-replace"' ) == false){
+			$stroke_attr = sprintf( 'stroke="url(#%s)" class="ube-svg-stroke"', $id );
+			$fill_attr   = sprintf( 'fill="url(#%s)" class="ube-svg-fill"', $id );
 
-		$s = preg_replace( '/stroke="#(.*?)"/', $stroke_attr, $s );
-		$s = preg_replace( '/fill="#(.*?)"/', $fill_attr, $s );
+
+           /* $s = preg_replace('/stroke="(?!currentColor)([^"]+)"/i', $stroke_attr, $s);
+            $s = preg_replace('/fill="(?!currentColor)([^"]+)"/i', $fill_attr, $s);*/
+
+            $s = preg_replace('/stroke="(?!(?:currentColor|none|transparent))([^"]+)"/i', $stroke_attr, $s);
+            $s = preg_replace('/fill="(?!(?:currentColor|none|transparent))([^"]+)"/i', $fill_attr, $s);
+
+
+            /*$s = preg_replace( '/stroke="#(.*?)"/', $stroke_attr, $s );
+			$s = preg_replace( '/fill="#(.*?)"/', $fill_attr, $s );*/
+		}
+
 		if ( ( strpos( $s, 'ube-svg-stroke' ) != false ) && ( strpos( $s, 'ube-svg-fill' ) != false ) ) {
-
 			$s = str_replace( 'class="ube-svg-stroke"', '', $s );
 			$s = str_replace( 'class="ube-svg-fill"', 'class="ube-svg-fill ube-svg-stroke"', $s );
 		}
 
 		return $s;
 	}, $html );
-
 	return $html;
+}
+
+function ube_get_icon_markup($icon,$attributes = [], $tag = 'i' ) {
+    $is_svg = isset( $icon['library'] ) && 'svg' === $icon['library'];
+    if ( $is_svg ) {
+        $output = Icons_Manager::render_uploaded_svg_icon( $icon['value'] );
+        $output = ube_icon_svg_markup($output);
+    } else {
+        $output = Icons_Manager::render_font_icon( $icon, $attributes, $tag );
+    }
+    return $output;
+}
+
+function ube_render_icon($icon,$attributes = []) {
+    $output = ube_get_icon_markup( $icon, $attributes );
+    Utils::print_unescaped_internal_string( $output );
 }
 
 function ube_get_builder_content_for_display($post_id, $with_css = false)

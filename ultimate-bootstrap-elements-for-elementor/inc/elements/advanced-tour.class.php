@@ -459,7 +459,6 @@ class UBE_Element_Advanced_Tour extends UBE_Abstracts_Elements {
 				],
 				'selectors'  => [
 					'{{WRAPPER}} .ube-tour .ube-tab-icon'     => 'font-size: {{SIZE}}{{UNIT}};',
-					'{{WRAPPER}} .ube-tour .ube-tab-icon svg' => 'max-width: {{SIZE}}{{UNIT}}; height: auto',
 				],
 				'separator'  => 'before',
 				'condition'  => [
@@ -691,8 +690,6 @@ class UBE_Element_Advanced_Tour extends UBE_Abstracts_Elements {
 				'selectors' => [
 					'{{WRAPPER}} .ube-tour .nav-link:not(.active):not(:hover) .ube-tab-icon'               => 'color: {{VALUE}};',
 					'{{WRAPPER}} .ube-tour .ube-tabs-card:not(.active) .ube-tabs-card-header:not(:hover) .ube-tab-icon'      => 'color: {{VALUE}};',
-					'{{WRAPPER}} .ube-tour .nav-link:not(.active):not(:hover) .ube-tab-icon path'          => 'stroke: {{VALUE}}; fill: {{value}}',
-					'{{WRAPPER}} .ube-tour .ube-tabs-card:not(.active) .ube-tabs-card-header:not(:hover) .ube-tab-icon path' => 'stroke: {{VALUE}}; fill: {{value}}'
 				],
 				'condition' => [
 					'tab_title_type_icon' => 'yes',
@@ -744,8 +741,6 @@ class UBE_Element_Advanced_Tour extends UBE_Abstracts_Elements {
 				'selectors' => [
 					'{{WRAPPER}} .ube-tour .nav-tabs .nav-link:not(.active):hover .ube-tab-icon'                  => 'color: {{VALUE}} !important;',
 					'{{WRAPPER}} .ube-tour .tab-content .ube-tabs-card:not(.active) .ube-tabs-card-header:hover .ube-tab-icon'      => 'color: {{VALUE}} !important;',
-					'{{WRAPPER}} .ube-tour .nav-tabs .nav-link:not(.active):hover .ube-tab-icon path'             => 'stroke: {{VALUE}}; fill: {{value}}',
-					'{{WRAPPER}} .ube-tour .tab-content .ube-tabs-card:not(.active) .ube-tabs-card-header:hover .ube-tab-icon path' => 'stroke: {{VALUE}}; fill: {{value}}'
 				],
 				'condition' => [
 					'tab_title_type_icon' => 'yes',
@@ -796,8 +791,6 @@ class UBE_Element_Advanced_Tour extends UBE_Abstracts_Elements {
 				'selectors' => [
 					'{{WRAPPER}} .ube-tour .nav-tabs .nav-link.active .ube-tab-icon'      => 'color: {{VALUE}} !important;',
 					'{{WRAPPER}} .ube-tour .tab-content .ube-tabs-card.active .ube-tab-icon'       => 'color: {{VALUE}} !important;',
-					'{{WRAPPER}} .ube-tour .nav-tabs .nav-link.active .ube-tab-icon path' => 'stroke: {{VALUE}}; fill: {{value}}',
-					'{{WRAPPER}} .ube-tour .tab-content .ube-tabs-card.active .ube-tab-icon path'  => 'stroke: {{VALUE}}; fill: {{value}}'
 				],
 				'condition' => [
 					'tab_title_type_icon' => 'yes',

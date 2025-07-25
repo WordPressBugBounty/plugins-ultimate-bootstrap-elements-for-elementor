@@ -62,7 +62,7 @@ class UBE_Element_Flip_Box extends UBE_Abstracts_Elements {
 					],
 					'image' => [
 						'title' => esc_html__( 'Image', 'ube' ),
-						'icon'  => 'fa fa-picture-o',
+						'icon'  => 'fa fa-image',
 					],
 					'icon'  => [
 						'title' => esc_html__( 'Icon', 'ube' ),
@@ -261,7 +261,7 @@ class UBE_Element_Flip_Box extends UBE_Abstracts_Elements {
 					],
 					'image' => [
 						'title' => esc_html__( 'Image', 'ube' ),
-						'icon'  => 'fa fa-picture-o',
+						'icon'  => 'fa fa-image',
 					],
 					'icon'  => [
 						'title' => esc_html__( 'Icon', 'ube' ),

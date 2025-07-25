@@ -88,11 +88,11 @@ $element->add_render_attribute( 'acc_wrapper', array(
 		?>
         <div <?php echo $element->get_render_attribute_string( $acc_card_setting_key ); ?>>
             <div <?php echo $element->get_render_attribute_string( $acc_card_header_setting_key ); ?>>
-                <h5 <?php echo $element->get_render_attribute_string( $acc_link_setting_key ); ?>>
+                <h2 <?php echo $element->get_render_attribute_string( $acc_link_setting_key ); ?>>
 					<?php
 					if ( $accordion_tab_icon_position == 'left' ):
 						?>
-                        <span class="ube-accordion-icon left-icon">
+                        <span class="ube-accordion-icon ube-icon left-icon">
                                      <?php
                                      if ( $is_new || $migrated ) { ?>
 	                                     <?php Icons_Manager::render_icon( $settings['accordion_tab_icon'] ); ?>
@@ -112,7 +112,7 @@ $element->add_render_attribute( 'acc_wrapper', array(
 					<?php
 					if ( $accordion_tab_icon_position == 'right' ):
 						?>
-                        <span class="ube-accordion-icon right-icon ml-auto">
+                        <span class="ube-accordion-icon ube-icon right-icon ml-auto">
                                      <?php
                                      if ( $is_new || $migrated ) { ?>
 	                                     <?php Icons_Manager::render_icon( $settings['accordion_tab_icon'] ); ?>
@@ -123,7 +123,7 @@ $element->add_render_attribute( 'acc_wrapper', array(
 					<?php
 					endif;
 					?>
-                </h5>
+                </h2>
             </div>
 			<?php $acc_collapse_setting_key = $element->get_repeater_setting_key( 'acc_collapse', 'accordion_items', $i );
 			$element->add_render_attribute( $acc_collapse_setting_key, array(

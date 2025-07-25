@@ -144,7 +144,7 @@ class UBE_Element_Advanced_Icon_Box extends UBE_Abstracts_Elements_Grid {
 
 		$icon_html = '';
 		if ( ! empty( $icon['value'] ) ) {
-			$icon_html = $this->get_icon_markup( $icon, [ 'aria-hidden' => 'true' ] );
+            $icon_html = ube_get_icon_markup( $icon, [ 'aria-hidden' => 'true' ] );
 		}
 
 
@@ -219,8 +219,9 @@ class UBE_Element_Advanced_Icon_Box extends UBE_Abstracts_Elements_Grid {
 				'label'        => esc_html__( 'Shape', 'ube' ),
 				'type'         => Controls_Manager::SELECT,
 				'options'      => [
-					'circle' => esc_html__( 'Circle', 'ube' ),
-					'square' => esc_html__( 'Square', 'ube' ),
+                    'square' => esc_html__( 'Square', 'ube' ),
+                    'rounded' => esc_html__( 'Rounded', 'ube' ),
+                    'circle' => esc_html__( 'Circle', 'ube' ),
 				],
 				'default'      => 'circle',
 				'condition'    => [
@@ -738,16 +739,4 @@ class UBE_Element_Advanced_Icon_Box extends UBE_Abstracts_Elements_Grid {
 
 		$this->end_controls_section();
 	}
-
-	public function get_icon_markup( $icon, $attributes = [] ) {
-		$is_svg = isset( $icon['library'] ) && 'svg' === $icon['library'];
-		ob_start();
-		Icons_Manager::render_icon( $icon, $attributes );
-		$html = ob_get_clean();
-		if ( $is_svg ) {
-			$html = ube_icon_svg_markup( $html );
-		}
-		return $html;
-	}
-
 }

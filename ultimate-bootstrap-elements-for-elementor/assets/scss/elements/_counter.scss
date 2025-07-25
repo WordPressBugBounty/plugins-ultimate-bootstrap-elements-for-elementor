@@ -20,22 +20,6 @@
 		@include d-flex();
 		@include align-items-center();
 		@include justify-content-center();
-
-		svg {
-			width: 1em;
-			height: 1em;
-			fill: currentColor;
-
-			*[stroke^="#"],
-			*[stroke^="url(#"] {
-				stroke: currentColor;
-			}
-
-			*[fill^="#"],
-			*[fill^="url(#"] {
-				fill: currentColor;
-			}
-		}
 	}
 
 	.card-body {

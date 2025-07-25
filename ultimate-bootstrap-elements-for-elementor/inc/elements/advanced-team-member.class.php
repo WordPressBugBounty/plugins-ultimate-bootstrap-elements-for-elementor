@@ -791,8 +791,9 @@ class UBE_Element_Advanced_Team_Member extends UBE_Abstracts_Elements_Grid {
 				'label' => esc_html__( 'Shape', 'ube' ),
 				'type' => Controls_Manager::SELECT,
 				'options' => [
-					'circle' => esc_html__( 'Circle', 'ube' ),
-					'square' => esc_html__( 'Square', 'ube' ),
+                    'square' => esc_html__( 'Square', 'ube' ),
+                    'rounded' => esc_html__( 'Rounded', 'ube' ),
+                    'circle' => esc_html__( 'Circle', 'ube' ),
 				],
 				'default' => 'circle',
 				'condition' => [

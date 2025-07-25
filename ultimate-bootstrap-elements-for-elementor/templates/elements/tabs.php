@@ -167,12 +167,12 @@ $id_int = $element->get_id();
                 <li <?php echo $element->get_render_attribute_string( $tabs_item_setting_key ); ?>>
                     <a <?php echo $element->get_render_attribute_string( $tabs_link_setting_key ); ?>>
 						<?php if ( $tab_title_type_icon == 'yes' ): ?>
-                            <span class="ube-tab-icon <?php echo esc_attr( $icon_classes ) ?>">
+                            <span class="ube-tab-icon ube-icon <?php echo esc_attr( $icon_classes ) ?>">
                         <?php
                         if ( ! empty( $item['tab_title_image']['url'] ) ) {
 	                        echo Group_Control_Image_Size::get_attachment_image_html( $item, 'thumbnail', 'tab_title_image' );
                         } elseif ( ! empty( $item['tab_title_icons'] ) ) {
-	                        Icons_Manager::render_icon( $item['tab_title_icons'] );
+	                        ube_render_icon( $item['tab_title_icons'] );
                         }
                         ?>
                              </span>
@@ -298,12 +298,12 @@ $id_int = $element->get_id();
                         <div <?php echo $element->get_render_attribute_string( $tabs_card_header_setting_key ); ?>>
                             <div <?php echo $element->get_render_attribute_string( $tabs_card_title_setting_key ); ?>>
 								<?php if ( $tab_title_type_icon == 'yes' ): ?>
-                                    <span class="ube-tab-icon <?php echo esc_attr( $icon_classes ) ?>">
+                                    <span class="ube-tab-icon ube-icon <?php echo esc_attr( $icon_classes ) ?>">
                                         <?php
                                         if ( ! empty( $item['tab_title_image']['url'] ) ) {
 	                                        echo Group_Control_Image_Size::get_attachment_image_html( $item, 'thumbnail', 'tab_title_image' );
                                         } elseif ( ! empty( $item['tab_title_icons'] ) ) {
-	                                        Icons_Manager::render_icon( $item['tab_title_icons'] );
+                                            ube_render_icon( $item['tab_title_icons'] );
                                         }
                                         ?>
                                     </span>

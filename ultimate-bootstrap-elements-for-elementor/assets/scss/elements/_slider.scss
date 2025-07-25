@@ -438,6 +438,7 @@
 		margin-left: calc(0px - (var(--ube-slider-gap) / 2));
 		margin-right: calc(0px - (var(--ube-slider-gap) / 2));
 		margin-top: calc(0px - (var(--ube-slider-gap) / 2));
+
 		.slick-slide > div {
 			padding: calc((var(--ube-slider-gap) / 2));
 		}
@@ -448,6 +449,7 @@
 	.slick-track {
 		@include d-flex();
 	}
+
 	.slick-slide {
 		height: inherit;
 	}
@@ -497,5 +499,41 @@
 
 			}
 		}
+	}
+}
+
+
+.ube-slider-marquee .slick-track {
+	--ube-slider-marquee-speed: 100s;
+
+	&:hover {
+		animation-play-state: paused;
+	}
+}
+
+.ube-slider-marquee-type-rtl .slick-track {
+	animation: ube-slider-marquee-rtl var(--ube-slider-marquee-speed) linear infinite;
+}
+
+.ube-slider-marquee-type-ltr .slick-track {
+	animation: ube-slider-marquee-ltr var(--ube-slider-marquee-speed) linear infinite;
+}
+
+@keyframes ube-slider-marquee-rtl {
+	0% {
+		transform: translateX(0%);
+	}
+	100% {
+		transform: translateX(-10%);
+	}
+}
+
+@keyframes ube-slider-marquee-ltr {
+
+	0% {
+		transform: translateX(-10%);
+	}
+	100% {
+		transform: translateX(0);
 	}
 }

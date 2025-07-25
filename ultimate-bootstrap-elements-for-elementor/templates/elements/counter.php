@@ -64,9 +64,9 @@ $element->add_render_attribute( 'counter_title', 'class', $counter_title_classes
 			$element->add_render_attribute( 'counter_media', 'class', $media_class );
 			?>
             <div <?php echo $element->get_render_attribute_string( 'counter_media' ) ?>>
-                <span class="ube-counter-icon elementor-icon">
+                <span class="ube-counter-icon ube-icon">
                     <?php
-                    Icons_Manager::render_icon( $settings['counter_icon'] );
+                    ube_render_icon( $settings['counter_icon'] );
                     ?>
                 </span>
             </div>

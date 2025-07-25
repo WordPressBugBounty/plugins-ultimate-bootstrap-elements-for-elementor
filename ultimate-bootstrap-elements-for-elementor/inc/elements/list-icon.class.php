@@ -592,8 +592,8 @@ class UBE_Element_List_Icon extends UBE_Abstracts_Elements {
 		) );
 	}
 
-	protected function content_template() {
+/*	protected function content_template() {
 		ube_get_template( 'elements-view/list-icon.php' );
-	}
+	}*/
 
 }

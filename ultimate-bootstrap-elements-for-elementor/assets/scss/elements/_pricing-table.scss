@@ -8,6 +8,21 @@
 		padding-left: 15px;
 		padding-right: 15px;
 	}
+
+}
+
+.ube-pricing-button {
+	&.icon-left {
+		.ube-icon {
+			margin-right: 5px;
+		}
+	}
+
+	&.icon-right {
+		.ube-icon {
+			margin-left: 5px;
+		}
+	}
 }
 
 .ube-pricing-original-price.has-sale {
@@ -56,24 +71,6 @@
 .ube-pricing-feature-item-icon {
 	color: var(--e-global-color-accent);
 	margin-right: 6px;
-
-	svg {
-		display: inline-block;
-		width: 1em;
-		height: 1em;
-		stroke: currentColor;
-		fill: currentColor;
-
-		*[stroke^="#"],
-		*[stroke^="url(#"] {
-			stroke: currentColor;
-		}
-
-		*[fill^="#"],
-		*[fill^="url(#"] {
-			fill: currentColor;
-		}
-	}
 }
 
 .ube-pricing-disable-item {
@@ -97,7 +94,7 @@
 	}
 }
 
-.ube-pricing .ube-pricing-bg-icon-none .ube-icon {
+.ube-pricing-bg-icon-none .ube-pricing-icon .ube-icon {
 	background: none !important;
 	color: var(--e-global-color-accent);
 }
@@ -161,6 +158,20 @@
 	}
 }
 
+.ube-pricing-icon {
+	.ube-icon {
+		padding: 25px 0;
+		position: relative;
+		width: 80px;
+		height: 80px;
+		background: var(--e-global-color-accent);
+		border-radius: 50%;
+		overflow: hidden;
+		font-size: 30px;
+		color: var(--e-global-color-accent-foreground);
+	}
+}
+
 .ube-pricing-inner {
 	width: 100%;
 	height: auto;
@@ -175,17 +186,7 @@
 		@include transform(translateY(-10px));
 	}
 
-	.ube-icon {
-		padding: 25px 0;
-		position: relative;
-		width: 80px;
-		height: 80px;
-		background: var(--e-global-color-accent);
-		border-radius: 50%;
-		overflow: hidden;
-		font-size: 30px;
-		color: var(--e-global-color-accent-foreground);
-	}
+
 }
 
 .ube-pricing-ribbon-1:before {

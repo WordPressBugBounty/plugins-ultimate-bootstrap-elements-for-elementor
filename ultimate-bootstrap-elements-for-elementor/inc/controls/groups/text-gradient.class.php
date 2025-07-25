@@ -126,7 +126,7 @@ class UBE_Group_Control_Text_Gradient extends Group_Control_Base {
 			'type'      => Controls_Manager::COLOR,
 			'default'   => '',
 			'selectors' => [
-				'{{SELECTOR}}'         => 'color: {{VALUE}};',
+				'{{SELECTOR}}'         => 'color: {{VALUE}}; -webkit-text-fill-color: unset;',
 				'{{SELECTOR}} .stop-a' => 'stop-color: {{VALUE}}',
 				'{{SELECTOR}} .stop-b' => 'stop-color: {{VALUE}}',
 			],

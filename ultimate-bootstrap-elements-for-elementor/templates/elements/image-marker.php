@@ -58,7 +58,9 @@ if ( $settings['image_marker_arrow'] == 'yes' ) {
 			<?php
 			if ( $item['type_of_marker'] == 'icon' ) {
 				if ( ! empty( $item['marker_icon']['value'] ) ) {
-					\Elementor\Icons_Manager::render_icon( $item['marker_icon'] );
+                    echo '<span class="ube-icon">';
+					ube_render_icon( $item['marker_icon'] );
+                    echo '</span>';
 				} else {
 					echo UBE_Icon::get_instance()->get_svg( 'info-circle' );
 				}

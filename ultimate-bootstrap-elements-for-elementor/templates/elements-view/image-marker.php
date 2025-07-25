@@ -54,7 +54,9 @@ var iconHTML = elementor.helpers.renderIcon( view, item.marker_icon, { 'aria-hid
     if ( item.type_of_marker === 'icon' ) {
     if ( item.marker_icon.value ) {
     #>
+    <span class="ube-icon">
     {{{ iconHTML.value }}}
+        </span>
     <#}
     } else {
     #>

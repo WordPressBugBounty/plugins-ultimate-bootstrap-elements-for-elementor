@@ -87,8 +87,8 @@ if ( ( $settings['slider_syncing'] === 'on' ) && ( ! empty( $settings['slider_sy
 	$slick_options['asNavFor'] = $settings['slider_syncing_element'];
 }
 if ( $settings['slider_arrows_position'] == 'vertical' ) {
-	$slick_options['prevArrow'] = '<div class="slick-prev" aria-label="Previous"><i class="fas fa-chevron-up"></i></div>';
-	$slick_options['nextArrow'] = '<div class="slick-next" aria-label="Next"><i class="fas fa-chevron-down"></i></div>';
+	$slick_options['prevArrow'] = '<div role="button" class="slick-prev" aria-label="Previous"><i class="fas fa-chevron-up"></i></div>';
+	$slick_options['nextArrow'] = '<div role="button" class="slick-next" aria-label="Next"><i class="fas fa-chevron-down"></i></div>';
 }
 
 

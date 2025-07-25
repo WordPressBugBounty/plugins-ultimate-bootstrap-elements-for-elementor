@@ -26,7 +26,7 @@ class UBE_Element_Team_MemBer extends UBE_Abstracts_Elements {
 	}
 
 	public function get_ube_keywords() {
-		return array( 'team','member','ube' , 'team member', 'ube team member');
+		return array( 'team', 'member', 'ube', 'team member', 'ube team member' );
 	}
 
 	protected function register_controls() {
@@ -39,7 +39,7 @@ class UBE_Element_Team_MemBer extends UBE_Abstracts_Elements {
 		$this->start_controls_section(
 			'section_content',
 			[
-				'label' => esc_html__('Content','ube')
+				'label' => esc_html__( 'Content', 'ube' )
 			]
 		);
 
@@ -80,24 +80,24 @@ class UBE_Element_Team_MemBer extends UBE_Abstracts_Elements {
 		$this->add_control(
 			'team_member_name',
 			[
-				'label'       => esc_html__( 'Name', 'ube' ),
-				'type'        => Controls_Manager::TEXT,
-				'dynamic'     => [
+				'label'   => esc_html__( 'Name', 'ube' ),
+				'type'    => Controls_Manager::TEXT,
+				'dynamic' => [
 					'active' => true,
 				],
-				'default' => esc_html__('John Doe', 'ube'),
+				'default' => esc_html__( 'John Doe', 'ube' ),
 			]
 		);
 
 		$this->add_control(
 			'team_member_job_title',
 			[
-				'label'       => esc_html__( 'Position', 'ube' ),
-				'type'        => Controls_Manager::TEXT,
-				'dynamic'     => [
+				'label'   => esc_html__( 'Position', 'ube' ),
+				'type'    => Controls_Manager::TEXT,
+				'dynamic' => [
 					'active' => true,
 				],
-				'default' => esc_html__('Designer', 'ube'),
+				'default' => esc_html__( 'Designer', 'ube' ),
 			]
 		);
 
@@ -116,14 +116,14 @@ class UBE_Element_Team_MemBer extends UBE_Abstracts_Elements {
 		$this->add_control(
 			'team_member_description',
 			[
-				'label'       => esc_html__( 'Description', 'ube' ),
-				'type'        => Controls_Manager::TEXTAREA,
-				'dynamic'     => [
+				'label'     => esc_html__( 'Description', 'ube' ),
+				'type'      => Controls_Manager::TEXTAREA,
+				'dynamic'   => [
 					'active' => true,
 				],
-				'default' => esc_html__('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.', 'ube'),
-				'rows'        => 10,
-				'condition'   => [
+				'default'   => esc_html__( 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.', 'ube' ),
+				'rows'      => 10,
+				'condition' => [
 					'team_member_style!' => 'style-03',
 				],
 			]
@@ -144,13 +144,14 @@ class UBE_Element_Team_MemBer extends UBE_Abstracts_Elements {
 		);
 
 		$repeater = new Repeater();
-		$this->register_social_controls($repeater);
+		$this->register_social_controls( $repeater );
 		$this->add_control(
 			'team_member_list',
 			[
-				'type'        => Controls_Manager::REPEATER,
-				'fields'      => $repeater->get_controls(),
-				'default'     => [
+				'type'          => Controls_Manager::REPEATER,
+				'fields'        => $repeater->get_controls(),
+				'prevent_empty' => false,
+				'default'       => [
 					[
 						'social_icon' => [
 							'value'   => 'fab fa-facebook',
@@ -170,8 +171,8 @@ class UBE_Element_Team_MemBer extends UBE_Abstracts_Elements {
 						],
 					],
 				],
-				'title_field' => '<# var migrated = "undefined" !== typeof __fa4_migrated, social = ( "undefined" === typeof social ) ? false : social; #>{{{ elementor.helpers.getSocialNetworkNameFromIcon( social_icon, social, true, migrated, true ) }}}',
-				'condition'   => [
+				'title_field'   => '<# var migrated = "undefined" !== typeof __fa4_migrated, social = ( "undefined" === typeof social ) ? false : social; #>{{{ elementor.helpers.getSocialNetworkNameFromIcon( social_icon, social, true, migrated, true ) }}}',
+				'condition'     => [
 					'social_icon_switcher' => 'yes',
 				]
 			]
@@ -215,17 +216,17 @@ class UBE_Element_Team_MemBer extends UBE_Abstracts_Elements {
 		$this->start_controls_section(
 			'section_style_content',
 			[
-				'label' => esc_html__('Content','ube'),
-				'tab' => Controls_Manager::TAB_STYLE,
+				'label' => esc_html__( 'Content', 'ube' ),
+				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
 
 		$this->add_responsive_control(
 			'team_member_text_align',
 			[
-				'label'     => esc_html__( 'Alignment', 'ube' ),
-				'type'      => Controls_Manager::CHOOSE,
-				'options'   => [
+				'label'                => esc_html__( 'Alignment', 'ube' ),
+				'type'                 => Controls_Manager::CHOOSE,
+				'options'              => [
 					'left'   => [
 						'title' => esc_html__( 'Left', 'ube' ),
 						'icon'  => 'eicon-text-align-left',
@@ -239,13 +240,13 @@ class UBE_Element_Team_MemBer extends UBE_Abstracts_Elements {
 						'icon'  => 'eicon-text-align-right',
 					],
 				],
-				'prefix_class' => 'elementor%s-align-',
+				'prefix_class'         => 'elementor%s-align-',
 				'selectors_dictionary' => [
 					'left'  => 'flex-start',
 					'right' => 'flex-end',
 				],
 				'selectors'            => [
-					'{{WRAPPER}} .ube-tm-classic' => 'align-items: {{VALUE}}',
+					'{{WRAPPER}} .ube-tm-classic'  => 'align-items: {{VALUE}}',
 					'{{WRAPPER}} .ube-tm-style-02' => 'justify-content: {{VALUE}}',
 					'{{WRAPPER}} .ube-tm-style-03' => 'justify-content: {{VALUE}}',
 
@@ -285,10 +286,10 @@ class UBE_Element_Team_MemBer extends UBE_Abstracts_Elements {
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
 			[
-				'name'      => 'team_member_content_background',
-				'label'     => esc_html__( 'Background Color', 'ube' ),
-				'types'     => [ 'classic', 'gradient' ],
-				'selector'  => '{{WRAPPER}} .ube-team-member .card-body',
+				'name'     => 'team_member_content_background',
+				'label'    => esc_html__( 'Background Color', 'ube' ),
+				'types'    => [ 'classic', 'gradient' ],
+				'selector' => '{{WRAPPER}} .ube-team-member .card-body',
 			]
 		);
 
@@ -359,15 +360,14 @@ class UBE_Element_Team_MemBer extends UBE_Abstracts_Elements {
 		);
 
 
-
 		$this->end_controls_section();
 	}
 
 	private function register_style_image_section_controls() {
-		$this->start_controls_section('section_style_image', [
-			'label' => esc_html__('Image', 'ube'),
-			'tab' => Controls_Manager::TAB_STYLE,
-		]);
+		$this->start_controls_section( 'section_style_image', [
+			'label' => esc_html__( 'Image', 'ube' ),
+			'tab'   => Controls_Manager::TAB_STYLE,
+		] );
 
 		$this->add_responsive_control(
 			'image_margin',
@@ -378,8 +378,8 @@ class UBE_Element_Team_MemBer extends UBE_Abstracts_Elements {
 				'selectors'  => [
 					'{{WRAPPER}} .ube-team-member .ube-tm-image' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
-				'condition' => [
-					'image[url]!' => '',
+				'condition'  => [
+					'image[url]!'        => '',
 					'team_member_style!' => 'style-03',
 				]
 			]
@@ -394,18 +394,18 @@ class UBE_Element_Team_MemBer extends UBE_Abstracts_Elements {
 				'selectors'  => [
 					'{{WRAPPER}} .ube-team-member .card-img' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
-				'condition' => [
-					'image[url]!' => '',
+				'condition'  => [
+					'image[url]!'        => '',
 					'team_member_style!' => 'style-03',
 				]
 			]
 		);
 
-		$this->add_responsive_control('team_member_image_width', [
-			'label' => esc_html__('Image Width', 'ube'),
-			'type' => Controls_Manager::SLIDER,
+		$this->add_responsive_control( 'team_member_image_width', [
+			'label'      => esc_html__( 'Image Width', 'ube' ),
+			'type'       => Controls_Manager::SLIDER,
 			'size_units' => [ 'px', '%' ],
-			'range' => [
+			'range'      => [
 				'px' => [
 					'min' => 1,
 					'max' => 1000,
@@ -415,15 +415,15 @@ class UBE_Element_Team_MemBer extends UBE_Abstracts_Elements {
 					'max' => 100,
 				],
 			],
-			'selectors' => [
-				'{{WRAPPER}} .ube-tm-classic .ube-tm-image' => 'max-width:{{SIZE}}{{UNIT}}',
+			'selectors'  => [
+				'{{WRAPPER}} .ube-tm-classic .ube-tm-image'  => 'max-width:{{SIZE}}{{UNIT}}',
 				'{{WRAPPER}} .ube-tm-style-02 .ube-tm-inner' => 'max-width:{{SIZE}}{{UNIT}}',
 				'{{WRAPPER}} .ube-tm-style-03 .ube-tm-inner' => 'max-width:{{SIZE}}{{UNIT}}',
 			],
-			'condition' => [
+			'condition'  => [
 				'image[url]!' => '',
 			],
-		]);
+		] );
 
 		$this->add_control(
 			'team_member_image_hover_style',
@@ -439,7 +439,7 @@ class UBE_Element_Team_MemBer extends UBE_Abstracts_Elements {
 					'bottom'  => esc_html__( 'Bottom', 'ube' ),
 				],
 				'condition' => [
-					'image[url]!' => '',
+					'image[url]!'       => '',
 					'team_member_style' => 'style-03',
 				],
 			]
@@ -448,12 +448,12 @@ class UBE_Element_Team_MemBer extends UBE_Abstracts_Elements {
 		$this->add_control(
 			'hover_animation',
 			[
-				'label'   => esc_html__( 'Hover Effect', 'ube' ),
-				'type'    => \Elementor\Controls_Manager::SELECT,
-				'default' => '',
-				'options' => ube_get_hover_effect(),
+				'label'     => esc_html__( 'Hover Effect', 'ube' ),
+				'type'      => \Elementor\Controls_Manager::SELECT,
+				'default'   => '',
+				'options'   => ube_get_hover_effect(),
 				'condition' => [
-					'image[url]!' => '',
+					'image[url]!'        => '',
 					'team_member_style!' => 'style-03',
 				],
 			]
@@ -461,12 +461,12 @@ class UBE_Element_Team_MemBer extends UBE_Abstracts_Elements {
 		$this->add_control(
 			'hover_image_animation',
 			[
-				'label'   => esc_html__( 'Hover Image Effect', 'ube' ),
-				'type'    => \Elementor\Controls_Manager::SELECT,
-				'default' => '',
-				'options' => ube_get_image_effect(),
+				'label'     => esc_html__( 'Hover Image Effect', 'ube' ),
+				'type'      => \Elementor\Controls_Manager::SELECT,
+				'default'   => '',
+				'options'   => ube_get_image_effect(),
 				'condition' => [
-					'image[url]!' => '',
+					'image[url]!'        => '',
 					'team_member_style!' => 'style-03',
 				],
 			]
@@ -479,17 +479,17 @@ class UBE_Element_Team_MemBer extends UBE_Abstracts_Elements {
 		$this->start_controls_section(
 			'section_style_name',
 			[
-				'label' => esc_html__('Name','ube'),
-				'tab' => Controls_Manager::TAB_STYLE,
+				'label' => esc_html__( 'Name', 'ube' ),
+				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
 
 
-		$this->start_controls_tabs( 'team_name_colors');
+		$this->start_controls_tabs( 'team_name_colors' );
 
 		$this->start_controls_tab( 'team_name_tab_normal', [
 			'label' => esc_html__( 'Normal', 'ube' ),
-		]);
+		] );
 
 		$this->add_control(
 			'team_name_color',
@@ -507,7 +507,7 @@ class UBE_Element_Team_MemBer extends UBE_Abstracts_Elements {
 
 		$this->start_controls_tab( 'team_name_tab_hover', [
 			'label' => esc_html__( 'Hover', 'ube' ),
-		]);
+		] );
 		$this->add_control(
 			'team_name_color_hover',
 			[
@@ -532,11 +532,11 @@ class UBE_Element_Team_MemBer extends UBE_Abstracts_Elements {
 			]
 		);
 
-		$this->add_control('team_name_class',[
-			'label' => esc_html__('Custom Class','ube'),
-			'type' => Controls_Manager::TEXT,
+		$this->add_control( 'team_name_class', [
+			'label'   => esc_html__( 'Custom Class', 'ube' ),
+			'type'    => Controls_Manager::TEXT,
 			'default' => '',
-		]);
+		] );
 
 		$this->add_responsive_control(
 			'team_name_margin_spacing',
@@ -562,10 +562,10 @@ class UBE_Element_Team_MemBer extends UBE_Abstracts_Elements {
 	}
 
 	private function register_style_position_section_controls() {
-		$this->start_controls_section('section_style_position', [
-			'label' => esc_html__('Position', 'ube'),
-			'tab' => Controls_Manager::TAB_STYLE,
-		]);
+		$this->start_controls_section( 'section_style_position', [
+			'label' => esc_html__( 'Position', 'ube' ),
+			'tab'   => Controls_Manager::TAB_STYLE,
+		] );
 
 
 		$this->add_control(
@@ -588,11 +588,11 @@ class UBE_Element_Team_MemBer extends UBE_Abstracts_Elements {
 			]
 		);
 
-		$this->add_control('team_job_title_class',[
-			'label' => esc_html__('Custom Class','ube'),
-			'type' => Controls_Manager::TEXT,
+		$this->add_control( 'team_job_title_class', [
+			'label'   => esc_html__( 'Custom Class', 'ube' ),
+			'type'    => Controls_Manager::TEXT,
 			'default' => '',
-		]);
+		] );
 
 
 		$this->add_responsive_control(
@@ -620,13 +620,13 @@ class UBE_Element_Team_MemBer extends UBE_Abstracts_Elements {
 	}
 
 	private function register_style_description_section_controls() {
-		$this->start_controls_section('section_style_description', [
-			'label' => esc_html__('Description', 'ube'),
-			'tab' => Controls_Manager::TAB_STYLE,
+		$this->start_controls_section( 'section_style_description', [
+			'label'     => esc_html__( 'Description', 'ube' ),
+			'tab'       => Controls_Manager::TAB_STYLE,
 			'condition' => [
 				'team_member_style!' => 'style-03',
 			]
-		]);
+		] );
 
 		$this->add_control(
 			'team_description_color',
@@ -648,11 +648,11 @@ class UBE_Element_Team_MemBer extends UBE_Abstracts_Elements {
 			]
 		);
 
-		$this->add_control('team_desc_class',[
-			'label' => esc_html__('Custom Class','ube'),
-			'type' => Controls_Manager::TEXT,
+		$this->add_control( 'team_desc_class', [
+			'label'   => esc_html__( 'Custom Class', 'ube' ),
+			'type'    => Controls_Manager::TEXT,
 			'default' => '',
-		]);
+		] );
 
 		$this->add_responsive_control(
 			'team_description_margin_spacing',
@@ -673,30 +673,41 @@ class UBE_Element_Team_MemBer extends UBE_Abstracts_Elements {
 			]
 		);
 
+		$this->add_responsive_control(
+			'team_description_padding',
+			[
+				'label'      => esc_html__( 'Padding', 'ube' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em' ],
+				'selectors'  => [
+					'{{WRAPPER}} .ube-tm-desc' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
 
 		$this->end_controls_section();
 	}
 
 	private function register_style_social_section_controls() {
-		$this->start_controls_section('section_style_social', [
-			'label' => esc_html__('Social', 'ube'),
-			'tab' => Controls_Manager::TAB_STYLE,
+		$this->start_controls_section( 'section_style_social', [
+			'label'     => esc_html__( 'Social', 'ube' ),
+			'tab'       => Controls_Manager::TAB_STYLE,
 			'condition' => [
 				'social_icon_switcher' => 'yes',
 			]
-		]);
+		] );
 
 		$this->add_control(
 			'view',
 			[
-				'label' => esc_html__( 'View', 'ube' ),
-				'type' => Controls_Manager::SELECT,
-				'options' => [
+				'label'        => esc_html__( 'View', 'ube' ),
+				'type'         => Controls_Manager::SELECT,
+				'options'      => [
 					'default' => esc_html__( 'Default', 'ube' ),
 					'stacked' => esc_html__( 'Stacked', 'ube' ),
-					'framed' => esc_html__( 'Framed', 'ube' ),
+					'framed'  => esc_html__( 'Framed', 'ube' ),
 				],
-				'default' => 'default',
+				'default'      => 'default',
 				'prefix_class' => 'elementor-view-',
 			]
 		);
@@ -704,14 +715,15 @@ class UBE_Element_Team_MemBer extends UBE_Abstracts_Elements {
 		$this->add_control(
 			'shape',
 			[
-				'label' => esc_html__( 'Shape', 'ube' ),
-				'type' => Controls_Manager::SELECT,
-				'options' => [
-					'circle' => esc_html__( 'Circle', 'ube' ),
-					'square' => esc_html__( 'Square', 'ube' ),
+				'label'        => esc_html__( 'Shape', 'ube' ),
+				'type'         => Controls_Manager::SELECT,
+				'options'      => [
+					'square'  => esc_html__( 'Square', 'ube' ),
+					'rounded' => esc_html__( 'Rounded', 'ube' ),
+					'circle'  => esc_html__( 'Circle', 'ube' ),
 				],
-				'default' => 'circle',
-				'condition' => [
+				'default'      => 'circle',
+				'condition'    => [
 					'view!' => 'default',
 				],
 				'prefix_class' => 'elementor-shape-',
@@ -732,7 +744,7 @@ class UBE_Element_Team_MemBer extends UBE_Abstracts_Elements {
 						'step' => 1,
 					],
 				],
-				'condition' => [
+				'condition'  => [
 					'view' => 'framed',
 				],
 				'selectors'  => [
@@ -857,12 +869,11 @@ class UBE_Element_Team_MemBer extends UBE_Abstracts_Elements {
 				'selectors'  => [
 					'{{WRAPPER}} .elementor-icon' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
-				'condition' => [
+				'condition'  => [
 					'view!' => 'default',
 				],
 			]
 		);
-
 
 
 		$this->add_responsive_control(
@@ -920,62 +931,63 @@ class UBE_Element_Team_MemBer extends UBE_Abstracts_Elements {
 	}
 
 	public function render() {
-		$settings          = $this->get_settings_for_display();
-		$style = isset($settings['team_member_style']) ? $settings['team_member_style'] : 'style-01';
-		$image_hover_style = isset($settings['team_member_image_hover_style']) ? $settings['team_member_image_hover_style'] : 'default';
-		$hover_animation = isset($settings['hover_animation']) ? $settings['hover_animation'] : '';
-		$hover_image_animation = isset($settings['hover_image_animation']) ? $settings['hover_image_animation'] : '';
-		$team_member_link = isset($settings['team_member_link']) ? $settings['team_member_link'] : array();
+		$settings              = $this->get_settings_for_display();
+		$style                 = isset( $settings['team_member_style'] ) ? $settings['team_member_style'] : 'style-01';
+		$image_hover_style     = isset( $settings['team_member_image_hover_style'] ) ? $settings['team_member_image_hover_style'] : 'default';
+		$hover_animation       = isset( $settings['hover_animation'] ) ? $settings['hover_animation'] : '';
+		$hover_image_animation = isset( $settings['hover_image_animation'] ) ? $settings['hover_image_animation'] : '';
+		$team_member_link      = isset( $settings['team_member_link'] ) ? $settings['team_member_link'] : array();
 
 		$image_html = '';
-		$image_src = '';
-		if (isset($settings['image'])) {
-			$image_html =  Group_Control_Image_Size::get_attachment_image_html( $settings, 'image_size', 'image' );
-			$image_src = $this->get_attachment_image_src($settings,'image_size','image');
+		$image_src  = '';
+		if ( isset( $settings['image'] ) ) {
+			$image_html = Group_Control_Image_Size::get_attachment_image_html( $settings, 'image_size', 'image' );
+			$image_src  = $this->get_attachment_image_src( $settings, 'image_size', 'image' );
 		}
 
-		$social_html = '';
-		$social_icon_switcher = isset($settings['social_icon_switcher']) ? $settings['social_icon_switcher'] : 'yes';
-		$name = isset($settings['team_member_name']) ? $settings['team_member_name'] : '';
-		$name_class = isset($settings['team_name_class']) ? $settings['team_name_class'] : '';
-		$position = isset($settings['team_member_job_title']) ? $settings['team_member_job_title'] : '';
-		$position_class = isset($settings['team_job_title_class']) ? $settings['team_job_title_class'] : '';
-		$description = isset($settings['team_member_description']) ? $settings['team_member_description'] : '';
-		$desc_class = isset($settings['team_desc_class']) ? $settings['team_desc_class'] : '';
-		if ($social_icon_switcher === 'yes') {
-			$team_member_list = isset($settings['team_member_list']) ? $settings['team_member_list'] : array();
-			$social_html = $this->get_social_markup_html($team_member_list);
+		$social_html          = '';
+		$social_icon_switcher = isset( $settings['social_icon_switcher'] ) ? $settings['social_icon_switcher'] : 'yes';
+		$name                 = isset( $settings['team_member_name'] ) ? $settings['team_member_name'] : '';
+		$name_class           = isset( $settings['team_name_class'] ) ? $settings['team_name_class'] : '';
+		$position             = isset( $settings['team_member_job_title'] ) ? $settings['team_member_job_title'] : '';
+		$position_class       = isset( $settings['team_job_title_class'] ) ? $settings['team_job_title_class'] : '';
+		$description          = isset( $settings['team_member_description'] ) ? $settings['team_member_description'] : '';
+		$desc_class           = isset( $settings['team_desc_class'] ) ? $settings['team_desc_class'] : '';
+		if ( $social_icon_switcher === 'yes' ) {
+			$team_member_list = isset( $settings['team_member_list'] ) ? $settings['team_member_list'] : array();
+			$social_html      = $this->get_social_markup_html( $team_member_list );
 		}
 
 
-		ube_get_template('elements/team-member.php', array(
-			'element' => $this,
-			'style' => $style,
-			'image_hover_style' => $image_hover_style,
-			'hover_animation' => $hover_animation,
+		ube_get_template( 'elements/team-member.php', array(
+			'element'               => $this,
+			'style'                 => $style,
+			'image_hover_style'     => $image_hover_style,
+			'hover_animation'       => $hover_animation,
 			'hover_image_animation' => $hover_image_animation,
-			'team_member_link' => $team_member_link,
-			'image_html' => $image_html,
-			'image_src' => $image_src,
-			'social_html' => $social_html,
-			'name' => $name,
-			'name_class' => $name_class,
-			'position' => $position,
-			'position_class' => $position_class,
-			'description' => $description,
-			'desc_class' => $desc_class
-		));
+			'team_member_link'      => $team_member_link,
+			'image_html'            => $image_html,
+			'image_src'             => $image_src,
+			'social_html'           => $social_html,
+			'name'                  => $name,
+			'name_class'            => $name_class,
+			'position'              => $position,
+			'position_class'        => $position_class,
+			'description'           => $description,
+			'desc_class'            => $desc_class
+		) );
 	}
 
-	private function get_social_markup_html($socials = array()) {
-		if (empty($socials)) {
+	private function get_social_markup_html( $socials = array() ) {
+		if ( empty( $socials ) ) {
 			return '';
 		}
 		ob_start();
-		ube_get_template('elements/team-member/social.php',array(
-				'socials' => $socials,
-				'element' => $this
-			));
+		ube_get_template( 'elements/team-member/social.php', array(
+			'socials' => $socials,
+			'element' => $this
+		) );
+
 		return ob_get_clean();
 	}
 

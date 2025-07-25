@@ -101,6 +101,15 @@ class UBE_Element_Advanced_Testimonial extends UBE_Abstracts_Elements_Grid {
 				'default' => '',
 			]
 		);
+
+		$repeater->add_control(
+			'css_classes',
+			[
+				'label'       => esc_html__( 'Custom Css', 'ube' ),
+				'type'        => Controls_Manager::TEXT,
+				'default'     => '',
+			]
+		);
 	}
 
 	protected function get_repeater_defaults() {
@@ -672,6 +681,21 @@ class UBE_Element_Advanced_Testimonial extends UBE_Abstracts_Elements_Grid {
 				]
 			]
 		);
+
+		$this->add_control('testimonial_rating_size', [
+			'label' => esc_html__('Size', 'ube'),
+			'type' => Controls_Manager::SLIDER,
+			'size_units' => ['px'],
+			'range' => [
+				'px' => [
+					'min' => 1,
+					'max' => 200,
+				],
+			],
+			'selectors' => [
+				'{{WRAPPER}} .ube-testimonial-rating .ube-icon' => 'font-size: {{SIZE}}{{UNIT}};',
+			],
+		]);
 
 		$this->end_controls_section();
 	}
