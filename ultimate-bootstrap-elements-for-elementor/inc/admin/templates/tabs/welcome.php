@@ -6,6 +6,27 @@ if (!defined('ABSPATH')) {
  * @var $tab string
  */
 $premium_themes = array(
+    array(
+        'name' => esc_html__('Groww - Business & Consulting WordPress Theme', 'ube'),
+        'desc' => esc_html__('Groww is a versatile WordPress theme crafted for businesses, consultants, IT services, and startups. Featuring 10 stunning pre-built demos, powerful Elementor integration (with exclusive templates), and full WooCommerce compatibility, Groww helps you build a professional website quickly and easily. With a fully responsive design, optimized loading speed, and SEO-friendly structure, Groww is the perfect solution to grow your online presence.', 'ube'),
+        'logo' => ube_get_plugin_url('assets/images/groww-logo.png'),
+        'link' => 'https://themeforest.net/item/groww-business-consulting-wordpress-theme/59572085',
+        'demo' => 'https://groww.g5plus.net/',
+    ),
+    array(
+        'name' => esc_html__('Authore - WordPress Theme for Authors and Publishers', 'ube'),
+        'desc' => esc_html__('Introducing Authore - WordPress Theme for Authors and Publishers, a dedicated theme crafted specifically for the publishing world. Authore is the perfect solution for building a professional website for Authors, Publishers, and Bloggers.', 'ube'),
+        'logo' => ube_get_plugin_url('assets/images/authore-logo.png'),
+        'link' => 'https://themeforest.net/item/authore-wordpress-theme-for-authors-and-publishers/48998538',
+        'demo' => 'https://authore.g5plus.net/',
+    ),
+    array(
+        'name' => esc_html__('Stanley – Modern Fashion WooCommerce Theme', 'ube'),
+        'desc' => esc_html__('Stanley - Modern Fashion WooCommerce Theme, a sleek and stylish solution for your online fashion store. This theme is designed to help you create a professional and contemporary e-commerce website with ease.', 'ube'),
+        'logo' => ube_get_plugin_url('assets/images/stanley-logo.jpg'),
+        'link' => 'https://themeforest.net/item/stanley-modern-fashion-woocommerce-theme/38922979',
+        'demo' => 'https://stanley.g5plus.net/',
+    ),
 	array(
 		'name' => esc_html__('Auteur – WordPress Theme for Authors and Publishers', 'ube'),
 		'desc' => esc_html__('Auteur is a gracefully crafted WordPress theme created specifically for writing authors, bloggers, reviewers, publishers, book distributors, book stores anyone whose work concerning writing and other book-related services. It was for writers or professional bloggers. The theme features an elegant design, seamless interface with great user experience taken into consideration.', 'ube'),
@@ -48,6 +69,13 @@ $premium_themes = array(
 		'link' => 'https://themeforest.net/item/dukaken-multipurpose-woocommerce-wordpress-theme/25727237',
 		'demo' => 'https://dukaken-elementor.g5plus.net/main/',
 	),
+    array(
+        'name' => esc_html__('Beyot - WordPress Real Estate Theme', 'ube'),
+        'desc' => esc_html__('BEYOT WordPress Theme is a premium theme designed for independent agents and agencies or on front end as well as on admin-side and makes properties managements a breeze, but you can also use it to allow users to submit their properties for free, for a fee or based on a subscription.', 'ube'),
+        'logo' => ube_get_plugin_url('assets/images/beyot-logo.png'),
+        'link' => 'https://themeforest.net/item/beyot-wordpress-real-estate-theme/19514964',
+        'demo' => 'https://beyot.g5plus.net/elementor/main/',
+    ),
 	array(
 		'name' => esc_html__('CUPID - Adorable Kindergarten WordPress Theme', 'ube'),
 		'desc' => esc_html__('CUPID is premium WordPress Theme for kindergarten’s school, and/or other type of school website.', 'ube'),
