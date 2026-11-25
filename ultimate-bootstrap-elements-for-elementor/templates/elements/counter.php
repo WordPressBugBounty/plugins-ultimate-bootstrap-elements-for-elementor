@@ -27,7 +27,7 @@ if (!empty($settings['counter_number_class'])) {
 	$counter_number_classes[] = $settings['counter_number_class'];
 }
 
-$element->add_render_attribute( 'counter_options', 'data-counter-options', json_encode( $setting_array ) );
+$element->add_render_attribute( 'counter_options', 'data-counter-options', wp_json_encode( $setting_array, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT ) );
 $element->add_render_attribute( 'counter_options', 'class', $counter_number_classes );
 $counter_classes[] = 'ube-counter';
 if ( ! empty( $settings['counter_icon'] ) || ! empty( $settings['counter_image']['url'] ) ) {

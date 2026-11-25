@@ -410,10 +410,11 @@ class UBE_Element_Mapbox extends UBE_Abstracts_Elements {
 			<?php endif; ?>
 			<div class="card-body">
 				<?php if (!empty($title)): ?>
-					<h5 class="card-title"><?php echo wp_strip_all_tags($title)?></h5>
+					<h5 class="card-title"><?php echo esc_html( wp_strip_all_tags( $title ) ) ?></h5>
 				<?php endif; ?>
 				<?php if (!empty($description)): ?>
-					<p class="card-text"><?php echo htmlentities(ube_kses_simple_tag( $description))?></p>
+					<?php // Popup HTML is passed through a JSON data attribute encoded with JSON_HEX_AMP. ?>
+					<p class="card-text"><?php echo ube_kses_simple_tag( $description ) ?></p>
 				<?php endif; ?>
 
 			</div>

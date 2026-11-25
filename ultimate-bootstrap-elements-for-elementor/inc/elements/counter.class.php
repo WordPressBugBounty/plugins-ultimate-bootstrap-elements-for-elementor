@@ -722,6 +722,40 @@ class UBE_Element_Counter extends UBE_Abstracts_Elements {
 
 	}
 
+	/**
+	 * Sanitize settings used by the counter script (rendered with innerHTML by CountUp).
+	 * Done here (not in the template) so theme template overrides are protected too.
+	 *
+	 * @param string|null $setting_key
+	 *
+	 * @return mixed
+	 */
+	public function get_settings_for_display( $setting_key = null ) {
+		$settings = parent::get_settings_for_display();
+
+		if ( is_array( $settings ) ) {
+			if ( isset( $settings['thousand_separator_char'] ) && ! in_array( $settings['thousand_separator_char'], array( '', '.', ',', ' ' ), true ) ) {
+				$settings['thousand_separator_char'] = '';
+			}
+
+			if ( isset( $settings['data_decimal'] ) && ! in_array( $settings['data_decimal'], array( '.', ',' ), true ) ) {
+				$settings['data_decimal'] = '.';
+			}
+
+			foreach ( array( 'starting_number', 'ending_number', 'duration', 'ending_decimals' ) as $key ) {
+				if ( isset( $settings[ $key ] ) && '' !== $settings[ $key ] && ! is_numeric( $settings[ $key ] ) ) {
+					$settings[ $key ] = '';
+				}
+			}
+		}
+
+		if ( null === $setting_key ) {
+			return $settings;
+		}
+
+		return isset( $settings[ $setting_key ] ) ? $settings[ $setting_key ] : null;
+	}
+
 	protected function render() {
 
 		ube_get_template( 'elements/counter.php', array(

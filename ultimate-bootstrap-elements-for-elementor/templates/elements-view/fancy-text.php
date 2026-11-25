@@ -68,7 +68,7 @@ view.addRenderAttribute( 'fancy_text_animated_attr', {
 #>
 <{{{tag_html}}} {{{ view.getRenderAttributeString( 'fancy_attr' ) }}}>
 	<# if ( settings.fancy_text_prefix !== '' ) {#>
-		<span class="ube-fancy-text-before">{{{settings.fancy_text_prefix}}}</span>
+		<span class="ube-fancy-text-before">{{ settings.fancy_text_prefix }}</span>
 	<# } #>
 	<span {{{ view.getRenderAttributeString( 'fancy_text_animated_attr' ) }}}>
 		<# if ( settings.fancy_text_animated_text.length>0 && settings.fancy_text_animation_type !== 'typing'){#>
@@ -84,11 +84,11 @@ view.addRenderAttribute( 'fancy_text_animated_attr', {
 				}
 				view.addRenderAttribute('fancy_text_item'+j, 'class', items_class);
 				#>
-				<b {{{ view.getRenderAttributeString( 'fancy_text_item'+j ) }}}>{{{items.fancy_text_field_animated }}}</b>
+				<b {{{ view.getRenderAttributeString( 'fancy_text_item'+j ) }}}>{{ items.fancy_text_field_animated }}</b>
 			<# });#>
 		<# } #>
 	</span>
 	<# if ( settings.fancy_text_suffix !== '' ) {#>
-	<span class="ube-fancy-text-after">{{{settings.fancy_text_suffix}}}</span>
+	<span class="ube-fancy-text-after">{{ settings.fancy_text_suffix }}</span>
 	<# } #>
 </{{{tag_html}}}>

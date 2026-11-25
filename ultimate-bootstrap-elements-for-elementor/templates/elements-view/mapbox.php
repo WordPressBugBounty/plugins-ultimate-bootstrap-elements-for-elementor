@@ -1,4 +1,9 @@
 <#
+var ubeSafeUrl = function( url ) {
+	url = ( url || "" ) + "";
+	var scheme = _.filter( url.split( "" ), function( c ) { return c.charCodeAt( 0 ) > 32; } ).join( "" ).match( /^([a-z][a-z0-9+.-]*):/i );
+	return ( ! scheme || /^(https?|ftps?|mailto|tel|sms|fax)$/i.test( scheme[1] ) ) ? url : "";
+};
 var wrapper_classes =[
 	'ube-map-box',
 ];
@@ -37,21 +42,23 @@ _.each( settings.items, function(value ) {
         position.lng= address_arr[1];
 	}
 	var marker_html = '';
-	if (value.image_marker.url!=='') {
-		marker_html = '<img src="'+ value.image_marker.url +'">';
+	var marker_url = ubeSafeUrl( value.image_marker.url );
+	if (marker_url!=='') {
+		marker_html = '<img src="'+ _.escape( marker_url ) +'">';
 	}
 
     var popup_html                = '<div class="card">';
-    if (value.image.url!==''){
-      popup_html+='<img src="'+ value.image.url +'">';
+    var popup_image_url = ubeSafeUrl( value.image.url );
+    if (popup_image_url!==''){
+      popup_html+='<img src="'+ _.escape( popup_image_url ) +'">';
     }
     popup_html+='<div class="card-body">';
      if (value.title!==''){
-       popup_html+=  '<h5 class="card-title">'+value.title+'</h5>';
+       popup_html+=  '<h5 class="card-title">'+ _.escape( value.title ) +'</h5>';
     }
 
     if (value.description!==''){
-         popup_html+= '<p class="card-text">'+value.description+'</p>';
+         popup_html+= '<p class="card-text">'+ _.escape( value.description ) +'</p>';
     }
     popup_html+=  '</div>';
     popup_html+='</div>';

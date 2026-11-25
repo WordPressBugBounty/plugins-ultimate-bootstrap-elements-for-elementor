@@ -3,13 +3,13 @@
  * Plugin Name: Ultimate Bootstrap Elements for Elementor
  * Plugin URI: https://wordpress.org/plugins/ultimate-bootstrap-elements-for-elementor
  * Description: Enhance your Elementor page building experience with Bootstrap Components and many other extension elements.
- * Version: 1.5.3
+ * Version: 1.5.4
  * Author: G5Theme
  * Author URI: http://themeforest.net/user/g5theme
  * Text Domain: ube
  * Domain Path: /languages/
  * License: GPLv2 or later
- * Elementor tested up to: 3.28.4
+ * Elementor tested up to: 4.2.4
  * Elementor Pro tested up to: 3.28.3
  */
 if (!defined('ABSPATH')) {

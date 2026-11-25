@@ -32,7 +32,7 @@ if ($settings['fancy_text_animated_background'] !== '') {
 if ($settings['fancy_text_animation_type'] === 'typing') {
 	$data_text = $element->data_animation_text($settings);
     $data_text = array_map('wp_strip_all_tags',$data_text);
-	$element->add_render_attribute('fancy_attr', 'data-text', wp_json_encode($data_text));
+	$element->add_render_attribute('fancy_attr', 'data-text', wp_json_encode($data_text, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT));
 
 	if ($settings['fancy_text_typing_speed'] !== '') {
 		$additional_data['typingSpeed'] = $settings['fancy_text_typing_speed'];

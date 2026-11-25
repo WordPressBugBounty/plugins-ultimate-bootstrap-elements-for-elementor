@@ -1,4 +1,9 @@
 <#
+var ubeSafeUrl = function( url ) {
+	url = ( url || "" ) + "";
+	var scheme = _.filter( url.split( "" ), function( c ) { return c.charCodeAt( 0 ) > 32; } ).join( "" ).match( /^([a-z][a-z0-9+.-]*):/i );
+	return ( ! scheme || /^(https?|ftps?|mailto|tel|sms|fax)$/i.test( scheme[1] ) ) ? url : "";
+};
 var map_options     = {};
 var all_markerslist = [];
 var id              = view.getIDInt().toString();
@@ -9,12 +14,12 @@ _.each( settings.map_marker_list, function( marker_item, i ) {
 
 	var image_url = '';
 	if (  marker_item.custom_marker.url !=='' ) {
-        image_url = marker_item.custom_marker.url;
+        image_url = ubeSafeUrl( marker_item.custom_marker.url );
 
 	}
 	var popup_image_url = '';
 	if (  marker_item.marker_popup_image.url !=='' ) {
-        popup_image_url = marker_item.marker_popup_image.url;
+        popup_image_url = ubeSafeUrl( marker_item.marker_popup_image.url );
 	}
 	var ballon_text ='';
         if (popup_image_url==='' &&  marker_item.marker_title ==='' && marker_item.marker_description==='' ) {
@@ -23,17 +28,17 @@ _.each( settings.map_marker_list, function( marker_item, i ) {
          ballon_text+= '<div class="card">';
 
             if ( popup_image_url!=='' ) {
-           ballon_text+=  '<img class="card-img-top" src="' + popup_image_url+ '">';
+           ballon_text+=  '<img class="card-img-top" src="' + _.escape( popup_image_url ) + '">';
             }
 
            ballon_text+=  '<div class="card-body">';
 
                 if ( marker_item.marker_title!=='' ) {
-               ballon_text+=  '<h5 class="card-title">' + marker_item.marker_title + '</h5>';
+               ballon_text+=  '<h5 class="card-title">' + _.escape( marker_item.marker_title ) + '</h5>';
                 }
 
                 if (  marker_item.marker_description!=='' ) {
-                ballon_text+=  '<p class="card-text">' + marker_item.marker_description + '</p>';
+                ballon_text+=  '<p class="card-text">' + _.escape( marker_item.marker_description ) + '</p>';
                 }
 
         ballon_text+=  '</div >';

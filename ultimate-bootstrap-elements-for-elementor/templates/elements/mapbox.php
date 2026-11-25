@@ -35,7 +35,7 @@ if ( $settings['map_zoom'] !== '' ) {
 
 
 
-$element->add_render_attribute('wrapper','data-options',json_encode($options));
+$element->add_render_attribute('wrapper','data-options',wp_json_encode($options, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT));
 $markers = array();
 foreach ( $settings['items'] as $i => $value ) {
 	$address     = isset( $value['address'] ) ? ( $value['address'] ) : '';
@@ -43,8 +43,8 @@ foreach ( $settings['items'] as $i => $value ) {
 	if ( !empty($address) && strpos($address,',') > 0 ) {
 		$address_arr = explode( ',', $address);
 		$position =  array(
-			'lat' => $address_arr[0],
-			'lng' => $address_arr[1]
+			'lat' => (float) trim( $address_arr[0] ),
+			'lng' => (float) trim( $address_arr[1] )
 		);
 	}
 	$marker_html = '';
@@ -59,6 +59,6 @@ foreach ( $settings['items'] as $i => $value ) {
 		'popup'    => $popup_html
 	);
 }
-$element->add_render_attribute('wrapper','data-markers',json_encode($markers));
+$element->add_render_attribute('wrapper','data-markers',wp_json_encode($markers, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT));
 ?>
 <div <?php $element->print_render_attribute_string( 'wrapper' ); ?> ></div>

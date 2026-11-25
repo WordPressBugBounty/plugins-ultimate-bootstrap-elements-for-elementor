@@ -433,11 +433,13 @@ class UBE_Element_Google_Map extends UBE_Abstracts_Elements {
 		$string .= '<div class="card-body">';
 
 		if ( ! empty( $title ) ) {
-			$string .= '<h5 class="card-title">' . wp_strip_all_tags( $title ) . '</h5>';
+			$string .= '<h5 class="card-title">' . esc_html( wp_strip_all_tags( $title ) ) . '</h5>';
 		}
 
 		if ( ! empty( $description ) ) {
-			$string .= '<p class="card-text">' . htmlentities(ube_kses_simple_tag( $description))  . '</p>';
+			// Popup HTML is passed through a JSON data attribute encoded with JSON_HEX_AMP,
+			// so the kses output reaches the browser as-is (no extra entity decoding).
+			$string .= '<p class="card-text">' . ube_kses_simple_tag( $description ) . '</p>';
 		}
 
 		$string .= '</div >';

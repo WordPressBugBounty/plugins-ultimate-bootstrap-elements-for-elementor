@@ -53,6 +53,7 @@
                     backDelay: options.typingDelay,
                     showCursor: options.typingCursor,
                     loop: options.typingLoop,
+                    contentType: 'text'
                 });
             } else {
                 //trigger animation

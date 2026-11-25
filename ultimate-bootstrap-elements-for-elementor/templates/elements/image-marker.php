@@ -28,11 +28,13 @@ if ( $settings['image_marker_arrow'] == 'yes' ) {
 	<?php
 	foreach ( $settings['image_marker_list'] as $i => $item ):
 		$title = '';
+		// Tooltip HTML is stored in the title attribute and rendered with html:true,
+		// so text is double-encoded to survive the attribute decoding step.
 		if ( ! empty( $item['marker_title'] ) ) {
-			$title .= '<h4>' . esc_html( $item['marker_title'] ) . '</h4>';
+			$title .= '<h4>' . htmlspecialchars( wp_strip_all_tags( $item['marker_title'] ), ENT_QUOTES, 'UTF-8' ) . '</h4>';
 		}
 		if ( ! empty( $item['marker_content'] ) ) {
-			$title .= '<p>' . esc_html( $item['marker_content'] ) . '</p>';
+			$title .= '<p>' . htmlspecialchars( wp_strip_all_tags( $item['marker_content'] ), ENT_QUOTES, 'UTF-8' ) . '</p>';
 		}
 		$marker_setting_key = $element->get_repeater_setting_key( 'marker_attr', 'image_marker_list', $i );
 		$element->add_render_attribute( $marker_setting_key, 'title', $title );

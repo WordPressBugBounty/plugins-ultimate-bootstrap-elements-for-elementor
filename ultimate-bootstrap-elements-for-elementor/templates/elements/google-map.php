@@ -19,7 +19,7 @@ foreach ( $settings['map_marker_list'] as $i => $marker_item ) {
 
 	$image_url = '';
 	if ( ! empty( $marker_item['custom_marker']['url'] ) ) {
-		$image_url = $marker_item['custom_marker']['url'];
+		$image_url = esc_url_raw( $marker_item['custom_marker']['url'] );
 
 	}
 	$popup_image_url = '';
@@ -65,8 +65,8 @@ $element->add_render_attribute( 'googlemaps_attr', array(
 	'class'           => 'ube-google-map',
 	'id'              => 'ube-google-map-' . $id,
 	'data-id'         => $id,
-	'data-mapmarkers' => wp_json_encode( $all_markerslist ),
-	'data-mapoptions' => wp_json_encode( $map_options ),
+	'data-mapmarkers' => wp_json_encode( $all_markerslist, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT ),
+	'data-mapoptions' => wp_json_encode( $map_options, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT ),
 	'data-mapstyle'   => $settings['style_address'],
 ) );
 

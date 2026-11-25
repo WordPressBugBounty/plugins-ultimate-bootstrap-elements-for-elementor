@@ -1,4 +1,9 @@
 <#
+var ubeSafeUrl = function( url ) {
+	url = ( url || "" ) + "";
+	var scheme = _.filter( url.split( "" ), function( c ) { return c.charCodeAt( 0 ) > 32; } ).join( "" ).match( /^([a-z][a-z0-9+.-]*):/i );
+	return ( ! scheme || /^(https?|ftps?|mailto|tel|sms|fax)$/i.test( scheme[1] ) ) ? url : "";
+};
 view.addRenderAttribute( 'ube_image_marker_attr', 'class', 'ube-marker-wrapper' );
 if ( settings.image_marker_animation== 'yes' ) {
 view.addRenderAttribute( 'ube_image_marker_attr', 'class', 'ube-marker-animate-icon' );
@@ -23,24 +28,25 @@ return;
 var tabindex = view.getIDInt().toString().substr( 0, 3 );
 var marker_tag = 'div';
 #>
-<img src="{{{ image_url }}}"/>
+<img src="{{ image_url }}"/>
 <#
 if(settings.image_marker_list){
 _.each( settings.image_marker_list, function( item, index ) {
 var title = '';
 if ( item.marker_title!=='' ) {
-title += '<h4>' + item.marker_title + '</h4>';
+title += '<h4>' + _.escape( item.marker_title ) + '</h4>';
 }
 if (item.marker_content!=='' ) {
-title += '<p>' + item.marker_content + '</p>';
+title += '<p>' + _.escape( item.marker_content ) + '</p>';
 }
 view.addRenderAttribute( 'marker_attr_' + index, 'title', title );
 
-if ( item.marker_link.url ) {
+var marker_link_url = ubeSafeUrl( item.marker_link.url );
+if ( marker_link_url ) {
 marker_tag = 'a';
 var target     = item.marker_link.is_external ? ' target="_blank"' : '';
 var nofollow   = item.marker_link.nofollow ? ' rel="nofollow"' : '';
-view.addRenderAttribute( 'marker_attr_' + index, 'href', item.marker_link.url);
+view.addRenderAttribute( 'marker_attr_' + index, 'href', marker_link_url);
 view.addRenderAttribute( 'marker_attr_' + index, 'target', target );
 view.addRenderAttribute( 'marker_attr_' + index, 'rel', nofollow );
 }
@@ -60,7 +66,7 @@ var iconHTML = elementor.helpers.renderIcon( view, item.marker_icon, { 'aria-hid
     <#}
     } else {
     #>
-    {{{item.marker_text}}}
+    {{ item.marker_text }}
     <#
     }
     #>

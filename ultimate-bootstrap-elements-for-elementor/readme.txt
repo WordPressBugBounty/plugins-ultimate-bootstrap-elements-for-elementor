@@ -3,8 +3,8 @@ Contributors: g5theme
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=RC62AS34KU8WY
 Tags: elementor, elementor addons, elementor widget, element
 Requires at least: 4.7
-Tested up to: 6.8
-Stable tag: 1.5.3
+Tested up to: 7.1.5
+Stable tag: 1.5.4
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -102,6 +102,9 @@ Do follow to install plugins:
 3. Go to menu UBE Elements screen to configure the plugin
 
 == Changelog ==
+= 1.5.4 =
+* Security: Fix Stored XSS (Contributor+) in Counter, Fancy Text, Google Maps, Mapbox and Image Marker widgets (frontend and editor preview)
+
 = 1.5.3 =
 * Update premium themes
 
