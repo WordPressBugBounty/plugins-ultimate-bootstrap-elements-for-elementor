@@ -1,4 +1,10 @@
 <#
+var ubeEscHtml = function( str ) {
+	return ( str === undefined || str === null ? "" : String( str ) )
+		.replace( /&(?!(?:#[0-9]+|#x[0-9a-fA-F]+|[a-zA-Z][a-zA-Z0-9]*);)/g, "&amp;" )
+		.replace( /</g, "&lt;" ).replace( />/g, "&gt;" )
+		.replace( /"/g, "&quot;" ).replace( /'/g, "&#039;" );
+};
 var social_items_color = social_items_bg = social_animation = social_share_outline = '';
 var social_share_classes = [
 	'ube-social-share',
@@ -65,7 +71,7 @@ if ( settings.social_share_outline === 'yes' && settings.social_share_shape !== 
 		<li {{{ view.getRenderAttributeString( social_items_classes ) }}}>
 			{{{ icon_social.value }}}
 			<# if ( settings.social_share_shape === 'text' || settings.social_share_shape === 'text-background' ) { #>
-				<span class="ube-text-social">{{{ item.social_share_label}}}</span>
+				<span class="ube-text-social">{{{ ubeEscHtml( item.social_share_label ) }}}</span>
 			<#} #>
 		</li>
 	<# }); #>

@@ -79,7 +79,7 @@ if (isset($description_class)) {
 		<?php if (!empty($title) || !empty($description)): ?>
 			<div class="ube-ib-content">
 				<?php if (!empty($title)){
-					printf( '<%1$s class="%5$s"><%2$s %3$s>%4$s</%2$s></%1$s>',$title_tag, $icon_tag, $element->get_render_attribute_string( "title{$item_key}" ),$title, join(' ', $title_classes)  );
+					printf( '<%1$s class="%5$s"><%2$s %3$s>%4$s</%2$s></%1$s>',$title_tag, $icon_tag, $element->get_render_attribute_string( "title{$item_key}" ), wp_kses_post( $title ), esc_attr( join( ' ', $title_classes ) ) );
 				} ?>
 				<?php if (!empty($description) && ($description_pos === 'inset')): ?>
 					<div class="<?php echo esc_attr(join(' ', $description_classes))?>"><?php echo wp_kses_post($description)?></div>

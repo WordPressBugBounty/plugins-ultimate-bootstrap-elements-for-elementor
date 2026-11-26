@@ -1,4 +1,15 @@
 <#
+var ubeEscHtml = function( str ) {
+	return ( str === undefined || str === null ? "" : String( str ) )
+		.replace( /&(?!(?:#[0-9]+|#x[0-9a-fA-F]+|[a-zA-Z][a-zA-Z0-9]*);)/g, "&amp;" )
+		.replace( /</g, "&lt;" ).replace( />/g, "&gt;" )
+		.replace( /"/g, "&quot;" ).replace( /'/g, "&#039;" );
+};
+var ubeSafeUrl = function( url ) {
+	url = ( url || "" ) + "";
+	var scheme = _.filter( url.split( "" ), function( c ) { return c.charCodeAt( 0 ) > 32; } ).join( "" ).match( /^([a-z][a-z0-9+.-]*):/i );
+	return ( ! scheme || /^(https?|ftps?|mailto|tel|sms|fax)$/i.test( scheme[1] ) ) ? url : "";
+};
 var social_items_color = social_items_bg = social_animation = social_icon_outline='';
 
 var social_icon_classes = [
@@ -60,7 +71,7 @@ if ( settings.social_icon_outline === 'yes' && settings.social_icon_shape !== 't
 			if(item.social_icon_link.nofollow){
 			view.addRenderAttribute( social_items_links, 'rel', 'nofollow' );
 			}
-			view.addRenderAttribute( social_items_links,'href' ,item.social_icon_link.url );
+			view.addRenderAttribute( social_items_links,'href' ,ubeSafeUrl( item.social_icon_link.url ) );
 			social_icon_tag = 'a';
 		}
 
@@ -106,10 +117,10 @@ if ( settings.social_icon_outline === 'yes' && settings.social_icon_shape !== 't
 			<{{{social_icon_tag}}} {{{view.getRenderAttributeString( social_items_links )}}}>
 				{{{ icon_social.value }}}
 			<# if ( settings.social_icon_shape === 'text' && item.social_title == '') { #>
-				<span class="ube-text-social">{{{ social_str }}}</span>
+				<span class="ube-text-social">{{{ ubeEscHtml( social_str ) }}}</span>
 			<# } #>
 			<# if ( settings.social_icon_shape === 'text' && item.social_title !== '') { #>
-				<span class="ube-text-social">{{{ item.social_title }}}</span>
+				<span class="ube-text-social">{{{ ubeEscHtml( item.social_title ) }}}</span>
 			<# } #>
 			</{{{social_icon_tag}}}>
 		</li>

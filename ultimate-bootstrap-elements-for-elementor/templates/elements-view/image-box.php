@@ -1,4 +1,15 @@
 <#
+var ubeEscHtml = function( str ) {
+	return ( str === undefined || str === null ? "" : String( str ) )
+		.replace( /&(?!(?:#[0-9]+|#x[0-9a-fA-F]+|[a-zA-Z][a-zA-Z0-9]*);)/g, "&amp;" )
+		.replace( /</g, "&lt;" ).replace( />/g, "&gt;" )
+		.replace( /"/g, "&quot;" ).replace( /'/g, "&#039;" );
+};
+var ubeSafeUrl = function( url ) {
+	url = ( url || "" ) + "";
+	var scheme = _.filter( url.split( "" ), function( c ) { return c.charCodeAt( 0 ) > 32; } ).join( "" ).match( /^([a-z][a-z0-9+.-]*):/i );
+	return ( ! scheme || /^(https?|ftps?|mailto|tel|sms|fax)$/i.test( scheme[1] ) ) ? url : "";
+};
 var wrapper_classes = [
 	'ube-image-box',
 	'ube-icon-box',
@@ -24,7 +35,7 @@ if ( settings.image_box_link.url ) {
 var target = settings.image_box_link.is_external ? ' target="_blank"' : '';
 var nofollow = settings.image_box_link.nofollow ? ' rel="nofollow"' : '';
 var attr={
-'href': settings.image_box_link.url,
+'href': ubeSafeUrl( settings.image_box_link.url ),
 };
     view.addRenderAttribute( "image_link",attr );
 
@@ -67,7 +78,7 @@ view.addRenderAttribute("description",'class', description_classes);
             };
             var image_url = elementor.imagesManager.getImageUrl( image );
             #>
-            <img src="{{{ image_url }}}" />
+            <img src="{{{ ubeEscHtml( ubeSafeUrl( image_url ) ) }}}" />
             <#
             if ( settings.image_switcher!=='' ){
             var image_hover = {
@@ -79,7 +90,7 @@ view.addRenderAttribute("description",'class', description_classes);
             };
             var image_hover_url = elementor.imagesManager.getImageUrl( image_hover );
             #>
-            <img src="{{{ image_hover_url }}}" />
+            <img src="{{{ ubeEscHtml( ubeSafeUrl( image_hover_url ) ) }}}" />
             <#}#>
 
             </{{{image_tag}}}>

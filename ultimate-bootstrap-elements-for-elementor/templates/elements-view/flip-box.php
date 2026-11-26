@@ -1,4 +1,15 @@
 <#
+var ubeEscHtml = function( str ) {
+	return ( str === undefined || str === null ? "" : String( str ) )
+		.replace( /&(?!(?:#[0-9]+|#x[0-9a-fA-F]+|[a-zA-Z][a-zA-Z0-9]*);)/g, "&amp;" )
+		.replace( /</g, "&lt;" ).replace( />/g, "&gt;" )
+		.replace( /"/g, "&quot;" ).replace( /'/g, "&#039;" );
+};
+var ubeSafeUrl = function( url ) {
+	url = ( url || "" ) + "";
+	var scheme = _.filter( url.split( "" ), function( c ) { return c.charCodeAt( 0 ) > 32; } ).join( "" ).match( /^([a-z][a-z0-9+.-]*):/i );
+	return ( ! scheme || /^(https?|ftps?|mailto|tel|sms|fax)$/i.test( scheme[1] ) ) ? url : "";
+};
 var fix_box_tag      = 'span';
 var fix_box_back_tag = 'div';
 
@@ -58,7 +69,7 @@ if (  settings.link.url !=='' && settings.link_click === 'box' ) {
 	if(settings.link.nofollow){
 	view.addRenderAttribute( 'ube-back', 'rel', 'nofollow' );
 	}
-	view.addRenderAttribute( 'ube-back','href' ,settings.link.url );
+	view.addRenderAttribute( 'ube-back','href' ,ubeSafeUrl( settings.link.url ) );
 	view.addRenderAttribute( 'ube-back', 'class', 'd-block' );
 	fix_box_back_tag = 'a';
 }
@@ -76,7 +87,7 @@ if ( settings.link.url !=='' && settings.link_click === 'button' ) {
 	if(settings.link.nofollow){
 	view.addRenderAttribute( 'fix_box_button', 'rel', 'nofollow' );
 	}
-	view.addRenderAttribute( 'fix_box_button','href' ,settings.link.url );
+	view.addRenderAttribute( 'fix_box_button','href' ,ubeSafeUrl( settings.link.url ) );
 	fix_box_tag = 'a';
 }
 view.addRenderAttribute( 'fix_box_button', 'class', fix_box_button );
@@ -130,7 +141,7 @@ icon_back = elementor.helpers.renderIcon( view, settings.icon_back, { 'aria-hidd
 				var image_front_url = elementor.imagesManager.getImageUrl( image_front );
 				#>
 				<div class="ube-flip-flip-image d-inline-block">
-					<img src="{{{image_front_url}}}">
+					<img src="{{{ ubeEscHtml( ubeSafeUrl( image_front_url ) ) }}}">
 				</div>
 			<# } #>
 			<# if ( 'icon' === settings.flip_box_graphic && settings.icon_front.value !=='' ) { #>
@@ -142,13 +153,13 @@ icon_back = elementor.helpers.renderIcon( view, settings.icon_back, { 'aria-hidd
 			<# } #>
 			<# if ( settings.title_front!=='' ) {
 				view.addRenderAttribute( 'title_tag_front_attr', 'class', title_class_front );#>
-				<{{{settings.title_tag_front}}} {{{ view.getRenderAttributeString( 'title_tag_front_attr' ) }}}>
-					{{{settings.title_front}}}
-				</{{{settings.title_tag_front}}}>
+				<{{{ elementor.helpers.validateHTMLTag( settings.title_tag_front ) }}} {{{ view.getRenderAttributeString( 'title_tag_front_attr' ) }}}>
+					{{{ ubeEscHtml( settings.title_front ) }}}
+				</{{{ elementor.helpers.validateHTMLTag( settings.title_tag_front ) }}}>
 			<#} #>
 			<# if (  settings.description_front !=='' ) { #>
 				<# view.addRenderAttribute( 'desc_tag_front_attr', 'class', desc_class_front ); #>
-				<div {{{ view.getRenderAttributeString( 'desc_tag_front_attr' ) }}}>{{{settings.description_front}}}</div>
+				<div {{{ view.getRenderAttributeString( 'desc_tag_front_attr' ) }}}>{{{ ubeEscHtml( settings.description_front ) }}}</div>
 			<# } #>
 		</div>
 	</div>
@@ -165,7 +176,7 @@ icon_back = elementor.helpers.renderIcon( view, settings.icon_back, { 'aria-hidd
 			var image_back_url = elementor.imagesManager.getImageUrl( image_back );
 		#>
 			<div class="ube-flip-flip-image d-inline-block">
-				<img src="{{{image_back_url}}}">
+				<img src="{{{ ubeEscHtml( ubeSafeUrl( image_back_url ) ) }}}">
 			</div>
 		<# } #>
 		<# if ( 'icon' === settings.flip_box_graphic_back &&  settings.icon_back.value !=='' ) { #>
@@ -177,17 +188,17 @@ icon_back = elementor.helpers.renderIcon( view, settings.icon_back, { 'aria-hidd
 		<# } #>
 		<# if ( settings.title_back!=='' ) {
 			view.addRenderAttribute( 'title_tag_back_attr', 'class', title_class_back );#>
-			<{{{settings.title_tag_back}}} {{{ view.getRenderAttributeString( 'title_tag_back_attr' ) }}}>
-				{{{settings.title_back}}}
-			</{{{settings.title_tag_back}}}>
+			<{{{ elementor.helpers.validateHTMLTag( settings.title_tag_back ) }}} {{{ view.getRenderAttributeString( 'title_tag_back_attr' ) }}}>
+				{{{ ubeEscHtml( settings.title_back ) }}}
+			</{{{ elementor.helpers.validateHTMLTag( settings.title_tag_back ) }}}>
 		<# } #>
 		<# if ( settings.description_back !=='' ) { #>
 			<# view.addRenderAttribute( 'desc_tag_back_attr', 'class', desc_class_back ); #>
-			<div {{{ view.getRenderAttributeString( 'desc_tag_back_attr' ) }}}>{{{settings.description_back}}}</div>
+			<div {{{ view.getRenderAttributeString( 'desc_tag_back_attr' ) }}}>{{{ ubeEscHtml( settings.description_back ) }}}</div>
 		<# } #>
 		<# if ( settings.button_text!=='' ) {#>
 			<{{{fix_box_tag}}} {{{view.getRenderAttributeString( 'fix_box_button' )}}}>
-				{{{settings.button_text}}}
+				{{{ ubeEscHtml( settings.button_text ) }}}
 			</{{{fix_box_tag}}}>
 		<# } #>
 	</div>

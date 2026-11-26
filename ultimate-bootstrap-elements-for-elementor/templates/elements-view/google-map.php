@@ -1,4 +1,10 @@
 <#
+var ubeEscHtml = function( str ) {
+	return ( str === undefined || str === null ? "" : String( str ) )
+		.replace( /&(?!(?:#[0-9]+|#x[0-9a-fA-F]+|[a-zA-Z][a-zA-Z0-9]*);)/g, "&amp;" )
+		.replace( /</g, "&lt;" ).replace( />/g, "&gt;" )
+		.replace( /"/g, "&quot;" ).replace( /'/g, "&#039;" );
+};
 var ubeSafeUrl = function( url ) {
 	url = ( url || "" ) + "";
 	var scheme = _.filter( url.split( "" ), function( c ) { return c.charCodeAt( 0 ) > 32; } ).join( "" ).match( /^([a-z][a-z0-9+.-]*):/i );
@@ -28,17 +34,17 @@ _.each( settings.map_marker_list, function( marker_item, i ) {
          ballon_text+= '<div class="card">';
 
             if ( popup_image_url!=='' ) {
-           ballon_text+=  '<img class="card-img-top" src="' + _.escape( popup_image_url ) + '">';
+           ballon_text+=  '<img class="card-img-top" src="' + ubeEscHtml( popup_image_url ) + '">';
             }
 
            ballon_text+=  '<div class="card-body">';
 
                 if ( marker_item.marker_title!=='' ) {
-               ballon_text+=  '<h5 class="card-title">' + _.escape( marker_item.marker_title ) + '</h5>';
+               ballon_text+=  '<h5 class="card-title">' + ubeEscHtml( marker_item.marker_title ) + '</h5>';
                 }
 
                 if (  marker_item.marker_description!=='' ) {
-                ballon_text+=  '<p class="card-text">' + _.escape( marker_item.marker_description ) + '</p>';
+                ballon_text+=  '<p class="card-text">' + ubeEscHtml( marker_item.marker_description ) + '</p>';
                 }
 
         ballon_text+=  '</div >';

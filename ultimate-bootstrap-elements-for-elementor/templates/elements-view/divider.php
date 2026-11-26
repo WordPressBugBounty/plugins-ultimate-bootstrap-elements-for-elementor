@@ -1,4 +1,10 @@
 <#
+var ubeEscHtml = function( str ) {
+	return ( str === undefined || str === null ? "" : String( str ) )
+		.replace( /&(?!(?:#[0-9]+|#x[0-9a-fA-F]+|[a-zA-Z][a-zA-Z0-9]*);)/g, "&amp;" )
+		.replace( /</g, "&lt;" ).replace( />/g, "&gt;" )
+		.replace( /"/g, "&quot;" ).replace( /'/g, "&#039;" );
+};
 var divider_classes = [
 'ube-divider',
 "ube-divider-style-" + settings.divider_style
@@ -17,7 +23,7 @@ view.addRenderAttribute('divider_attr', 'class', divider_classes );
     <span class="ube-divider-element"></span>
     <span class="ube-divider-content">
 				<# if ( settings.divider_add_element === 'text' && settings.divider_text !== '' ){ #>
-					{{{ settings.divider_text }}}
+					{{{ ubeEscHtml( settings.divider_text ) }}}
 				<#} #>
 				<# if ( settings.divider_add_element === 'icon' &&  settings.divider_icon.value !=='' ){
                    var iconHTML = elementor.helpers.renderIcon( view, settings.divider_icon, { 'aria-hidden': true }, 'i' , 'object' );

@@ -1,4 +1,10 @@
 <#
+var ubeEscHtml = function( str ) {
+	return ( str === undefined || str === null ? "" : String( str ) )
+		.replace( /&(?!(?:#[0-9]+|#x[0-9a-fA-F]+|[a-zA-Z][a-zA-Z0-9]*);)/g, "&amp;" )
+		.replace( /</g, "&lt;" ).replace( />/g, "&gt;" )
+		.replace( /"/g, "&quot;" ).replace( /'/g, "&#039;" );
+};
 var ubeSafeUrl = function( url ) {
 	url = ( url || "" ) + "";
 	var scheme = _.filter( url.split( "" ), function( c ) { return c.charCodeAt( 0 ) > 32; } ).join( "" ).match( /^([a-z][a-z0-9+.-]*):/i );
@@ -44,21 +50,21 @@ _.each( settings.items, function(value ) {
 	var marker_html = '';
 	var marker_url = ubeSafeUrl( value.image_marker.url );
 	if (marker_url!=='') {
-		marker_html = '<img src="'+ _.escape( marker_url ) +'">';
+		marker_html = '<img src="'+ ubeEscHtml( marker_url ) +'">';
 	}
 
     var popup_html                = '<div class="card">';
     var popup_image_url = ubeSafeUrl( value.image.url );
     if (popup_image_url!==''){
-      popup_html+='<img src="'+ _.escape( popup_image_url ) +'">';
+      popup_html+='<img src="'+ ubeEscHtml( popup_image_url ) +'">';
     }
     popup_html+='<div class="card-body">';
      if (value.title!==''){
-       popup_html+=  '<h5 class="card-title">'+ _.escape( value.title ) +'</h5>';
+       popup_html+=  '<h5 class="card-title">'+ ubeEscHtml( value.title ) +'</h5>';
     }
 
     if (value.description!==''){
-         popup_html+= '<p class="card-text">'+ _.escape( value.description ) +'</p>';
+         popup_html+= '<p class="card-text">'+ ubeEscHtml( value.description ) +'</p>';
     }
     popup_html+=  '</div>';
     popup_html+='</div>';

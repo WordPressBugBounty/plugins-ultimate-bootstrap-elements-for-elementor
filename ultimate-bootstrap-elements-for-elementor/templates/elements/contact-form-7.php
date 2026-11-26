@@ -28,7 +28,7 @@ if ( ! empty( $settings['contact_form_list'] ) ) :
     <div class="ube-contact-form-7-wrapper">
         <div <?php echo $element->get_render_attribute_string( 'contact-form' ) ?>>
 			<?php
-			echo do_shortcode( '[contact-form-7 id="' . $settings['contact_form_list'] . '" ]' );
+			echo do_shortcode( '[contact-form-7 id="' . absint( $settings['contact_form_list'] ) . '" ]' );
 			?>
         </div>
     </div>

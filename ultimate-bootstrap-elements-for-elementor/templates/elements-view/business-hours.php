@@ -1,4 +1,10 @@
 <#
+var ubeEscHtml = function( str ) {
+	return ( str === undefined || str === null ? "" : String( str ) )
+		.replace( /&(?!(?:#[0-9]+|#x[0-9a-fA-F]+|[a-zA-Z][a-zA-Z0-9]*);)/g, "&amp;" )
+		.replace( /</g, "&lt;" ).replace( />/g, "&gt;" )
+		.replace( /"/g, "&quot;" ).replace( /'/g, "&#039;" );
+};
 var bh_classes = [
 'ube-business-hours',
 "ube-business-hours-layout-"+settings.bh_layout,
@@ -24,13 +30,13 @@ view.addRenderAttribute( 'business_attr', 'class', bh_classes );
             <li {{{ view.getRenderAttributeString( item_setting_key ) }}}>
 				<#
 				if ( item.bh_day!==''  ) {#>
-				<span class="ube-business-day">{{{item.bh_day}}}</span>
+				<span class="ube-business-day">{{{ ubeEscHtml( item.bh_day ) }}}</span>
 				<#}
 				if ( settings.bh_layout === '04' ) {#>
 					<span class="ube-business-divider"></span>
 				<#}
 				if ( item.bh_time!=='') {#>
-					<span class="ube-business-time"> {{{item.bh_time}}}</span>
+					<span class="ube-business-time"> {{{ ubeEscHtml( item.bh_time ) }}}</span>
 				<#}#>
             </li>
 		<#});#>

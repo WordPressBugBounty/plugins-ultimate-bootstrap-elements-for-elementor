@@ -36,7 +36,7 @@ $element->add_render_attribute( 'offcanvas', array(
 		<?php if ( ! empty( $settings['button_icon'] ) && $settings['button_icon_pos'] === 'left' ) : ?>
             <span class="ube-icon"><?php Icons_Manager::render_icon( $settings['button_icon'] ); ?></span>
 		<?php endif; ?>
-		<?php echo $settings['button_text'] ?>
+		<?php echo esc_html( $settings['button_text'] ) ?>
 		<?php if ( ! empty( $settings['button_icon'] ) && $settings['button_icon_pos'] === 'right' ) : ?>
             <span class="ube-icon"><?php Icons_Manager::render_icon( $settings['button_icon'] ); ?></span>
 		<?php endif; ?>

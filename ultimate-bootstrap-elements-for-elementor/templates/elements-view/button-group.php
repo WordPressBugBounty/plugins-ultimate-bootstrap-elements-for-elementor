@@ -1,4 +1,15 @@
 <#
+var ubeEscHtml = function( str ) {
+	return ( str === undefined || str === null ? "" : String( str ) )
+		.replace( /&(?!(?:#[0-9]+|#x[0-9a-fA-F]+|[a-zA-Z][a-zA-Z0-9]*);)/g, "&amp;" )
+		.replace( /</g, "&lt;" ).replace( />/g, "&gt;" )
+		.replace( /"/g, "&quot;" ).replace( /'/g, "&#039;" );
+};
+var ubeSafeUrl = function( url ) {
+	url = ( url || "" ) + "";
+	var scheme = _.filter( url.split( "" ), function( c ) { return c.charCodeAt( 0 ) > 32; } ).join( "" ).match( /^([a-z][a-z0-9+.-]*):/i );
+	return ( ! scheme || /^(https?|ftps?|mailto|tel|sms|fax)$/i.test( scheme[1] ) ) ? url : "";
+};
 var button_group_classes = [
 	'ube-button-group',
 	'flex-wrap'
@@ -45,7 +56,7 @@ if ( settings.button_group_hover_animation ) {
                 if(item.button_group_link.nofollow){
                 view.addRenderAttribute( item_link_key, 'rel', 'nofollow' );
                 }
-				view.addRenderAttribute( item_link_key,'href' ,item.button_group_link.url );
+				view.addRenderAttribute( item_link_key,'href' ,ubeSafeUrl( item.button_group_link.url ) );
 			}
 			#>
 			<a {{{ view.getRenderAttributeString( item_link_key ) }}}>
@@ -54,11 +65,11 @@ if ( settings.button_group_hover_animation ) {
 						<i class="{{{ item.button_group_icon.value }}}"></i>
 					<#}
 					if ( item.button_group_text ) {#>
-						{{{ item.button_group_text}}}
+						{{{ ubeEscHtml( item.button_group_text ) }}}
 					<#}
 				} else {
 					if ( item.button_group_text!=='' ) {#>
-						{{{ item.button_group_text }}}
+						{{{ ubeEscHtml( item.button_group_text ) }}}
 					<#}
 					if ( item.button_group_icon.value ) {#>
                         <i class="{{{ item.button_group_icon.value }}}"></i>

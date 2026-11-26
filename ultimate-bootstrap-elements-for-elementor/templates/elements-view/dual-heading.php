@@ -1,4 +1,10 @@
 <#
+var ubeEscHtml = function( str ) {
+	return ( str === undefined || str === null ? "" : String( str ) )
+		.replace( /&(?!(?:#[0-9]+|#x[0-9a-fA-F]+|[a-zA-Z][a-zA-Z0-9]*);)/g, "&amp;" )
+		.replace( /</g, "&lt;" ).replace( />/g, "&gt;" )
+		.replace( /"/g, "&quot;" ).replace( /'/g, "&#039;" );
+};
 var dual_heading_classes = [
 	'ube-dual-heading',
 ];
@@ -18,11 +24,11 @@ dual_heading_classes.push('ube-dual-heading-size-' + settings.dual_heading_title
 
 dual_heading_first_html = '';
 if (settings.dual_heading_title_first !== '') {
-	dual_heading_first_html = '<span class="ube-dual-heading-title-first">' + settings.dual_heading_title_first + '</span>';
+	dual_heading_first_html = '<span class="ube-dual-heading-title-first">' + ubeEscHtml( settings.dual_heading_title_first ) + '</span>';
 }
 dual_heading_last_html = '';
 if (settings.dual_heading_title_last !== '') {
-	dual_heading_last_html = '<span class="ube-dual-heading-title-last">' + settings.dual_heading_title_last + '</span>';
+	dual_heading_last_html = '<span class="ube-dual-heading-title-last">' + ubeEscHtml( settings.dual_heading_title_last ) + '</span>';
 }
 
 view.addRenderAttribute('dual_heading_attr', 'class', dual_heading_classes);

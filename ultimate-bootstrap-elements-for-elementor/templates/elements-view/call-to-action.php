@@ -1,7 +1,18 @@
 <#
+var ubeEscHtml = function( str ) {
+	return ( str === undefined || str === null ? "" : String( str ) )
+		.replace( /&(?!(?:#[0-9]+|#x[0-9a-fA-F]+|[a-zA-Z][a-zA-Z0-9]*);)/g, "&amp;" )
+		.replace( /</g, "&lt;" ).replace( />/g, "&gt;" )
+		.replace( /"/g, "&quot;" ).replace( /'/g, "&#039;" );
+};
+var ubeSafeUrl = function( url ) {
+	url = ( url || "" ) + "";
+	var scheme = _.filter( url.split( "" ), function( c ) { return c.charCodeAt( 0 ) > 32; } ).join( "" ).match( /^([a-z][a-z0-9+.-]*):/i );
+	return ( ! scheme || /^(https?|ftps?|mailto|tel|sms|fax)$/i.test( scheme[1] ) ) ? url : "";
+};
 var call_to_action_tag = 'button';
 if ( settings.call_to_action_link.url!=='' ) {
-		view.addRenderAttribute( 'call_to_action_button','href', settings.call_to_action_link.url );
+		view.addRenderAttribute( 'call_to_action_button','href', ubeSafeUrl( settings.call_to_action_link.url ) );
 		if( settings.call_to_action_link.is_external){
 		view.addRenderAttribute( 'call_to_action_button', 'target', '_blank' );
 		}
@@ -68,7 +79,7 @@ view.addRenderAttribute( 'call_to_action_desc_attr', 'class', desc_class );
 		<# if ((iconHTML.rendered) && (settings.icon_align === 'left')) { #>
 			{{{ iconHTML.value }}}
 		<# } #>
-		{{{settings.call_to_action_button}}}
+		{{{ ubeEscHtml( settings.call_to_action_button ) }}}
 		<# if ((iconHTML.rendered) && (settings.icon_align === 'right')) { #>
 			{{{ iconHTML.value }}}
 		<# } #>
@@ -82,7 +93,7 @@ view.addRenderAttribute( 'call_to_action_desc_attr', 'class', desc_class );
             </{{{call_to_action_title_tag}}}>
 		<# } #>
 		<# if ( settings.call_to_action_description !=='' ) { #>
-			<p {{{ view.getRenderAttributeString( 'call_to_action_desc_attr' ) }}}>{{{settings.call_to_action_description}}}</p>
+			<p {{{ view.getRenderAttributeString( 'call_to_action_desc_attr' ) }}}>{{{ ubeEscHtml( settings.call_to_action_description ) }}}</p>
 		<# } #>
 	</div>
 	<# if (settings.call_to_action_button !=='' && settings.position_button !== 'top' ) {#>
@@ -90,7 +101,7 @@ view.addRenderAttribute( 'call_to_action_desc_attr', 'class', desc_class );
 			<# if ((iconHTML.rendered) && (settings.icon_align === 'left')) { #>
 			{{{ iconHTML.value }}}
 			<# } #>
-			{{{settings.call_to_action_button}}}
+			{{{ ubeEscHtml( settings.call_to_action_button ) }}}
 			<# if ((iconHTML.rendered) && (settings.icon_align === 'right')) { #>
 			{{{ iconHTML.value }}}
 			<# } #>

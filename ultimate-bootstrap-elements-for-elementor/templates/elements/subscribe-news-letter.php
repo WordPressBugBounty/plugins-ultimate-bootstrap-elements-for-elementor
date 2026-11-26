@@ -21,5 +21,5 @@ $element->add_render_attribute('snl_attr', 'class', $snl_classes);
 
 ?>
 <div <?php echo $element->get_render_attribute_string('snl_attr'); ?> >
-	<?php echo do_shortcode('[mc4wp_form  id="' . $settings['snl_id'] . '"]'); ?>
+	<?php echo do_shortcode('[mc4wp_form  id="' . absint( $settings['snl_id'] ) . '"]'); ?>
 </div>

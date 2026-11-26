@@ -1,4 +1,15 @@
 <#
+var ubeEscHtml = function( str ) {
+	return ( str === undefined || str === null ? "" : String( str ) )
+		.replace( /&(?!(?:#[0-9]+|#x[0-9a-fA-F]+|[a-zA-Z][a-zA-Z0-9]*);)/g, "&amp;" )
+		.replace( /</g, "&lt;" ).replace( />/g, "&gt;" )
+		.replace( /"/g, "&quot;" ).replace( /'/g, "&#039;" );
+};
+var ubeSafeUrl = function( url ) {
+	url = ( url || "" ) + "";
+	var scheme = _.filter( url.split( "" ), function( c ) { return c.charCodeAt( 0 ) > 32; } ).join( "" ).match( /^([a-z][a-z0-9+.-]*):/i );
+	return ( ! scheme || /^(https?|ftps?|mailto|tel|sms|fax)$/i.test( scheme[1] ) ) ? url : "";
+};
 var wrapper_classes = [
 	'ube-btn',
 	'btn',
@@ -48,11 +59,11 @@ if( ('yes' === settings.button_event_switcher) && ( settings.button_event_functi
 }
 
 #>
-<a href="{{ settings.link.url }}" {{{ view.getRenderAttributeString( 'wrapper' ) }}}>
+<a href="{{{ ubeEscHtml( ubeSafeUrl( settings.link.url ) ) }}}" {{{ view.getRenderAttributeString( 'wrapper' ) }}}>
 	<# if ((iconHTML.rendered) && (settings.icon_align === 'left')) { #>
 		<span class="ube-btn-icon ube-icon">{{{ iconHTML.value }}}</span>
 	<# } #>
-	<span {{{ view.getRenderAttributeString( 'text' ) }}}>{{{ settings.text }}}</span>
+	<span {{{ view.getRenderAttributeString( 'text' ) }}}>{{{ ubeEscHtml( settings.text ) }}}</span>
 	<# if ((iconHTML.rendered) && (settings.icon_align === 'right')) { #>
 		<span class="ube-btn-icon ube-icon">{{{ iconHTML.value }}}</span>
 	<# } #>

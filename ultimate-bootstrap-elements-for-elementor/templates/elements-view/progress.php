@@ -1,4 +1,10 @@
 <#
+var ubeEscHtml = function( str ) {
+	return ( str === undefined || str === null ? "" : String( str ) )
+		.replace( /&(?!(?:#[0-9]+|#x[0-9a-fA-F]+|[a-zA-Z][a-zA-Z0-9]*);)/g, "&amp;" )
+		.replace( /</g, "&lt;" ).replace( />/g, "&gt;" )
+		.replace( /"/g, "&quot;" ).replace( /'/g, "&#039;" );
+};
 view.addRenderAttribute( 'progress-warrper', 'class', 'progress' );
 var progress_ube_classes = [
 	'ube-progress',
@@ -43,22 +49,22 @@ view.addRenderAttribute( 'progress_ube_classes', 'class', progress_ube_classes )
 		#>
         <div class="ube-progress-content">
 			<# if (  item.progress_label !=='' && settings.progress_style == '01' || settings.progress_style == '04' ) { #>
-                <span class="ube-progress-label">{{{ item.progress_label }}}</span>
+                <span class="ube-progress-label">{{{ ubeEscHtml( item.progress_label ) }}}</span>
 			<# } #>
             <div {{{ view.getRenderAttributeString( 'progress-warrper' )}}}>
                 <div {{{ view.getRenderAttributeString( progress_items_classes )}}}>
 					<# if (  item.progress_label !=='' ||  item.progress_multiple_bar_value !=='') { #>
 							<# if (  item.progress_label!=='' && settings.progress_style == '02' ) { #>
-                                <span class="ube-progress-label"> {{{item.progress_label }}}</span>
+                                <span class="ube-progress-label"> {{{ ubeEscHtml( item.progress_label ) }}}</span>
 							<# } #>
 							<# if (item.progress_multiple_bar_value !=='' && settings.progress_display_value == "yes" ) { #>
-                                <span class="ube-progress-value"> {{{ item.progress_multiple_bar_value }}}%</span>
+                                <span class="ube-progress-value"> {{{ ubeEscHtml( item.progress_multiple_bar_value ) }}}%</span>
 							<# } #>
 					<# } #>
                 </div>
             </div>
 			<# if (  item.progress_label!=='' && settings.progress_style == '03' ) { #>
-                <span class="ube-progress-label">{{{ item.progress_label }}}</span>
+                <span class="ube-progress-label">{{{ ubeEscHtml( item.progress_label ) }}}</span>
 			<# } #>
         </div>
 	<# });#>

@@ -1,4 +1,9 @@
 <#
+var ubeSafeUrl = function( url ) {
+	url = ( url || "" ) + "";
+	var scheme = _.filter( url.split( "" ), function( c ) { return c.charCodeAt( 0 ) > 32; } ).join( "" ).match( /^([a-z][a-z0-9+.-]*):/i );
+	return ( ! scheme || /^(https?|ftps?|mailto|tel|sms|fax)$/i.test( scheme[1] ) ) ? url : "";
+};
 var list_icon_tag = 'span';
 
 var list_icon_classes = [
@@ -54,7 +59,7 @@ var iconsHTML = {};
 		if(item.list_icon_link.nofollow){
 		view.addRenderAttribute( link_list_icon, 'rel', 'nofollow' );
 		}
-		view.addRenderAttribute( link_list_icon,'href' ,item.list_icon_link.url );
+		view.addRenderAttribute( link_list_icon,'href' ,ubeSafeUrl( item.list_icon_link.url ) );
 			list_icon_tag = 'a';
 		}
 		view.addRenderAttribute( link_list_icon, 'class','ube-list-icon-title');

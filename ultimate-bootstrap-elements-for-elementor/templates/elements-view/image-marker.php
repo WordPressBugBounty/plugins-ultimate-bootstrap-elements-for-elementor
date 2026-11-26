@@ -1,4 +1,10 @@
 <#
+var ubeEscHtml = function( str ) {
+	return ( str === undefined || str === null ? "" : String( str ) )
+		.replace( /&(?!(?:#[0-9]+|#x[0-9a-fA-F]+|[a-zA-Z][a-zA-Z0-9]*);)/g, "&amp;" )
+		.replace( /</g, "&lt;" ).replace( />/g, "&gt;" )
+		.replace( /"/g, "&quot;" ).replace( /'/g, "&#039;" );
+};
 var ubeSafeUrl = function( url ) {
 	url = ( url || "" ) + "";
 	var scheme = _.filter( url.split( "" ), function( c ) { return c.charCodeAt( 0 ) > 32; } ).join( "" ).match( /^([a-z][a-z0-9+.-]*):/i );
@@ -28,16 +34,16 @@ return;
 var tabindex = view.getIDInt().toString().substr( 0, 3 );
 var marker_tag = 'div';
 #>
-<img src="{{ image_url }}"/>
+<img src="{{{ ubeEscHtml( image_url ) }}}"/>
 <#
 if(settings.image_marker_list){
 _.each( settings.image_marker_list, function( item, index ) {
 var title = '';
 if ( item.marker_title!=='' ) {
-title += '<h4>' + _.escape( item.marker_title ) + '</h4>';
+title += '<h4>' + ubeEscHtml( item.marker_title ) + '</h4>';
 }
 if (item.marker_content!=='' ) {
-title += '<p>' + _.escape( item.marker_content ) + '</p>';
+title += '<p>' + ubeEscHtml( item.marker_content ) + '</p>';
 }
 view.addRenderAttribute( 'marker_attr_' + index, 'title', title );
 
@@ -66,7 +72,7 @@ var iconHTML = elementor.helpers.renderIcon( view, item.marker_icon, { 'aria-hid
     <#}
     } else {
     #>
-    {{ item.marker_text }}
+    {{{ ubeEscHtml( item.marker_text ) }}}
     <#
     }
     #>

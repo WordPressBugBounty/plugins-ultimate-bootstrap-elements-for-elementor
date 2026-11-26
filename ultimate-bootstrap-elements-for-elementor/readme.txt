@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: elementor, elementor addons, elementor widget, element
 Requires at least: 4.7
 Tested up to: 7.1.5
-Stable tag: 1.5.4
+Stable tag: 1.5.5
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -102,6 +102,14 @@ Do follow to install plugins:
 3. Go to menu UBE Elements screen to configure the plugin
 
 == Changelog ==
+= 1.5.5 =
+* Security: Fix unauthenticated disclosure of non-public posts via the post widgets "load more" AJAX request
+* Security: Fix Stored XSS (Contributor+) in Image Comparison, Slider, Gallery Masonry, Advanced Icon Box and Advanced Image Box widgets
+* Security: Escape output and validate URLs / HTML tags in editor preview templates (Flip Box, Badge, Image, Image Box and other widgets)
+* Security: Harden search box and autocomplete AJAX requests, shortcode widgets and template rendering
+* Fix: Fancy Text (typing) showing "&amp;" instead of "&", and freezing the page when the text contains "&" or "<"
+* Fix: Image Comparison labels cut off at an apostrophe
+
 = 1.5.4 =
 * Security: Fix Stored XSS (Contributor+) in Counter, Fancy Text, Google Maps, Mapbox and Image Marker widgets (frontend and editor preview)
 

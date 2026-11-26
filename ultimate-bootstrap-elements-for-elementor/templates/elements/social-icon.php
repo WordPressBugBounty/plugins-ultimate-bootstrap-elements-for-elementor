@@ -112,7 +112,7 @@ if ( $settings['social_icon_outline'] === 'yes' && $settings['social_icon_shape'
                 <span class="ube-text-social"><?php echo esc_html( $social ); ?></span>
 			<?php endif; ?>
 			<?php if ( $settings['social_icon_shape'] === 'text' && $item['social_title'] !== '') : ?>
-	            <span class="ube-text-social"><?php echo $item['social_title']; ?></span>
+	            <span class="ube-text-social"><?php echo esc_html( $item['social_title'] ); ?></span>
 	        <?php endif;
 			printf( '</%1$s>', $social_icon_tag ); ?>
         </li>

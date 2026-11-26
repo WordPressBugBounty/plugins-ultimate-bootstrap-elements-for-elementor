@@ -1,4 +1,10 @@
 <#
+var ubeEscHtml = function( str ) {
+	return ( str === undefined || str === null ? "" : String( str ) )
+		.replace( /&(?!(?:#[0-9]+|#x[0-9a-fA-F]+|[a-zA-Z][a-zA-Z0-9]*);)/g, "&amp;" )
+		.replace( /</g, "&lt;" ).replace( />/g, "&gt;" )
+		.replace( /"/g, "&quot;" ).replace( /'/g, "&#039;" );
+};
 
 dropcaps_sharp ='';
 
@@ -15,6 +21,6 @@ dropcaps_sharp
 #>
 <div {{{ view.getRenderAttributeString( 'dropcaps_warpper' ) }}}>
 <# if(  settings.dropcaps_text !=='' ){#>
-<p>{{{ settings.dropcaps_text}}}</p>
+<p>{{{ ubeEscHtml( settings.dropcaps_text ) }}}</p>
 <# }#>
 </div>

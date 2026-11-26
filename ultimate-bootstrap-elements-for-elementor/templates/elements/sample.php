@@ -14,6 +14,6 @@ $element->add_render_attribute( 'icon', 'class', $settings['icon']['value'] );
 <div <?php echo $element->get_render_attribute_string( 'button' ) ?>>
 	<i <?php echo $element->get_render_attribute_string( 'icon' ) ?>></i>
 	<span <?php echo $element->get_render_attribute_string( 'text' ) ?>>
-		<?php echo $settings['text'] ?>
+		<?php echo esc_html( $settings['text'] ) ?>
 	</span>
 </div>

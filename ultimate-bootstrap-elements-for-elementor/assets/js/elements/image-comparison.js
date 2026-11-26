@@ -15,6 +15,14 @@
 		};
 		var options = $image_comparison.data('options');
 		options = $.extend({}, $default_option, options);
+		// twentytwenty concatenates labels into HTML: escape them first.
+		var escapeLabel = function (str) {
+			return String(str).replace(/[&<>"']/g, function (c) {
+				return {'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c];
+			});
+		};
+		options.before_label = escapeLabel(options.before_label);
+		options.after_label = escapeLabel(options.after_label);
 		$image_comparison.twentytwenty(
 			options
 		);

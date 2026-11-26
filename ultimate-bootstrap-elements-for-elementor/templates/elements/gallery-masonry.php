@@ -84,7 +84,7 @@ $image_settings = array('image_size' =>  $settings['image_size_size'],'image_cus
 			$caption           = $image_meta['caption'];
 			$image_setting_key = $element->get_repeater_setting_key( 'image_attr', 'gallery', $i );
 			$element->add_render_attribute( $image_setting_key, array(
-				'href'                              => $item['url'],
+				'href'                              => esc_url( $item['url'] ),
 				'class'                             => $image_classes,
 				'data-elementor-lightbox-slideshow' => $element->get_id(),
 			) );

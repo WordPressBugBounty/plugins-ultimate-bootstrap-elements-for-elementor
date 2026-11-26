@@ -1,4 +1,10 @@
 <#
+var ubeEscHtml = function( str ) {
+	return ( str === undefined || str === null ? "" : String( str ) )
+		.replace( /&(?!(?:#[0-9]+|#x[0-9a-fA-F]+|[a-zA-Z][a-zA-Z0-9]*);)/g, "&amp;" )
+		.replace( /</g, "&lt;" ).replace( />/g, "&gt;" )
+		.replace( /"/g, "&quot;" ).replace( /'/g, "&#039;" );
+};
 var wrapper_classes = [
 	'ube-alert',
 	'alert',
@@ -25,7 +31,7 @@ view.addRenderAttribute('wrapper','role','alert');
 		view.addRenderAttribute('title', 'class', 'alert-heading');
 	#>
 		<{{{ title_html_tag }}} {{{ view.getRenderAttributeString( 'title' ) }}}>
-		{{{ settings.title }}}
+		{{{ ubeEscHtml( settings.title ) }}}
 		</{{{ title_html_tag }}}>
 	<# } #>
 

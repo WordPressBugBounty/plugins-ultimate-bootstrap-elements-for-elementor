@@ -85,7 +85,7 @@ if ( $settings['social_share_outline'] === 'yes' && $settings['social_share_shap
 			<?php // Icons_Manager::render_icon( $item['social_icon'] ); ?>
 			<?php ube_render_icon( $item['social_icon'] ); ?>
 			<?php if ( $settings['social_share_shape'] === 'text' || $settings['social_share_shape'] === 'text-background' ) : ?>
-                <span class="ube-text-social"><?php echo $item['social_share_label']; ?></span>
+                <span class="ube-text-social"><?php echo esc_html( $item['social_share_label'] ); ?></span>
 			<?php endif; ?>
         </li>
 	<?php endforeach; ?>

@@ -29,8 +29,9 @@ if ( $settings['hover_effect'] == 'yes' ) {
 $element->add_render_attribute( 'ube_image_comparison', 'class', $wrapper_class );
 
 $options                       = array();
-$options['before_label']       = $settings['before_title'];
-$options['after_label']        = $settings['after_title'];
+// Plain text labels (escaped again in image-comparison.js before twentytwenty builds its HTML).
+$options['before_label']       = html_entity_decode( wp_strip_all_tags( (string) $settings['before_title'] ), ENT_QUOTES | ENT_HTML5, 'UTF-8' );
+$options['after_label']        = html_entity_decode( wp_strip_all_tags( (string) $settings['after_title'] ), ENT_QUOTES | ENT_HTML5, 'UTF-8' );
 $options['default_offset_pct'] = $settings['start_amount'];
 $options['orientation']        = $settings['image_comparison_direction'];
 
@@ -46,7 +47,7 @@ if ( $settings['image_comparison_handler_move'] == 'hover' ) {
 } elseif ( $settings['image_comparison_handler_move'] == 'click' ) {
 	$options['click_to_move'] = true;
 }
-$element->add_render_attribute( 'ube_image_comparison', 'data-options', json_encode( $options ) );
+$element->add_render_attribute( 'ube_image_comparison', 'data-options', wp_json_encode( $options, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT ) );
 
 ?>
 

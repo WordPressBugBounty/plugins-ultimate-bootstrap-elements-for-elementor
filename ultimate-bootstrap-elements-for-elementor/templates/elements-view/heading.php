@@ -1,4 +1,9 @@
 <#
+var ubeSafeUrl = function( url ) {
+	url = ( url || "" ) + "";
+	var scheme = _.filter( url.split( "" ), function( c ) { return c.charCodeAt( 0 ) > 32; } ).join( "" ).match( /^([a-z][a-z0-9+.-]*):/i );
+	return ( ! scheme || /^(https?|ftps?|mailto|tel|sms|fax)$/i.test( scheme[1] ) ) ? url : "";
+};
 var heading_class=['ube-heading'];
 
 var tag_html_title =  elementor.helpers.validateHTMLTag(settings.heading_title_tag);
@@ -55,7 +60,7 @@ view.addRenderAttribute( 'link_title_atrr', 'target', '_blank' );
 if(settings.heading_title_link.nofollow){
 view.addRenderAttribute( 'link_title_atrr', 'rel', 'nofollow' );
 }
-view.addRenderAttribute( 'link_title_atrr','href' ,settings.heading_title_link.url );#>
+view.addRenderAttribute( 'link_title_atrr','href' ,ubeSafeUrl( settings.heading_title_link.url ) );#>
 <a {{{ view.getRenderAttributeString( 'link_title_atrr' ) }}}>
 {{{settings.heading_title}}}
 </a>

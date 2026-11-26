@@ -25,10 +25,16 @@ if ( ! empty( $slider_content_animation ) ) {
 if ( $slider_dots_type == 'thumbnails' ) {
 	$data_thumb = '';
 	if ( ! empty( $slider_background_image['url'] ) ) {
-		$image_url  = $slider_background_image['url'];
-		$data_thumb = "background-image:url('" . $image_url . "');";
+		$image_url = esc_url( $slider_background_image['url'] );
+		if ( $image_url !== '' ) {
+			$data_thumb = "background-image:url('" . $image_url . "');";
+		}
 	} elseif ( ! empty( $slider_background_color ) ) {
-		$data_thumb = 'background:' . $slider_background_color . ';';
+		// Only allow characters used by CSS colors (hex, rgb/rgba/hsl/hsla(), var(--x), names).
+		$color = preg_replace( '/[^a-zA-Z0-9#(),.%\s\-]/', '', (string) $slider_background_color );
+		if ( $color !== '' ) {
+			$data_thumb = 'background:' . $color . ';';
+		}
 	}
 	$element->add_render_attribute( $slider_setting_key, 'data-thumb', $data_thumb );
 }

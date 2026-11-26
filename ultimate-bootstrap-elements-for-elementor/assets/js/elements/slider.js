@@ -90,7 +90,8 @@
                 if ($(this).find('.ube-slider-box').data('thumb') !== undefined && $(this).find('.ube-slider-box').data('thumb') !== '') {
                     options.customPaging = function (slider, i) {
                         var $thumb_url = $(slider.$slides[i]).find('.ube-slider-box').data('thumb');
-                        return '<button style="' + $thumb_url + '"></button>';
+                        // Build the element instead of concatenating HTML (thumb comes from user settings).
+                        return $('<button></button>').attr('style', String($thumb_url));
                     }
                 }
 

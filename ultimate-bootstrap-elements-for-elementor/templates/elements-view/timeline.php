@@ -1,4 +1,10 @@
 <#
+var ubeEscHtml = function( str ) {
+	return ( str === undefined || str === null ? "" : String( str ) )
+		.replace( /&(?!(?:#[0-9]+|#x[0-9a-fA-F]+|[a-zA-Z][a-zA-Z0-9]*);)/g, "&amp;" )
+		.replace( /</g, "&lt;" ).replace( />/g, "&gt;" )
+		.replace( /"/g, "&quot;" ).replace( /'/g, "&#039;" );
+};
 var tl_classes = [
 	'ube-timeline',
 	"ube-timeline-style-"+settings.timeline_style];
@@ -33,7 +39,7 @@ view.addRenderAttribute( 'timeline_attr', 'class', tl_classes );
 					<div class="ube-timeline-content">
 						<#
 						if (  items.timeline_title !=='' ) {#>
-							<h6 class="ube-timeline-title"> {{{ items.timeline_title }}}</h6>
+							<h6 class="ube-timeline-title"> {{{ ubeEscHtml( items.timeline_title ) }}}</h6>
 						<# } #>
 						<div class="content">{{{items.timeline_content }}}</div>
 					</div>
